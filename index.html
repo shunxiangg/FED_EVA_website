@@ -1,1 +1,41 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MokeSell - Buy and Sell Online</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Sell</a></li>
+
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <h1>Welcome to MokeSell!</h1>
+    <section class="filters">
+    
+      </select>
+
+      <label for="price">Price:</label>
+      <input type="range" id="price" min="0" max="5000" step="100" onchange="filterProducts()">
+    </section>
+
+    <section id="product-list">
+
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 EVA. All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
