@@ -60,10 +60,37 @@
   </div>
 
   <footer>
-    <p>&copy; 2025 EVA. All rights reserved.</p>
-  </footer>
+    <!-- Language Selector -->
+<div id="language-selector">
+  <select id="language-dropdown" onchange="changeLanguage()">
+    <option value="en">English</option>
+    <option value="zh">Chinese</option>
+    <option value="ms">Malay</option>
+    <option value="hi">Hindi</option>
+  </select>
+</div>
 
+    <div class="footer-content">
+      <p>&copy; 2025 EVA. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="/about">About Us</a> | 
+        <a href="/privacy-policy">Privacy Policy</a> | 
+        <a href="/terms-of-service">Terms of Service</a>
+      </div>
+      <div class="social-media">
+        <a href="https://facebook.com" target="_blank">Facebook</a> |
+        <a href="https://twitter.com" target="_blank">Twitter</a> |
+        <a href="https://linkedin.com" target="_blank">LinkedIn</a>
+      </div>
+    </div>
+  </footer>
+  
+
+  
+  <script src="js_folder/languages.js"></script>
+  <script src="js_folder/products.js"></script>
   <script src="js_folder/script.js"></script>
+  
   <script src="https://js.stripe.com/v3/"></script>
   <script src="https://apis.google.com/js/platform.js" async defer></script>
 
@@ -99,3 +126,18 @@
   </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
