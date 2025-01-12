@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MokeSell - Buy and Sell Online</title>
+  <link rel="stylesheet" href="css_folder/modal.css">
   <link rel="stylesheet" href="css_folder/styles.css">
 </head>
 <body>
@@ -39,14 +40,24 @@
       </select>
 
       <label for="price">Price:</label>
-      <input type="range" id="price" min="0" max="5000" step="100" onchange="filterProducts()">
+      <input type="range" id="price" min="0" max="5000" step="100">
       <p id="price-display">Price: $0 - $5000</p>
 
-      <button id="apply-filters" onclick="filterProducts()">Apply Filters</button>
+      <label for="condition">Condition:</label>
+      <select id="condition">
+        <option value="all">All</option>
+        <option value="new">New</option>
+        <option value="second-hand">Second Hand</option>
+      </select>
+
+      <label for="search">Search:</label>
+      <input type="text" id="search" placeholder="Search products...">
+
+      <button id="apply-filters">Apply Filters</button>
     </section>
 
-    <section id="product-list">
-      <!-- Product items will be dynamically displayed here -->
+    <section id="product-list" class="product-grid">
+      <!-- Products will be dynamically inserted here -->
     </section>
   </main>
 
@@ -54,24 +65,27 @@
   <div class="cart-modal" id="cart-modal">
     <div class="cart-content">
       <h3>Your Cart</h3>
-      <ul class="cart-items"></ul>
-      <button class="checkout-btn">Checkout</button>
+      <div id="cart-items"></div>
+      <div class="cart-total">
+        <p>Total: <span id="cart-total-amount">$0</span></p>
+      </div>
+      <button class="checkout-btn" onclick="checkout()">Checkout</button>
+      <button class="close-btn" onclick="closeCart()">Close</button>
     </div>
   </div>
 
   <footer>
-    <!-- Language Selector -->
-<div id="language-selector">
-  <select id="language-dropdown" onchange="changeLanguage()">
-    <option value="en">English</option>
-    <option value="zh">Chinese</option>
-    <option value="ms">Malay</option>
-    <option value="hi">Hindi</option>
-  </select>
-</div>
+    <div id="language-selector">
+      <select id="language-dropdown" onchange="changeLanguage()">
+        <option value="en">English</option>
+        <option value="zh">Chinese</option>
+        <option value="ms">Malay</option>
+        <option value="hi">Hindi</option>
+      </select>
+    </div>
 
     <div class="footer-content">
-      <p>&copy; 2025 EVA. All rights reserved.</p>
+      <p>&copy; 2025 MokeSell. All rights reserved.</p>
       <div class="footer-links">
         <a href="/about">About Us</a> | 
         <a href="/privacy-policy">Privacy Policy</a> | 
@@ -84,60 +98,15 @@
       </div>
     </div>
   </footer>
-  
 
-  
-  <script src="js_folder/languages.js"></script>
+  <!-- Scripts -->
+  <script src="js_folder/app.js"></script>
+  <script src="js_folder/cart.js"></script>
+  <script src="js_folder/config.js"></script>
+  <script src="js_folder/data.js"></script>
+  <script src="js_folder/filters.js"></script>
   <script src="js_folder/products.js"></script>
-  <script src="js_folder/script.js"></script>
-  
+
   <script src="https://js.stripe.com/v3/"></script>
-  <script src="https://apis.google.com/js/platform.js" async defer></script>
-
-  <div class="g-signin2" data-onsuccess="onSignIn"></div>
-
-  <script>
-    // Google Sign-In Script
-    function onSignIn(googleUser) {
-      var profile = googleUser.getBasicProfile();
-      console.log("User ID: " + profile.getId());
-      console.log("User Name: " + profile.getName());
-      console.log("User Email: " + profile.getEmail());
-    }
-
-    // Toggle Hamburger Menu
-    function toggleMenu() {
-      const menu = document.querySelector('.navbar .menu');
-      menu.style.display = (menu.style.display === 'flex' || menu.style.display === '') ? 'none' : 'flex';
-    }
-
-    // Open Cart Modal
-    function openCart() {
-      const cartModal = document.getElementById('cart-modal');
-      cartModal.style.display = 'flex';
-    }
-
-    // Close Cart Modal if clicked outside
-    document.getElementById('cart-modal').addEventListener('click', function(event) {
-      if (event.target === document.getElementById('cart-modal')) {
-        document.getElementById('cart-modal').style.display = 'none';
-      }
-    });
-  </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

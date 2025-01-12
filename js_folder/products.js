@@ -1,55 +1,25 @@
-
-// Sample products data
-const products = [
-    { name: "Laptop", category: "electronics", price: 800, condition: "new" },
-    { name: "Sofa", category: "furniture", price: 1200, condition: "second-hand" },
-    { name: "Smartphone", category: "electronics", price: 500, condition: "new" },
-    { name: "Book - JavaScript", category: "books", price: 25, condition: "new" },
-    { name: "T-Shirt", category: "clothing", price: 30, condition: "second-hand" },
-    // Add more products as needed
-  ];
-  
-  // Function to display products
-  function displayProducts(filteredProducts) {
+// Product display functionality
+function displayProducts(productsToShow) {
     const productList = document.getElementById('product-list');
-    productList.innerHTML = ''; // Clear existing products
-  
-    if (filteredProducts.length === 0) {
-      productList.innerHTML = "<p>No products found.</p>";
+    
+    if (productsToShow.length === 0) {
+      productList.innerHTML = "<p class='no-products'>No products found.</p>";
+      return;
     }
   
-    filteredProducts.forEach(product => {
-      const productElement = document.createElement('div');
-      productElement.classList.add('product');
-      productElement.innerHTML = `
-        <h3>${product.name}</h3>
-        <p>Category: ${product.category}</p>
-        <p>Price: $${product.price}</p>
-        <p>Condition: ${product.condition}</p>
-      `;
-      productList.appendChild(productElement);
-    });
+    productList.innerHTML = productsToShow.map(product => `
+      <div class="product-card">
+        <img src="${product.image}" alt="${product.name}" class="product-image">
+        <div class="product-details">
+          <h3>${product.name}</h3>
+          <p class="product-description">${product.description}</p>
+          <p class="product-category">Category: ${product.category}</p>
+          <p class="product-condition">Condition: ${product.condition}</p>
+          <p class="product-price">$${product.price}</p>
+          <button onclick="addToCart(${product.id})" class="add-to-cart-btn">
+            Add to Cart
+          </button>
+        </div>
+      </div>
+    `).join('');
   }
-  
-  // Function to filter products based on selected category and price range
-  function filterProducts() {
-    const category = document.getElementById('category').value;
-    const price = document.getElementById('price').value;
-    const priceDisplay = document.getElementById('price-display');
-  
-    // Update price display text
-    priceDisplay.textContent = `Price: $0 - $${price}`;
-  
-    // Filter products
-    let filteredProducts = products.filter(product => {
-      return (category === 'all' || product.category === category) && product.price <= price;
-    });
-  
-    displayProducts(filteredProducts);
-  }
-  
-  // Initial display of all products
-  document.addEventListener('DOMContentLoaded', () => {
-    displayProducts(products); // Display all products initially
-  });
-  
