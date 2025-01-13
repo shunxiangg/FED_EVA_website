@@ -1,0 +1,264 @@
+
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+:root{
+  --accent-color: #b872ff;
+  --base-color: white;
+  --text-color: #2E2B41;
+  --input-color: #F3F0FF;
+}
+*{
+  margin: 0;
+  padding: 0;
+}
+html{
+  font-family: Poppins, Segoe UI, sans-serif;
+  font-size: 12pt;
+  color: var(--text-color);
+  text-align: center;
+}
+body{
+  min-height: 100vh;
+  background-image: url('../img_folder/loginsigninbackground.jpeg');
+  background-size: cover;
+  background-position: right;
+  overflow: hidden;
+}
+.wrapper{
+  box-sizing: border-box;
+  background-color: var(--base-color);
+  height: 100vh;
+  width: max(40%, 600px);
+  padding: 10px;
+  border-radius: 0 20px 20px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+h1{
+  font-size: 3rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+form{
+  width: min(400px, 100%);
+  margin-top: 20px;
+  margin-bottom: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+form > div{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+form label{
+  flex-shrink: 0;
+  height: 50px;
+  width: 50px;
+  background-color: var(--accent-color);
+  fill: var(--base-color);
+  color: var(--base-color);
+  border-radius: 10px 0 0 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+form input{
+  box-sizing: border-box;
+  flex-grow: 1;
+  min-width: 0;
+  height: 50px;
+  padding: 1em;
+  font: inherit;
+  border-radius: 0 10px 10px 0;
+  border: 2px solid var(--input-color);
+  border-left: none;
+  background-color: var(--input-color);
+  transition: 150ms ease;
+}
+form input:hover{
+  border-color: var(--accent-color);
+}
+form input:focus{
+  outline: none;
+  border-color: var(--text-color);
+}
+div:has(input:focus) > label{
+  background-color: var(--text-color);
+}
+form input::placeholder{
+  color: var(--text-color);
+}
+form button{
+  margin-top: 10px;
+  border: none;
+  border-radius: 1000px;
+  padding: .85em 4em;
+  background-color: var(--accent-color);
+  color: var(--base-color);
+  font: inherit;
+  font-weight: 600;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: 150ms ease;
+}
+form button:hover{
+  background-color: var(--text-color);
+}
+form button:focus{
+  outline: none;
+  background-color: var(--text-color);
+}
+a{
+  text-decoration: none;
+  color: var(--accent-color);
+}
+a:hover{
+  text-decoration: underline;
+}
+@media(max-width: 1100px){
+  .wrapper{
+    width: min(600px, 100%);
+    border-radius: 0;
+  }
+}
+form div.incorrect label{
+  background-color: #f06272;
+}
+form div.incorrect input{
+  border-color: #f06272;
+}
+#error-message{
+  color:#f06272;
+}
+
+
+
+
+/* Back Button */
+.back-button {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background-color: var(--base-color);
+    border: none;
+    font-size: 1.2rem;
+    color: var(--text-color);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+  }
+  
+  .back-button:hover {
+    background-color: var(--accent-color);
+    color: var(--base-color);
+    transform: scale(1.1); /* Slight scaling effect on hover */
+  }
+  
+  .back-button:focus {
+    outline: none;
+  }
+  
+  /* Styling for the arrow inside the back button */
+  .back-button svg {
+    margin-right: 8px;
+    fill: var(--text-color);
+    width: 24px;
+    height: 24px;
+  }
+  
+  
+
+
+  
+  @media (max-width: 768px) {
+    /* Adjust the wrapper for mobile screens */
+    .wrapper {
+      width: 80%; /* Ensure the wrapper takes up 90% of the width */
+      padding: 15px; /* Add some padding for spacing */
+      border-radius: 20px;
+    }
+  
+    /* Adjust the form input fields */
+    form input {
+      padding: 0.8em; /* Reduce padding for mobile */
+      font-size: 1rem; /* Smaller font size for input fields */
+    }
+  
+    form button {
+      padding: 0.75em 3em; /* Smaller button padding */
+      font-size: 1rem; /* Slightly smaller font size for button */
+    }
+  
+    /* Adjust the label size and form layout for mobile */
+    form label {
+      font-size: 1.2rem; /* Smaller font size for labels */
+    }
+  
+    /* Adjust the margins and spacings */
+    form {
+      margin-top: 15px;
+      margin-bottom: 30px;
+    }
+  
+    /* Adjust the width and spacing of the input boxes */
+    form > div {
+      width: 100%;
+      display: flex;
+      justify-content: space-between; /* Adjust space between label and input */
+      margin-bottom: 10px; /* Add space between fields */
+    }
+  
+    /* Add padding to ensure input fields do not touch the screen edges */
+    form input {
+      padding: 0.8em; /* Adjust padding */
+      width: 100%; /* Ensure input takes the full width */
+      border-radius: 10px; /* Rounded borders for input */
+    }
+  
+    /* Adjust the back button */
+    .back-button {
+      font-size: 1rem; /* Smaller font size */
+      padding: 8px 12px; /* Reduced padding */
+      top: 15px; /* Adjust position */
+      left: 15px; /* Adjust position */
+    }
+  }
+  
+  /* Further adjustments for very small screens (e.g., mobile phones in portrait mode) */
+  @media (max-width: 480px) {
+    .wrapper {
+      width: 100%; /* Full width on smaller screens */
+      padding: 10px; /* Adjust padding */
+    }
+  
+    form input {
+      padding: 0.7em; /* Reduce input padding further */
+      font-size: 0.9rem; /* Smaller font size for inputs */
+    }
+  
+    form button {
+      padding: 0.7em 2.5em; /* Even smaller button padding */
+      font-size: 0.9rem; /* Smaller button text */
+    }
+  
+    form label {
+      font-size: 1rem; /* Even smaller label font size */
+    }
+  
+    .back-button {
+      font-size: 1rem; /* Slightly smaller font size for back button */
+      padding: 7px 10px; /* Reduced padding */
+    }
+  }
+  

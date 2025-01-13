@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MokeSell - Buy and Sell Online</title>
   <link rel="stylesheet" href="css_folder/modal.css">
-
   <link rel="stylesheet" href="css_folder/styles.css">
 </head>
 <body>
@@ -14,9 +13,10 @@
       <div class="logo">MokeSell</div>
       <ul class="menu">
         
-        <li><a href="home.html">Browse</a></li>
-        <li><a href="signup.html">Sign Up</a></li>
-        <li><a href="login.html">Login</a></li>
+        <li><a href="home.html">Home</a></li>
+        <li><a href="#">Sell</a></li>
+        <li><a href="javascript:void(0)" onclick="openCart()">Cart</a></li>
+        <li><a href="index.html">Login</a></li>
       </ul>
       <div class="hamburger" onclick="toggleMenu()">
         <span class="bar"></span>
@@ -27,11 +27,55 @@
   </header>
 
   <main>
-    <h1>Welcome to EVA!</h1>
+    <h1>Welcome to MokeSell!</h1>
+    
+    <section class="filters">
+      <label for="category">Category:</label>
+      <select id="category">
+        <option value="all">All</option>
+        <option value="electronics">Electronics</option>
+        <option value="furniture">Furniture</option>
+        <option value="clothing">Clothing</option>
+        <option value="books">Books</option>
+      </select>
 
+      <label for="price">Price:</label>
+      <input type="range" id="price" min="0" max="5000" step="100">
+      <p id="price-display">Price: $0 - $5000</p>
+
+      <label for="condition">Condition:</label>
+      <select id="condition">
+        <option value="all">All</option>
+        <option value="new">New</option>
+        <option value="second-hand">Second Hand</option>
+      </select>
+
+      <label for="search">Search:</label>
+      <input type="text" id="search" placeholder="Search products...">
+
+      <button id="apply-filters">Apply Filters</button>
+    </section>
+
+    <section id="product-list" class="product-grid">
+      <!-- Products will be dynamically inserted here -->
+    </section>
   </main>
 
-   
+  <!-- Cart Modal -->
+  <div class="cart-modal" id="cart-modal">
+    <div class="cart-content">
+      <h3>Your Cart</h3>
+      <div id="cart-items"></div>
+      <div class="cart-total">
+        <p>Total: <span id="cart-total-amount">$0</span></p>
+      </div>
+      <button class="checkout-btn" onclick="checkout()">Checkout</button>
+      <button class="close-btn" onclick="closeCart()">Close</button>
+    </div>
+  </div>
+
+  
+ 
   <footer>
     <div id="language-selector">
       <select id="language-dropdown" onchange="changeLanguage()">

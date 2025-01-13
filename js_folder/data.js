@@ -6,7 +6,7 @@ const products = [
     price: 800,
     condition: "new",
     description: "Powerful laptop for everyday use",
-    image: "images/laptop.jpg"
+    image: "img_folder/notebook-xps-15-9530-t-black-gallery-1.avif"
   },
   { 
     id: 2,
