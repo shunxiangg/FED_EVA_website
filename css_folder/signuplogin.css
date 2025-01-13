@@ -180,13 +180,13 @@ form div.incorrect input{
   
 
 
-  
+  /* MOBILE STYLES */
   @media (max-width: 768px) {
     /* Adjust the wrapper for mobile screens */
     .wrapper {
-      width: 80%; /* Ensure the wrapper takes up 90% of the width */
+      width: 100%; /* Ensure the wrapper takes up 90% of the width */
       padding: 15px; /* Add some padding for spacing */
-      border-radius: 20px;
+      background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent dark background */
     }
   
     /* Adjust the form input fields */
@@ -223,7 +223,6 @@ form div.incorrect input{
     form input {
       padding: 0.8em; /* Adjust padding */
       width: 100%; /* Ensure input takes the full width */
-      border-radius: 10px; /* Rounded borders for input */
     }
   
     /* Adjust the back button */
@@ -233,6 +232,18 @@ form div.incorrect input{
       top: 15px; /* Adjust position */
       left: 15px; /* Adjust position */
     }
+
+    /* Ensure 'Login' text is white */
+    h1 {
+        color: white; /* Set Login text color to white */
+    }
+    
+    /* Ensure 'New Here' text (or similar) is white */
+    p {
+        color: white; /* Set New Here text color to white */
+    }
+  
+
   }
   
   /* Further adjustments for very small screens (e.g., mobile phones in portrait mode) */
@@ -240,6 +251,7 @@ form div.incorrect input{
     .wrapper {
       width: 100%; /* Full width on smaller screens */
       padding: 10px; /* Adjust padding */
+      background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent dark background */
     }
   
     form input {
@@ -259,6 +271,16 @@ form div.incorrect input{
     .back-button {
       font-size: 1rem; /* Slightly smaller font size for back button */
       padding: 7px 10px; /* Reduced padding */
+    }
+
+    /* Ensure 'Login' text is white */
+    h1 {
+        color: white; /* Set Login text color to white */
+    }
+    
+    /* Ensure 'New Here' text (or similar) is white */
+    p {
+        color: white; /* Set New Here text color to white */
     }
   }
   
