@@ -11,10 +11,14 @@
 <body>
   <header>
     <nav class="navbar">
-      <div class="logo">MokeSell</div>
+      <div class="logo">
+        <a href="index.html">
+          MokeSell
+        </a>
+      </div>
       <ul class="menu">
         
-        <li><a href="home.html">Browse</a></li>
+        <li><a href="browse.html">Browse</a></li>
         <li><a href="signup.html">Sign Up</a></li>
         <li><a href="login.html">Login</a></li>
       </ul>
@@ -29,9 +33,47 @@
   <main>
     <h1>Welcome to EVA!</h1>
 
-  </main>
 
+    
+  </main>
+  <section id="product-list" class="product-grid">
+    <!-- Products will be dynamically inserted here -->
+  </section>
    
+  <main>
+    <h1>Welcome to MokeSell!</h1>
+    
+    <section class="filters">
+      <label for="category">Category:</label>
+      <select id="category">
+        <option value="all">All</option>
+        <option value="electronics">Electronics</option>
+        <option value="furniture">Furniture</option>
+        <option value="clothing">Clothing</option>
+        <option value="books">Books</option>
+      </select>
+
+      <label for="price">Price:</label>
+      <input type="range" id="price" min="0" max="5000" step="100">
+      <p id="price-display">Price: $0 - $5000</p>
+
+      <label for="condition">Condition:</label>
+      <select id="condition">
+        <option value="all">All</option>
+        <option value="new">New</option>
+        <option value="second-hand">Second Hand</option>
+      </select>
+
+      <label for="search">Search:</label>
+      <input type="text" id="search" placeholder="Search products...">
+
+      <button id="apply-filters">Apply Filters</button>
+    </section>
+
+    <section id="product-list" class="product-grid">
+      <!-- Products will be dynamically inserted here -->
+    </section>
+  </main>
   <footer>
     <div id="language-selector">
       <select id="language-dropdown" onchange="changeLanguage()">
