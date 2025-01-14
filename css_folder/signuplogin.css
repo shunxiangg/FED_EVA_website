@@ -6,6 +6,7 @@
   --base-color: white;
   --text-color: #2E2B41;
   --input-color: #F3F0FF;
+  --link-color: #7276ff;
 }
 *{
   margin: 0;
@@ -284,3 +285,27 @@ form div.incorrect input{
     }
   }
   
+
+/* Create account link */
+.create-account-link {
+  display: inline-block;
+  margin-top: 20px; 
+  font-size: 1rem;
+  color: var(--link-color);
+  text-decoration: none;
+  padding: 9px 16px;
+ 
+}
+
+
+
+/* Active state when the button is clicked */
+.create-account-link:active {
+  transform: translateY(3px); /* Moves the button down */
+  background-color: var(--accent-color); /* Retain hover background color */
+  color: rgb(255, 255, 255); /* Optional: Change text color on click */
+}
+
+.login-footer-content {
+  margin-top: 188px;
+}
