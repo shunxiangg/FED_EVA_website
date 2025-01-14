@@ -1,7 +1,7 @@
 # MokeSell Interactive Web Application
 
 ## Overview
-MokeSell is an interactive eCommerce platform designed to allow users to buy and sell new and second-hand goods. The goal of this web application is to create an engaging shopping experience enhanced by gamification features, allowing users to enjoy shopping while unlocking rewards, competing for the best deals, and exploring a user-friendly interface. This platform is aimed at enhancing online shopping with a fun, interactive experience.
+MokeSell is an interactive eCommerce platform designed to allow users to buy and sell new and second-hand goods. The goal of this web application is to create an engaging shopping experience, allowing users to enjoy shopping while unlocking rewards, competing for the best deals, and exploring a user-friendly interface. This platform is aimed at enhancing online shopping with a fun, interactive experience.
 
 ## Table of Contents
 - [Design Concept](#design-concept)
@@ -22,31 +22,28 @@ MokeSell is an interactive eCommerce platform designed to allow users to buy and
 - [Acknowledgements](#acknowledgements)
 
 ## Design Concept
-MokeSell integrates gamification principles into the shopping experience. As users browse and purchase items, they can unlock rewards, participate in challenges, and earn badges. The design incorporates a bright, modern aesthetic with easy navigation to enhance the shopping experience.
+As users browse and purchase items, they can unlock rewards, vouchers and earn badges. The design incorporates a bright, modern aesthetic with easy navigation to enhance the shopping experience.
 
 ### User Audience
 - **Shoppers**: Individuals looking for both new and second-hand items.
 - **Sellers**: Users wanting to list their items for sale.
-- **Gamification Enthusiasts**: Users who enjoy challenges and rewards while shopping.
 
 ### Purpose and Intent
-- **Purpose**: To provide a unique online shopping experience that combines eCommerce with gamified elements, making it more enjoyable and engaging.
-- **Intent**: The platform aims to drive user interaction and encourage frequent engagement through gamification, while offering a reliable marketplace for buying and selling items.
+The platform aims to drive user interaction and encourage frequent engagement, while offering a reliable marketplace for buying and selling items.
 
 ## Features
 
 ### E-commerce Experience
-- **Gamified Shopping**: Users can earn rewards as they shop, unlock special offers, and participate in challenges (e.g., finding hidden items or achieving the highest checkout).
+Users can earn rewards as they shop, unlock special offers, and participate in challenges.
 
 ### User Account Management
-- **Account Creation**: Users can create an account to access personalized features.
+- **Account Creation**: Users can create an account to purchase and sell items, earn and redeem rewards and vouches.
 - **Profile Management**: Users can update their profiles and account settings, including changing contact information or password.
 - **Follow Feature**: Users can follow other sellers to receive updates on new listings.
 
 ### Listing Management
 - **Create Listings**: Sellers can list items by uploading photos, providing descriptions, and selecting categories.
 - **Listing Expiry**: Listings automatically become inactive after 30 days.
-- **Bump Listings**: Sellers can purchase options to bump their listings for higher visibility.
 
 ### Search and Browsing
 - **Search Functionality**: Users can search for items using keywords and filter by category, price range, or item condition.
