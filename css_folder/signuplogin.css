@@ -12,6 +12,7 @@
   margin: 0;
   padding: 0;
 }
+
 html{
   font-family: Poppins, Segoe UI, sans-serif;
   font-size: 12pt;
@@ -29,7 +30,7 @@ body{
   box-sizing: border-box;
   background-color: var(--base-color);
   height: 100vh;
-  width: max(40%, 600px);
+  width: max(43%, 600px);
   padding: 10px;
   border-radius: 0 20px 20px 0;
   display: flex;
@@ -163,7 +164,7 @@ form div.incorrect input{
   .back-button:hover {
     background-color: var(--accent-color);
     color: var(--base-color);
-    transform: scale(1.1); /* Slight scaling effect on hover */
+    transform: scale(1.1); /* zoom on hover */
   }
   
   .back-button:focus {
@@ -274,12 +275,10 @@ form div.incorrect input{
       padding: 7px 10px; /* Reduced padding */
     }
 
-    /* Ensure 'Login' text is white */
     h1 {
-        color: white; /* Set Login text color to white */
+        color: white;
     }
     
-    /* Ensure 'New Here' text (or similar) is white */
     p {
         color: white; /* Set New Here text color to white */
     }
@@ -291,7 +290,7 @@ form div.incorrect input{
   display: inline-block;
   margin-top: 20px; 
   font-size: 1rem;
-  color: var(--link-color);
+  color: var(--accent-color);
   text-decoration: none;
   padding: 9px 16px;
   transition: all 0.3s ease-in-out;
@@ -310,11 +309,13 @@ form div.incorrect input{
 
 /* Active state when the button is clicked */
 .create-account-link:active {
-  transform: translateY(3px); /* Moves the button down */
-  background-color: var(--accent-color); /* Retain hover background color */
-  color: rgb(255, 255, 255); /* Optional: Change text color on click */
+  transform: translateY(3px); 
+  background-color: var(--accent-color); 
+  color: var(--link-color); 
 }
 
+
 .login-footer-content {
-  margin-top: 188px;
+  margin-top: 70px;
 }
+
