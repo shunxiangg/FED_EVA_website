@@ -1,7 +1,7 @@
 # MokeSell Interactive Web Application
 
 ## Overview
-MokeSell is an interactive eCommerce platform designed to allow users to buy and sell new and second-hand goods. The goal of this web application is to create an engaging shopping experience, allowing users to enjoy shopping while unlocking rewards, competing for the best deals, and exploring a user-friendly interface. This platform is aimed at enhancing online shopping with a fun, interactive experience.
+EVA is a new online platform which lets its users buy and sell both new and second-hand goods. The goal of this web application is to create an engaging shopping experience, allowing users to enjoy shopping while unlocking rewards, competing for the best deals, exploring a user-friendly interface and quizzes to help users find products that suits their needs. This platform is aimed at enhancing online shopping with a fun, interactive experience.
 
 ## Table of Contents
 - [Design Concept](#design-concept)
@@ -63,6 +63,7 @@ Users can earn rewards as they shop, unlock special offers, and participate in c
 ### Additional Features
 - **User Notifications**: Users receive notifications for new listings, offers, and chat messages.
 - **Transaction History**: Users can view their past transactions and reviews.
+- **Quizzes**: Users can attempt the quizzes and find products specify to their needs.
 
 ## Technologies Used
 - **HTML5**: Used for the overall structure and layout of the website.
@@ -91,7 +92,7 @@ cd MokeSell
 - Conduct usability testing to ensure that the shopping experience is smooth and the gamification elements are intuitive.
 
 ### Bug Fixes
-- Address any issues reported during testing, such as broken links, non-functioning buttons, or layout issues across devices.
+- index.html and browse,html nav-menu is different
 
 ## Credits and References
 - Images and other media used in this project are sourced from various online archives and free resources.
@@ -100,8 +101,10 @@ cd MokeSell
 - YT login/signup [https://www.youtube.com/@coding2go]
 - IG [https://www.instagram.com/web_development_legend/]
 - IG [https://www.instagram.com/the_coding_wizard/]
+- Icons [https://fontawesome.com/start]
+
 
 
 
 ## Acknowledgements
-This project was inspired by the need for a more interactive and gamified online shopping experience. Special thanks to the development community for resources on gamification and interactive web design, which were critical in shaping the features of this application.
+
