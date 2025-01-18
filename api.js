@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const loadingOverlay = document.createElement('div');
         loadingOverlay.className = 'loading-overlay';
         loadingOverlay.innerHTML = `<div class="loading-content">
-            <div class="spinner"></div>
+            <div class="loadSpin"></div>
           <p>Creating your account...</p>
           </div>`;
       document.body.appendChild(loadingOverlay);
