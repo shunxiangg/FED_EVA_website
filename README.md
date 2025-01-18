@@ -97,14 +97,16 @@ cd MokeSell
 ## Credits and References
 - Images and other media used in this project are sourced from various online archives and free resources.
 - Inspiration for the design and gamification features came from popular eCommerce platforms and gaming apps.
-- YT login/signup [https://www.youtube.com/@techmakersnocode]
-- YT login/signup [https://www.youtube.com/@coding2go]
-- IG [https://www.instagram.com/web_development_legend/]
-- IG [https://www.instagram.com/the_coding_wizard/]
+- Design [https://www.youtube.com/watch?v=OXGznpKZ_sA]
+- YT login/signup [https://www.youtube.com/@techmakersnocode] [https://www.youtube.com/@coding2go]
+- IG [https://www.instagram.com/web_development_legend/] [https://www.instagram.com/the_coding_wizard/]
 - Icons [https://fontawesome.com/start]
+- Connect Login & Sign up Form with DATABASE[https://www.youtube.com/watch?v=TRHtOixzrH8] [https://www.youtube.com/watch?v=EQii31gG51Q] [https://restdb.io/docs/javascript-api#restdb]
+
 
 
 
 
 ## Acknowledgements
+- Connect Login & Sign up Form with DATABASE[@LX]
 
