@@ -60,6 +60,15 @@ document.addEventListener("DOMContentLoaded", function () {
           return;
         }
 
+        //loading animation through css keyframes
+        const loadingOverlay = document.createElement('div');
+        loadingOverlay.className = 'loading-overlay';
+        loadingOverlay.innerHTML = `<div class="loading-content">
+            <div class="spinner"></div>
+          <p>Creating your account...</p>
+          </div>`;
+      document.body.appendChild(loadingOverlay);
+
         // Proceed with creating account
         let jsondata = {
           "name": contactName,
@@ -74,6 +83,7 @@ document.addEventListener("DOMContentLoaded", function () {
             "x-apikey": APIKEY,
             "Cache-Control": "no-cache"
           },
+          body: JSON.stringify(jsondata)
         };
 
         const submitResponse = await fetch("https://evadatabase-f3b8.restdb.io/rest/accounts", submitSettings);
