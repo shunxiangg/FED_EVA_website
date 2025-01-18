@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Initialize page elements
   const updateContainer = document.getElementById("update-contact-container");
   const addUpdateMsg = document.getElementById("add-update-msg");
+  const errorMessage = document.getElementById("error-message");
   
   if (updateContainer) updateContainer.style.display = "none";
   if (addUpdateMsg) addUpdateMsg.style.display = "none";
@@ -11,53 +12,89 @@ document.addEventListener("DOMContentLoaded", function () {
   // Load contacts when page loads
   getContacts();
 
-  // [STEP 1]: Create new contact
+  // [STEP 1]: Create new contact with validation
   const contactSubmit = document.getElementById("contact-submit");
   if (contactSubmit) {
-    contactSubmit.addEventListener("click", function (e) {
+    contactSubmit.addEventListener("click", async function (e) {
       e.preventDefault();
 
       let contactName = document.getElementById("contact-name").value;
       let contactEmail = document.getElementById("contact-email").value;
       let contactPassword = document.getElementById("contact-password").value;
+      let repeatPassword = document.getElementById("repeat-password-input").value;
 
-      let jsondata = {
-        "name": contactName,
-        "email": contactEmail,
-        "password": contactPassword,
-      };
+      // Clear previous error message
+      errorMessage.textContent = '';
+      errorMessage.style.color = 'red';
 
-      let settings = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "x-apikey": APIKEY,
-          "Cache-Control": "no-cache"
-        },
-        body: JSON.stringify(jsondata)
-      };
+      // Validate passwords match
+      if (contactPassword !== repeatPassword) {
+        errorMessage.textContent = 'Passwords do not match!';
+        return;
+      }
 
-      fetch("https://evadatabase-f3b8.restdb.io/rest/accounts", settings)
-        .then(response => response.json())
-        .then(data => {
-          console.log(data);
-          if (contactSubmit) contactSubmit.disabled = false;
-          
-          if (addUpdateMsg) {
-            addUpdateMsg.style.display = "block";
-            setTimeout(function () {
-              addUpdateMsg.style.display = "none";
-            }, 3000);
+      // Validate password length
+      if (contactPassword.length < 8) {
+        errorMessage.textContent = 'Password must be at least 8 characters long';
+        return;
+      }
+
+      // Check if email already exists
+      try {
+        const settings = {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            "x-apikey": APIKEY,
+            "Cache-Control": "no-cache"
           }
+        };
 
-          const form = document.getElementById("add-contact-form");
-          if (form) form.reset();
-          getContacts();
-        })
-        .catch(error => {
-          console.error('Error:', error);
-          alert('Error creating account');
-        });
+        const response = await fetch("https://evadatabase-f3b8.restdb.io/rest/accounts", settings);
+        const data = await response.json();
+        
+        const emailExists = data.some(account => account.email === contactEmail);
+        
+        if (emailExists) {
+          errorMessage.textContent = 'This email is already registered. Please use another email.';
+          return;
+        }
+
+        // Proceed with creating account
+        let jsondata = {
+          "name": contactName,
+          "email": contactEmail,
+          "password": contactPassword,
+        };
+
+        let submitSettings = {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "x-apikey": APIKEY,
+            "Cache-Control": "no-cache"
+          },
+        };
+
+        const submitResponse = await fetch("https://evadatabase-f3b8.restdb.io/rest/accounts", submitSettings);
+        const submitData = await submitResponse.json();
+        
+        console.log(submitData);
+        
+        // Redirect to browse page after successful signup
+        setTimeout(() => {
+          window.location.href = 'browse.html';
+        }, 2000);
+
+      } catch (error) {
+        console.error('Error:', error);
+        errorMessage.textContent = 'Error creating account. Please try again.';
+        // Remove loading overlay if exists
+        const loadingOverlay = document.querySelector('.loading-overlay');
+        if (loadingOverlay) {
+          loadingOverlay.remove();
+        }
+      }
     });
   }
 
@@ -118,44 +155,50 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // [STEP 3]: Handle table actions (Edit and Delete)
-  document.getElementById("contact-list").addEventListener("click", function (e) {
-    // Delete action
-    if (e.target.classList.contains("delete-btn")) {
-      e.preventDefault();
-      const contactId = e.target.getAttribute("data-id");
-      
-      if (confirm("Are you sure you want to delete this account?")) {
-        deleteContact(contactId);
+  const contactListElement = document.getElementById("contact-list");
+  if (contactListElement) {
+    contactListElement.addEventListener("click", function (e) {
+      // Delete action
+      if (e.target.classList.contains("delete-btn")) {
+        e.preventDefault();
+        const contactId = e.target.getAttribute("data-id");
+        
+        if (confirm("Are you sure you want to delete this account?")) {
+          deleteContact(contactId);
+        }
       }
-    }
-    
-    // Edit action
-    if (e.target.classList.contains("edit-btn")) {
-      e.preventDefault();
-      const contactId = e.target.getAttribute("data-id");
-      const contactName = e.target.getAttribute("data-name");
-      const contactEmail = e.target.getAttribute("data-email");
-      const contactPassword = e.target.getAttribute("data-password");
       
-      document.getElementById("update-contact-name").value = contactName;
-      document.getElementById("update-contact-email").value = contactEmail;
-      document.getElementById("update-contact-password").value = contactPassword;
-      document.getElementById("update-contact-id").value = contactId;
-      document.getElementById("update-contact-container").style.display = "block";
-    }
-  });
+      // Edit action
+      if (e.target.classList.contains("edit-btn")) {
+        e.preventDefault();
+        const contactId = e.target.getAttribute("data-id");
+        const contactName = e.target.getAttribute("data-name");
+        const contactEmail = e.target.getAttribute("data-email");
+        const contactPassword = e.target.getAttribute("data-password");
+        
+        document.getElementById("update-contact-name").value = contactName;
+        document.getElementById("update-contact-email").value = contactEmail;
+        document.getElementById("update-contact-password").value = contactPassword;
+        document.getElementById("update-contact-id").value = contactId;
+        document.getElementById("update-contact-container").style.display = "block";
+      }
+    });
+  }
 
   // [STEP 4]: Handle update form submission
-  document.getElementById("update-contact-submit").addEventListener("click", function (e) {
-    e.preventDefault();
-    
-    const contactId = document.getElementById("update-contact-id").value;
-    const contactName = document.getElementById("update-contact-name").value;
-    const contactEmail = document.getElementById("update-contact-email").value;
-    const contactPassword = document.getElementById("update-contact-password").value;
+  const updateSubmitBtn = document.getElementById("update-contact-submit");
+  if (updateSubmitBtn) {
+    updateSubmitBtn.addEventListener("click", function (e) {
+      e.preventDefault();
+      
+      const contactId = document.getElementById("update-contact-id").value;
+      const contactName = document.getElementById("update-contact-name").value;
+      const contactEmail = document.getElementById("update-contact-email").value;
+      const contactPassword = document.getElementById("update-contact-password").value;
 
-    updateContact(contactId, contactName, contactEmail, contactPassword);
-  });
+      updateContact(contactId, contactName, contactEmail, contactPassword);
+    });
+  }
 
   // [STEP 5]: Update contact function
   function updateContact(id, name, email, password) {
@@ -216,5 +259,19 @@ document.addEventListener("DOMContentLoaded", function () {
         console.error('Error:', error);
         alert('Error deleting account');
       });
+  }
+
+  //validation
+  const passwordInput = document.getElementById("contact-password");
+  const repeatPasswordInput = document.getElementById("repeat-password-input");
+  
+  if (repeatPasswordInput) {
+    repeatPasswordInput.addEventListener('input', function() {
+      if (passwordInput.value !== repeatPasswordInput.value) {
+        errorMessage.textContent = 'Passwords do not match';
+      } else {
+        errorMessage.textContent = '';
+      }
+    });
   }
 });

@@ -179,9 +179,14 @@ form div.incorrect input{
     height: 24px;
   }
   
+  /* styling for laptop screens*/
   @media (max-width: 1500px) {
   html {
     font-size: 9pt; 
+  }
+
+  .wrapper {
+    width: max(50%, 450px);
   }
 
   h1 {
@@ -191,116 +196,137 @@ form div.incorrect input{
   form {
     width: min(320px, 100%); 
     margin-top: 15px;
-   
+    margin-bottom: 35px; 
+    gap: 7px; 
   }
+
   form label {
     height: 38px; 
     width: 38px; 
     font-size: 1.2rem; 
   }
+
   form input {
     height: 38px; 
     padding: 0.7em; 
   }
 
+  form button {
+    margin-top: 8px;
+    padding: .65em 3.2em; 
+    font-size: 1rem; 
+  }
+
+  .back-button {
+    top: 12px; 
+    left: 12px; 
+    font-size: 1rem; 
+  }
+
   .back-button svg {
     width: 18px; 
   }
+
+  .create-account-link {
+    font-size: 1rem; 
+    padding: 8px 14px; 
   }
 
+  .login-footer-content {
+    margin-top: 40px; 
+    font-size: 1rem; 
+  }
+  
+  .footer-links, .social-media {
+    font-size: 1.5rem; 
+  }
+}
 
 
   /* MOBILE STYLES */
   @media (max-width: 768px) {
-    /* Adjust the wrapper for mobile screens */
+    
     .wrapper {
-      width: 100%; /* Ensure the wrapper takes up 90% of the width */
-      padding: 15px; /* Add some padding for spacing */
-      background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent dark background */
+      width: 100%; 
+      padding: 15px; 
+      background-color: rgba(0, 0, 0, 0.5); 
     }
   
-    /* Adjust the form input fields */
     form input {
-      padding: 0.8em; /* Reduce padding for mobile */
-      font-size: 1rem; /* Smaller font size for input fields */
+      padding: 0.8em; 
+      font-size: 1rem; 
     }
   
     form button {
-      padding: 0.75em 3em; /* Smaller button padding */
-      font-size: 1rem; /* Slightly smaller font size for button */
+      padding: 0.75em 3em; 
+      font-size: 1rem; 
     }
   
-    /* Adjust the label size and form layout for mobile */
     form label {
-      font-size: 1.2rem; /* Smaller font size for labels */
+      font-size: 1.2rem; 
     }
   
-    /* Adjust the margins and spacings */
     form {
       margin-top: 15px;
       margin-bottom: 30px;
     }
   
-    /* Adjust the width and spacing of the input boxes */
     form > div {
       width: 100%;
       display: flex;
-      justify-content: space-between; /* Adjust space between label and input */
-      margin-bottom: 10px; /* Add space between fields */
+      justify-content: space-between; 
+      margin-bottom: 10px; 
     }
   
-    /* Add padding to ensure input fields do not touch the screen edges */
     form input {
-      padding: 0.8em; /* Adjust padding */
-      width: 100%; /* Ensure input takes the full width */
+      padding: 0.8em; 
+      width: 100%; 
     }
   
-    /* Adjust the back button */
     .back-button {
-      font-size: 1rem; /* Smaller font size */
-      padding: 8px 12px; /* Reduced padding */
-      top: 15px; /* Adjust position */
-      left: 15px; /* Adjust position */
+      font-size: 1rem; 
+      padding: 8px 12px; 
+      top: 15px; 
+      left: 15px; 
     }
 
-    /* Ensure 'Login' text is white */
+   
     h1 {
-        color: white; /* Set Login text color to white */
+        color: white; 
     }
     
-    /* Ensure 'New Here' text (or similar) is white */
     p {
-        color: white; /* Set New Here text color to white */
+        color: white; 
     }
   
 
   }
   
-  /* Further adjustments for very small screens (e.g., mobile phones in portrait mode) */
+
   @media (max-width: 480px) {
     .wrapper {
-      width: 100%; /* Full width on smaller screens */
-      padding: 10px; /* Adjust padding */
-      background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent dark background */
+      width: 100%; 
+      padding: 10px; 
+      background-color: rgba(0, 0, 0, 0.5); 
     }
   
     form input {
-      padding: 0.7em; /* Reduce input padding further */
-      font-size: 0.9rem; /* Smaller font size for inputs */
+      padding: 0.7em; 
+      font-size: 0.9rem; 
     }
   
     form button {
-      padding: 0.7em 2.5em; /* Even smaller button padding */
-      font-size: 0.9rem; /* Smaller button text */
+      padding: 0.7em 2.5em; 
+      font-size: 0.9rem; 
     }
   
     form label {
-      font-size: 1rem; /* Even smaller label font size */
+      font-size: 1rem; 
     }
   
     .back-button {
-      font-size: 1rem; /* Slightly smaller font size for back button */
-      padding: 7px 10px; /* Reduced padding */
+      font-size: 1rem; 
+      padding: 7px 10px;
     }
 
     h1 {
@@ -308,7 +334,7 @@ form div.incorrect input{
     }
     
     p {
-        color: white; /* Set New Here text color to white */
+        color: white; 
     }
   }
   
