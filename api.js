@@ -93,7 +93,7 @@ document.addEventListener("DOMContentLoaded", function () {
         
         // Redirect to browse page after successful signup
         setTimeout(() => {
-          window.location.href = 'browse.html';
+          window.location.href = 'login.html';
         }, 2000);
 
       } catch (error) {
