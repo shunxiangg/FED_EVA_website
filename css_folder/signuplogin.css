@@ -367,8 +367,8 @@ form div.incorrect input{
   color: var(--link-color); 
 }
 
-
-/* loading Animation*/
+/* 
+loading Animation
 .login-footer-content {
   margin-top: 70px;
 }
@@ -413,4 +413,4 @@ form div.incorrect input{
     margin-top: 20px;
     font-size: 18px;
     color: #666;
-}
+} */

@@ -40,6 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 // Find matching account
                 const account = accounts.find(acc => acc.email === email && acc.password === password);
 
+                
                 if (account) {
                     localStorage.setItem('userEmail', account.email);
                     localStorage.setItem('userName', account.name);
@@ -48,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function () {
                  
                     //after a short duratuion it will direct to browswe pag
                     setTimeout(() => {
-                        window.location.href = 'browse.html';
+                        window.location.href = 'lottie.html';
                     }, 1500);
                 } else {
                     errorMessage.textContent = 'Invalid email or password';
