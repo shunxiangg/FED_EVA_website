@@ -109,7 +109,7 @@ document.addEventListener("DOMContentLoaded", function () {
           </tr>`;
         }
 
-        if (contactList.getElementsByTagName("tbody")[0]) {
+        if (contactList.getElementsByTagName("tbody")[0]) {                     //put this tag into the html to display the contents from the above content
           contactList.getElementsByTagName("tbody")[0].innerHTML = content;
         }
         if (totalContacts) {
@@ -252,3 +252,25 @@ fetch("https://evadatabase-f3b8.restdb.io/rest/accounts", settings)
 
     getContacts();
   })
+
+
+
+
+
+
+
+
+
+
+
+
+  document.addEventListener('DOMContentLoaded', function() {
+    const userName = localStorage.getItem('userName');
+    const userDisplay = document.getElementById('userDisplay');
+    
+    if (userName && userDisplay) {
+        userDisplay.textContent = `Welcome, ${userName}!`;
+        userDisplay.style.color = '#fff';
+        userDisplay.style.padding = '0 15px';
+    }
+});

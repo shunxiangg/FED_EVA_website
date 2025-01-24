@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="css_folder/modal.css">
   <link rel="stylesheet" href="css_folder/styles.css">
   <link rel="stylesheet" href="css_folder/home.css">
+  <link rel="stylesheet" href="css_folder/cart.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
@@ -21,11 +22,14 @@
         <input type="text" placeholder="Search">
       </div>
       <ul class="menu">
+        <!-- Add after userDisplay span in navbar -->
+<li><span id="userDisplay"></span></li>
+<li><button id="logoutBtn" onclick="logout()" style="display: none;">Logout</button></li>
         <li><a href="home.html">Home</a></li>
         <li><a href="browse.html">Browse</a></li>
         <li><a href="sell.html">Sell</a></li>
         <!-- <li><a href="signup.html">Sign Up</a></li> -->
-        <li><a class="fas fa-user" href="profile.html"></a></li>
+        <li><a class="fas fa-user" href="login.html"></a></li>
        
 
       </ul>
@@ -191,6 +195,13 @@
   </section>
  
    
+
+<!-- link to cart page -->
+  <button id="cart-toggle" class="cart-toggle" onclick="toggleCart()">
+    <i class="fas fa-shopping-cart"></i>
+    <span id="cartCount" class="cart-count">0</span>
+  </button>
+
   
   <footer>
     <div id="language-selector">
@@ -226,6 +237,8 @@
   <script src="js_folder/data.js"></script>
   <script src="js_folder/filters.js"></script>
   <script src="js_folder/products.js"></script>
+  
+  <script src="js_api_folder/loginAuthencation.js"></script>
 
   <script src="https://js.stripe.com/v3/"></script>
 </body>

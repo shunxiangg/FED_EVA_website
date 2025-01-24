@@ -18,7 +18,9 @@
         </a>
       </div>
       <ul class="menu">
-        
+        <!-- Add after userDisplay span in navbar -->
+<li><span id="userDisplay"></span></li>
+<li><button id="logoutBtn" onclick="logout()" style="display: none;">Logout</button></li>
         <li><a href="home.html">Home</a></li>
         <li><a href="browse.html">Browse</a></li>
         <li><a href="sell.html">Sell</a></li>
@@ -70,34 +72,13 @@
     </section>
   </main>
 
-  <!-- Cart Modal -->
-  <div class="cart-modal" id="cart-modal">
-    <div class="cart-content">
-      <h3>Your Cart</h3>
-      <div id="cart-items"></div>
-      <div class="cart-total">
-        <p>Total: <span id="cart-total-amount">$0</span></p>
-      </div>
-      <button class="checkout-btn" onclick="checkout()">Checkout</button>
-      <button class="close-btn" onclick="closeCart()">Close</button>
-    </div>
-  </div>
 
 
 
-<!-- Add this to your HTML -->
-<div id="cart-popup" class="cart-popup">
-  <div class="cart-popup-header">
-      <h3>Shopping Cart</h3>
-      <button onclick="toggleCart()" class="close-btn">&times;</button>
-  </div>
-  <div id="cart-items" class="cart-items"></div>
-  <div class="cart-popup-footer">
-      <div class="cart-total">Total: <span id="cart-total-amount">$0.00</span></div>
-      <button onclick="checkout()" class="checkout-btn">Checkout</button>
-  </div>
-</div>
 
+
+
+<!-- link to cart page -->
 <button id="cart-toggle" class="cart-toggle" onclick="toggleCart()">
   <i class="fas fa-shopping-cart"></i>
   <span id="cartCount" class="cart-count">0</span>
@@ -137,6 +118,8 @@
   <script src="js_folder/data.js"></script>
   <script src="js_folder/filters.js"></script>
   <script src="js_folder/products.js"></script>
+
+  <script src="js_api_folder/loginAuthencation.js"></script>
 
   <script src="https://js.stripe.com/v3/"></script>
 </body>

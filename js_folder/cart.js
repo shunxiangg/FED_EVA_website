@@ -120,13 +120,18 @@ function proceedToCheckout() {
         alert('Your cart is empty!');
         return;
     }
-    // Add checkout logic here
+    
     alert('Processing your order...');
+    window.location.href = 'payment.html';
     cart = [];
     localStorage.setItem('cart', JSON.stringify(cart));
     displayCart();
     updateCartCount();
+    
 }
+
+
+
 
 document.addEventListener('DOMContentLoaded', () => {
     updateCartCount();
