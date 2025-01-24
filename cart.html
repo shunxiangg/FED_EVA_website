@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart - EVA</title>
+    <link rel="stylesheet" href="css_folder/modal.css">
+    <link rel="stylesheet" href="css_folder/styles.css">
+    <link rel="stylesheet" href="css_folder/cart.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="home.html">EVA</a>
+            </div>
+            <ul class="menu">
+                <li><a href="home.html">Home</a></li>
+                <li><a href="browse.html">Browse</a></li>
+                <li><a href="sell.html">Sell</a></li>
+                <li><a class="fas fa-user" href="profile.html"></a></li>
+            </ul>
+            <div class="hamburger" onclick="toggleMenu()">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </nav>
+    </header>
+
+    <main class="cart-page">
+        <div class="cart-header">
+            <h1>Shopping Cart</h1>
+            <button onclick="window.location.href='browse.html'" class="continue-shopping">
+                <i class="fas fa-arrow-left"></i> Continue Shopping
+            </button>
+        </div>
+
+        <div class="cart-container">
+            <div id="cart-items" class="cart-items-list">
+                <!-- Cart items will be inserted here -->
+            </div>
+
+            <div class="cart-summary">
+                <h2>Order Summary</h2>
+                <div class="summary-item">
+                    <span>Subtotal</span>
+                    <span id="cart-subtotal">$0.00</span>
+                </div>
+                <div class="summary-item">
+                    <span>Shipping</span>
+                    <span>Free</span>
+                </div>
+                <div class="summary-item total">
+                    <span>Total</span>
+                    <span id="cart-total-amount">$0.00</span>
+                </div>
+                <button onclick="proceedToCheckout()" class="checkout-btn">
+                    <i class="fas fa-lock"></i> Proceed to Checkout
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 EVA. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="/about">About Us</a> | 
+                <a href="/privacy-policy">Privacy Policy</a> | 
+                <a href="/terms-of-service">Terms of Service</a>
+            </div>
+            <div class="social-media">
+                <a class="fab fa-instagram" href="https://www.instagram.com/" target="_blank"> Instagram</a> |
+                <a class="fab fa-facebook" href="https://facebook.com" target="_blank"> Facebook</a> |
+                <a class="fab fa-twitter" href="https://twitter.com" target="_blank"> Twitter</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js_folder/app.js"></script>
+    <script src="js_folder/data.js"></script>
+    <script src="js_folder/cart.js"></script>
+</body>
+</html>
