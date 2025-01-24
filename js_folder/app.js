@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
     hamburger.classList.toggle('active');
   }
   
+  
   // Language change handler
   function changeLanguage() {
     const language = document.getElementById('language-dropdown').value;
