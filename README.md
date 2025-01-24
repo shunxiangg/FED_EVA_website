@@ -102,11 +102,11 @@ cd MokeSell
 - IG [https://www.instagram.com/web_development_legend/] [https://www.instagram.com/the_coding_wizard/]
 - Icons [https://fontawesome.com/start]
 - Connect Login & Sign up Form with DATABASE[https://www.youtube.com/watch?v=TRHtOixzrH8] [https://www.youtube.com/watch?v=EQii31gG51Q] [https://restdb.io/docs/javascript-api#restdb] [https://www.sitepoint.com/how-to-get-started-with-restdb-io-and-create-a-simple-cms/]
-
+- [https://chatgpt.com/]
 
 
 
 
 ## Acknowledgements
 - Connect Login & Sign up Form with DATABASE[@LX]
-
+- The concepts of PHP and how it interacts with SQL to retrieve data[@LX]
