@@ -36,3 +36,65 @@
       </div>
     </nav>
   </header>
+
+
+<main class="sell-container">
+  <h1>List Item for Sale</h1>
+  <form id="listing-form">
+      <div class="form-group">
+          <label>Item Name</label>
+          <input type="text" id="item-name" required>
+      </div>
+      <div class="form-group">
+          <label>Price</label>
+          <input type="number" id="item-price" required>
+      </div>
+      <div class="form-group">
+          <label>Category</label>
+          <select id="item-category" required>
+              <option value="electronics">Electronics</option>
+              <option value="furniture">Furniture</option>
+              <option value="clothing">Clothing</option>
+              <option value="books">Books</option>
+          </select>
+      </div>
+      <div class="form-group">
+          <label>Description</label>
+          <textarea id="item-description" required></textarea>
+      </div>
+      <button type="submit">List Item</button>
+  </form>
+</main>
+
+<footer>
+  <div id="language-selector">
+    <select id="language-dropdown" onchange="changeLanguage()">
+      <option value="en">English</option>
+      <option value="zh">Chinese</option>
+      <option value="ms">Malay</option>
+      <option value="hi">Hindi</option>
+    </select>
+  </div>
+
+  <div class="footer-content">
+    <p>&copy; 2025 MokeSell. All rights reserved.</p>
+    <div class="footer-links">
+      <a href="/about">About Us</a> | 
+      <a href="/privacy-policy">Privacy Policy</a> | 
+      <a href="/terms-of-service">Terms of Service</a>
+    </div>
+    <div class="social-media">
+      <a class="fab fa-instagram" href="https://www.instagram.com/" target="_blank">  Instagram</a> |
+      <a class="fab fa-facebook" href="https://facebook.com" target="_blank">    Facebook</a> |
+      <a class="fab fa-twitter" href="https://twitter.com" target="_blank">    Twitter</a> |
+      <a class="fab fa-linkedin" href="https://linkedin.com" target="_blank">    LinkedIn</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
+
+
+
+
