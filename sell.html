@@ -21,12 +21,15 @@
         <input type="text" placeholder="Search">
       </div>
       <ul class="menu">
-        <li><a href="home.html">Home</a></li>
-        <li><a href="browse.html">Browse</a></li>
-        <li><a href="sell.html">Sell</a></li>
-        <!-- <li><a href="signup.html">Sign Up</a></li> -->
-        <li><a class="fas fa-user" href="profile.html"></a></li>
-       
+        <!-- Add after userDisplay span in navbar -->
+        <li><span id="userDisplay"></span></li>
+        <li><button id="logoutBtn" onclick="logout()" style="display: none;">Logout</button></li>
+                  <li><a href="home.html">Home</a></li>
+                  <li><a href="browse.html">Browse</a></li>
+                  <li><a href="sell.html">Sell</a></li>
+                  <!-- <li><a class="fas fa-shopping-cart" href="javascript:void(0)" onclick="openCart()"></a></li> -->
+                  <li><a class="fas fa-user" href="login.html"></a></li>
+             
 
       </ul>
       <div class="hamburger" onclick="toggleMenu()">
@@ -43,7 +46,7 @@
   <form id="listing-form">
       <div class="form-group">
           <label>Item Name</label>
-          <input type="text" id="item-name" required>
+          <input type="text" id="itemName" required>
       </div>
       <div class="form-group">
           <label>Price</label>
@@ -91,6 +94,10 @@
     </div>
   </div>
 </footer>
+
+
+
+<script src="js_api_folder/listings.js"></script>
 
 </body>
 </html>

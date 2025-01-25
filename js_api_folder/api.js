@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
       let jsondata = {
         "name": contactName,
         "email": contactEmail,
-        "password": contactPassword,
+        "password": contactPassword
       };
 
       let settings = {
