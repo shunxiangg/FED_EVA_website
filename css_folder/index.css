@@ -7,6 +7,12 @@
   --input-color: #F3F0FF; /* input background color */
 }
 
+header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: var(--text-color);
+}
 
 body {
     font-family: Poppins, Arial, sans-serif;
