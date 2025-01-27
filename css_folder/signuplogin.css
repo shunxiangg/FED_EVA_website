@@ -38,6 +38,22 @@ body{
   align-items: center;
   justify-content: center;
 }
+
+/* .wrapper{
+  position:absolute;
+  right:0;
+  width:50%;
+  height:100%;
+  background:#fff;
+  display:flex;
+  align-items: center;
+  color:#333;
+  text-align: center;
+  padding: 40px;
+  z-index: 1;
+  transition: .6s ease-in-out 1.2s, visibility 0s 1s;
+} */
+
 h1{
   font-size: 3rem;
   font-weight: 900;

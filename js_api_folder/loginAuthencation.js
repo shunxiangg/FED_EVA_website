@@ -16,12 +16,12 @@ function checkloginAuthencation() {
     }
 }
 
-// log ouut 
-function logout() {
-    localStorage.removeItem('userName');
-    localStorage.removeItem('userEmail');
-    window.location.href = 'index.html';
-}
+// // log ouut 
+// function logout() {
+//     localStorage.removeItem('userName');
+//     localStorage.removeItem('userEmail');
+//     window.location.href = 'index.html';
+// }
 
 // Check auth on page load
 document.addEventListener('DOMContentLoaded', checkloginAuthencation);

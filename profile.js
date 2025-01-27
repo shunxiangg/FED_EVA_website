@@ -8,8 +8,10 @@ document.getElementById('profileForm').addEventListener('submit', function(e) {
     document.getElementById('displayContact').textContent = document.getElementById('contact').value;
 });
 
-// logging user out
+// logging user out 
 function logout() {
     alert('Logging out...');
-    window.location.href = 'login.html'; 
+    localStorage.removeItem('userName');
+    localStorage.removeItem('userEmail');
+    window.location.href = 'index.html';
 }
