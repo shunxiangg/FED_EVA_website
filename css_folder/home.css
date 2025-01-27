@@ -7,6 +7,12 @@
   --input-color: #F3F0FF; /* input background color */
 }
 
+header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: var(--text-color);
+}
 
 body {
     font-family: Poppins, Arial, sans-serif;
@@ -45,6 +51,7 @@ a {
     padding: 0;
     flex-grow: 1;
     justify-content: flex-end;
+    align-items: center;
 }
   
 .navbar .menu li {
@@ -63,6 +70,21 @@ a {
     color: var(--accent-color); 
     transform: translateY(-5px);
 }
+
+#logoutBtn {
+    background: var(--accent-color);
+    color: var(--base-color);
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 1.5rem;
+}
+
+#logoutBtn:hover {
+    opacity: 0.8;
+}
+
   
 /* Hamburger Styles */
 .hamburger {
@@ -294,6 +316,15 @@ footer {
         text-align: center;
     }
     
+    #userDisplay {
+        margin: 0.5rem 0;
+    }
+    
+    #logoutBtn {
+        margin: 0.5rem auto;
+        width: 80%;
+    }
+
     .hamburger {
         display: flex;
     }
