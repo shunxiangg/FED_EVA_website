@@ -16,6 +16,7 @@ function checkloginAuthencation() {
     }
 }
 
+// log ouut 
 function logout() {
     localStorage.removeItem('userName');
     localStorage.removeItem('userEmail');
