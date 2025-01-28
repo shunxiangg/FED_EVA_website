@@ -13,7 +13,7 @@ async function loadAllProducts() {
         const dbProducts = await fetchDatabaseProducts();
         
         // Get local storage products
-        const localProducts = products || []; // assuming 'products' is your local storage array
+        const localProducts = products || []; 
         
         // Combine and display all products
         displayCombinedProducts(localProducts, dbProducts);
@@ -189,3 +189,155 @@ document.addEventListener('DOMContentLoaded', function() {
         applyFiltersBtn.addEventListener('click', applyFilters);
     }
 });
+
+
+
+
+
+
+
+
+
+// // display products from database without the local storage products handling
+// // Browse page products display
+// const APIKEY = "6787a92c77327a0a035a5437";
+// const DATABASE_URL = "https://evadatabase-f3b8.restdb.io/rest/sell";
+
+// document.addEventListener('DOMContentLoaded', function() {
+//     loadDatabaseProducts();
+// });
+
+// // Load products from database
+// async function loadDatabaseProducts() {
+//     try {
+//         const dbProducts = await fetchDatabaseProducts();
+//         displayProducts(dbProducts);
+//     } catch (error) {
+//         console.error('Error loading products:', error);
+//         const productList = document.getElementById('product-list');
+//         if (productList) {
+//             productList.innerHTML = "<p class='no-products'>Error loading products.</p>";
+//         }
+//     }
+// }
+
+// // Fetch products from database
+// async function fetchDatabaseProducts() {
+//     const settings = {
+//         method: "GET",
+//         headers: {
+//             "Content-Type": "application/json",
+//             "x-apikey": APIKEY,
+//             "Cache-Control": "no-cache"
+//         }
+//     };
+
+//     const response = await fetch(DATABASE_URL, settings);
+//     return await response.json();
+// }
+
+// // Display products
+// function displayProducts(products) {
+//     const productList = document.getElementById('product-list');
+//     if (!productList) return;
+
+//     if (products.length === 0) {
+//         productList.innerHTML = "<p class='no-products'>No products found.</p>";
+//         return;
+//     }
+
+//     productList.innerHTML = products.map(product => `
+//         <div class="product-card">
+//             <div class="product-image">
+//                 ${product.imageData ? 
+//                     `<img src="${product.imageData}" alt="${product.itemName}" class="product-image">` :
+//                     '<div class="no-image">No Image Available</div>'
+//                 }
+//             </div>
+//             <div class="product-details">
+//                 <h3>${product.itemName}</h3>
+//                 <p class="product-description">${product.description}</p>
+//                 <p class="product-category">Category: ${product.category}</p>
+//                 <p class="product-condition">Condition: ${product.condition}</p>
+//                 <p class="product-price">$${product.price}</p>
+//                 <p class="seller-info">Seller: ${product.sellerName}</p>
+//                 <button onclick="addToCart('${product._id}')" class="add-to-cart-btn">
+//                     Add to Cart
+//                 </button>
+//             </div>
+//         </div>
+//     `).join('');
+// }
+
+// // Add to cart function
+// async function addToCart(productId) {
+//     try {
+//         const settings = {
+//             method: "GET",
+//             headers: {
+//                 "Content-Type": "application/json",
+//                 "x-apikey": APIKEY,
+//                 "Cache-Control": "no-cache"
+//             }
+//         };
+
+//         const response = await fetch(`${DATABASE_URL}/${productId}`, settings);
+//         const product = await response.json();
+
+//         const cartItem = {
+//             id: product._id,
+//             name: product.itemName,
+//             price: parseFloat(product.price),
+//             imageData: product.imageData,
+//             quantity: 1
+//         };
+
+//         let cart = JSON.parse(localStorage.getItem('cart')) || [];
+//         const existingItem = cart.find(item => item.id === productId);
+
+//         if (existingItem) {
+//             existingItem.quantity += 1;
+//         } else {
+//             cart.push(cartItem);
+//         }
+
+//         localStorage.setItem('cart', JSON.stringify(cart));
+//         updateCartCount();
+//     } catch (error) {
+//         console.error('Error adding to cart:', error);
+//     }
+// }
+
+// // Filter products
+// function applyFilters() {
+//     const category = document.getElementById('category').value;
+//     const maxPrice = parseFloat(document.getElementById('price').value);
+//     const condition = document.getElementById('condition').value;
+//     const searchQuery = document.getElementById('search').value.toLowerCase();
+
+//     fetchDatabaseProducts()
+//         .then(products => {
+//             const filteredProducts = products.filter(product => {
+//                 const matchesCategory = category === 'all' || product.category === category;
+//                 const matchesPrice = parseFloat(product.price) <= maxPrice;
+//                 const matchesCondition = condition === 'all' || product.condition === condition;
+//                 const matchesSearch = product.itemName.toLowerCase().includes(searchQuery) ||
+//                                   product.description.toLowerCase().includes(searchQuery);
+                
+//                 return matchesCategory && matchesPrice && matchesCondition && matchesSearch;
+//             });
+
+//             displayProducts(filteredProducts);
+//         })
+//         .catch(error => {
+//             console.error('Error applying filters:', error);
+//         });
+// }
+
+// // Initialize filter event listeners
+// document.addEventListener('DOMContentLoaded', function() {
+//     const applyFiltersBtn = document.getElementById('apply-filters');
+//     if (applyFiltersBtn) {
+//         applyFiltersBtn.addEventListener('click', applyFilters);
+//     }
+// });
