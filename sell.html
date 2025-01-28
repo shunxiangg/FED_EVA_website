@@ -50,23 +50,23 @@
 
   <div class="container">
     <h2>Sell an item</h2>
-    
+  
     <form id="sellForm">
         <div class="image-upload">
-            <input type="file" id="photoUpload" accept="image/*" hidden>
+            <input type="file" id="photoUpload" name="photoUpload" accept="image/*" hidden>
             <div class="upload-box" onclick="document.getElementById('photoUpload').click()">
                 <span>Select Photo</span>
             </div>
         </div>
 
-        <!-- to enter link for product video -->
+        <!-- Video link -->
         <div class="video-link">
-            <input type="text" placeholder="Link to product video">
+            <input type="text" id="videoLink" name="videoLink" placeholder="Link to product video">
         </div>
 
-        <!-- Category section-->
+        <!-- Category section -->
         <div class="category-group">
-            <select required>
+            <select id="itemCategory" name="category" required>
                 <option value="" disabled selected>Select Category</option>
                 <option value="electronics">Electronics</option>
                 <option value="clothing">Clothing</option>
@@ -78,32 +78,32 @@
         <div class="condition-group">
             <label>Condition</label>
             <div class="radio-group">
-                <input type="radio" name="condition" id="brandNew">
+                <input type="radio" name="condition" id="brandNew" value="brandNew">
                 <label for="brandNew">Brand New</label>
-                <input type="radio" name="condition" id="likeNew">
+                <input type="radio" name="condition" id="likeNew" value="likeNew">
                 <label for="likeNew">Like New</label>
-                <input type="radio" name="condition" id="gentlyUsed">
+                <input type="radio" name="condition" id="gentlyUsed" value="gentlyUsed">
                 <label for="gentlyUsed">Gently Used</label>
             </div>
         </div>
 
-        <!-- Inputs such as item name, price, description and quantity of products available for sale-->
+        <!-- Item details -->
         <div class="form-group">
-            <input type="text" placeholder="Item Name" required>
-            <input type="number" placeholder="$ Price" required>
-            <textarea placeholder="Description" required></textarea>
-            <input type="number" placeholder="Item Quantity" required>
+            <input type="text" id="itemName" name="itemName" placeholder="Item Name" required>
+            <input type="number" id="itemPrice" name="itemPrice" placeholder="$ Price" required>
+            <textarea id="itemDescription" name="itemDescription" placeholder="Description" required></textarea>
+            <input type="number" id="itemQuantity" name="itemQuantity" placeholder="Item Quantity" required>
         </div>
 
-        <!-- Delivery section to enter delivery information-->
+        <!-- Delivery section -->
         <div class="delivery-method">
           <h3>Delivery Method</h3>
           
-          <input type="text" placeholder="Pickup Address" class="pickup-address">
+          <input type="text" id="pickupAddress" name="pickupAddress" placeholder="Pickup Address" class="pickup-address">
           
           <div class="address-row">
-              <input type="text" placeholder="Unit No" class="unit-no">
-              <input type="text" placeholder="Postal Code" class="postal-code">
+              <input type="text" id="unitNo" name="unitNo" placeholder="Unit No" class="unit-no">
+              <input type="text" id="postalCode" name="postalCode" placeholder="Postal Code" class="postal-code">
           </div>
        
           <div class="delivery-option">
@@ -114,7 +114,7 @@
                   <p>Delivered Within 3-5 Working Days</p>
                   <p>Price: $4.50</p>
               </div>
-              <input type="radio" id="standard" name="delivery">
+              <input type="radio" id="standard" name="deliveryMethod" value="standard">
             </label>
           </div>
        
@@ -126,13 +126,21 @@
                   <p>Same Day Delivery</p>
                   <p>Price: $5</p>
               </div>
-              <input type="radio" id="express" name="delivery">
+              <input type="radio" id="express" name="deliveryMethod" value="express">
             </label>
           </div>
        </div>
 
         <button type="submit" class="list-now">List Now</button>
     </form>
+</div>
+
+<!-- Add container for listings display -->
+<div class="my-listings-container">
+    <h2>My Listings</h2>
+    <div id="listings-list" class="listings-grid">
+        <!-- Listings will be dynamically inserted here -->
+    </div>
 </div>
 
 <!-- Old code below -->

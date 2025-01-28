@@ -102,6 +102,102 @@
     </div>
 </section>
 
+
+
+<!-- Edit Listing Modal -->
+<div id="editListingModal" class="modal" style="display: none;">
+  <div class="modal-content">
+    <h2>Edit Listing</h2>
+    <form id="editListingForm">
+      <input type="hidden" id="edit-listing-id">
+      
+      <div class="image-upload">
+        <input type="file" id="editPhotoUpload" accept="image/*" hidden>
+        <div class="upload-box" onclick="document.getElementById('editPhotoUpload').click()">
+          <span>Update Photo</span>
+        </div>
+      </div>
+
+      <div class="video-link">
+        <input type="text" id="edit-video-link" placeholder="Link to product video">
+      </div>
+
+      <div class="category-group">
+        <select id="edit-category" required>
+          <option value="" disabled>Select Category</option>
+          <option value="electronics">Electronics</option>
+          <option value="clothing">Clothing</option>
+          <option value="books">Books</option>
+        </select>
+      </div>
+
+      <div class="condition-group">
+        <label>Condition</label>
+        <div class="radio-group">
+          <input type="radio" name="edit-condition" id="edit-brandNew">
+          <label for="edit-brandNew">Brand New</label>
+          <input type="radio" name="edit-condition" id="edit-likeNew">
+          <label for="edit-likeNew">Like New</label>
+          <input type="radio" name="edit-condition" id="edit-gentlyUsed">
+          <label for="edit-gentlyUsed">Gently Used</label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <input type="text" id="edit-item-name" placeholder="Item Name" required>
+        <input type="number" id="edit-price" placeholder="$ Price" required>
+        <textarea id="edit-description" placeholder="Description" required></textarea>
+        <input type="number" id="edit-quantity" placeholder="Item Quantity" required>
+      </div>
+
+      <div class="delivery-method">
+        <h3>Delivery Method</h3>
+        <input type="text" id="edit-pickup-address" placeholder="Pickup Address" class="pickup-address">
+        <div class="address-row">
+          <input type="text" id="edit-unit-no" placeholder="Unit No" class="unit-no">
+          <input type="text" id="edit-postal-code" placeholder="Postal Code" class="postal-code">
+        </div>
+        <div class="delivery-option">
+          <label for="edit-standard" class="delivery-label">
+            <div class="delivery-details">
+              <h4>EVA Standard Delivery</h4>
+              <p>Delivered Within 3-5 Working Days</p>
+              <p>Price: $4.50</p>
+            </div>
+            <input type="radio" id="edit-standard" name="edit-delivery">
+          </label>
+        </div>
+        <div class="delivery-option">
+          <label for="edit-express" class="delivery-label">
+            <div class="delivery-details">
+              <h4>EVA Express Delivery</h4>
+              <p>Same Day Delivery</p>
+              <p>Price: $5</p>
+            </div>
+            <input type="radio" id="edit-express" name="edit-delivery">
+          </label>
+        </div>
+      </div>
+
+      <div class="button-group">
+        <button type="submit" class="save-btn">Save Changes</button>
+        <button type="button" class="cancel-btn" onclick="document.getElementById('editListingModal').style.display='none'">
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Add this container for displaying listings -->
+<div class="my-listings-container">
+  <h2>My Listings</h2>
+  <div id="listings-list" class="listings-grid">
+    <!-- Listings will be dynamically inserted here -->
+  </div>
+</div>
+
+
 <section class="recommended">
     <h2 class="section-title">Recommended For You</h2>
     <div class="product-grid">
@@ -238,7 +334,9 @@
   <script src="js_folder/filters.js"></script>
   <script src="js_folder/products.js"></script>
   <script src="js_folder/profile.js"></script>
-  
+  <script src="js_folder/listings.js"></script>
+  <script src="sell.js"></script>
+
   <script src="js_api_folder/loginAuthencation.js"></script>
 
   <script src="https://js.stripe.com/v3/"></script>

@@ -78,7 +78,7 @@ nav a.active {
 }
 
 nav .nav-link{
-  
+  background-color:cadetblue;
   border-radius: 4px;
   color: white;
 }
@@ -112,8 +112,6 @@ nav .nav-link_active{
   color: var(--accent-color); /* Change text color on hover */
   opacity: 0.9; /* Slight opacity change */
 }
-
-
 
 
 
