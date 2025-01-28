@@ -44,6 +44,7 @@
     <section class="filters">
       <label for="category">Category:</label>
       <select id="category">
+        <!-- Category section -->
         <option value="all">All</option>
         <option value="electronics">Electronics</option>
         <option value="furniture">Furniture</option>
@@ -77,14 +78,13 @@
 
 
 
-
-
-<!-- link to cart page -->
-<button id="cart-toggle" class="cart-toggle" onclick="toggleCart()">
+<!-- Replace your existing cart button with this -->
+<button id="cart-toggle" class="cart-toggle" onclick="window.location.href='cart.html'">
   <i class="fas fa-shopping-cart"></i>
   <span id="cartCount" class="cart-count">0</span>
 </button>
-  
+
+
  
   <footer>
     <div id="language-selector">
@@ -113,14 +113,14 @@
   </footer>
 
   <!-- Scripts -->
-  <script src="js_folder/app.js"></script>
+  <!-- <script src="js_folder/app.js"></script>
   <script src="js_folder/cart.js"></script>
   <script src="js_folder/config.js"></script>
   <script src="js_folder/data.js"></script>
-  <script src="js_folder/filters.js"></script>
+  <script src="js_folder/filters.js"></script> -->
+  <script src="js_folder/cart.js"></script>
   <script src="js_folder/products.js"></script>
   <script src="js_folder/profile.js"></script>
-  <script src="js_folder/browse.js"></script>
 
   <script src="js_api_folder/loginAuthencation.js"></script>
 
