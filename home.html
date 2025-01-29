@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="css_folder/styles.css">
   <link rel="stylesheet" href="css_folder/home.css">
   <link rel="stylesheet" href="css_folder/cart.css">
+  <link rel="stylesheet" href="css_folder/purchasehistory.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
@@ -193,14 +194,20 @@
 <div class="my-listings-container">
   <h2>My Listings</h2>
   <div id="listings-list" class="listings-grid">
-    <!-- Listings will be dynamically inserted here -->
+    <!-- Listings will be dynamically inserted here from products.js -->
   </div>
 </div>
 
 
 <section class="recommended">
     <h2 class="section-title">Recommended For You</h2>
+    
+    <section id="product-list" class="product-grid">
+      <!-- Products will be dynamically inserted here from products.js-->
+    </section>
+    
     <div class="product-grid">
+      
         <div class="product-card">
             <div class="product-image"></div>
             <h3 class="product-title">Style Item</h3>
@@ -290,15 +297,36 @@
     </div>
   </section>
  
-   
+<!-- cart button conner right -->
+<button id="cart-toggle" class="cart-toggle" onclick="window.location.href='cart.html'">
+  <i class="fas fa-shopping-cart"></i>
+  <span id="cartCount" class="cart-count">0</span>
+</button>
 
-<!-- link to cart page -->
-  <button id="cart-toggle" class="cart-toggle" onclick="toggleCart()">
-    <i class="fas fa-shopping-cart"></i>
-    <span id="cartCount" class="cart-count">0</span>
-  </button>
+<section class="purchase-history-section">
+    <h2>Purchase History</h2>
+    <div class="purchase-header-row">
+        <div class="header-item">Item</div>
+        <div class="header-item">Description</div>
+        <div class="header-item">Price</div>
+        <div class="header-item">Quantity</div>
+        <div class="header-item">Total</div>
+    </div>
+    <div id="purchase-history" class="purchase-history-container">
+        <div class="loading">Loading purchases...</div>
+    </div>
+</section>
 
-  
+  <!-- display purchase history -->
+  <!-- <section class="purchase-history-section">
+    <h2>Purchase History</h2>
+    <div id="purchase-history" class="purchase-history-container">
+     
+        <div class="loading">Loading purchases...</div>
+    </div>
+  </section>
+   -->
+
   <footer>
     <div id="language-selector">
       <select id="language-dropdown" onchange="changeLanguage()">
@@ -327,14 +355,15 @@
 
   <!-- Scripts -->
    <script src="js_folder/index.js"></script>
-  <script src="js_folder/app.js"></script>
+  <!-- <script src="js_folder/app.js"></script> -->
   <script src="js_folder/cart.js"></script>
-  <script src="js_folder/config.js"></script>
+  <!-- <script src="js_folder/config.js"></script>
   <script src="js_folder/data.js"></script>
-  <script src="js_folder/filters.js"></script>
+  <script src="js_folder/filters.js"></script> -->
   <script src="js_folder/products.js"></script>
   <script src="js_folder/profile.js"></script>
   <script src="js_folder/listings.js"></script>
+  <script src="js_folder/purchasehistory.js"></script>
   <script src="sell.js"></script>
 
   <script src="js_api_folder/loginAuthencation.js"></script>
