@@ -133,46 +133,54 @@ async function proceedToCheckout() {
     }
 
     const APIKEY = "6787a92c77327a0a035a5437";
-    const ORDERS_URL = "https://evadatabase-f3b8.restdb.io/rest/purchases";
+    const PURCHASES_URL = "https://evadatabase-f3b8.restdb.io/rest/purchases";
+    const userEmail = localStorage.getItem('userEmail');
+
+    if (!userEmail) {
+        alert('Please login to checkout');
+        return;
+    }
 
     try {
-        // Create order object
-        const order = {
-            userId: localStorage.getItem('userEmail'),
-            userName: localStorage.getItem('userName'),
-            orderDate: new Date().toISOString(),
-            items: cart,
+        // Create purchase object
+        const purchase = {
+            userEmail: userEmail,
+            items: cart.map(item => ({
+                itemName: item.name,
+                quantity: item.quantity,
+                price: item.price,
+                itemId: item.id
+            })),
             totalAmount: cart.reduce((sum, item) => sum + (item.price * item.quantity), 0),
-            status: 'pending'
+            orderDate: new Date().toISOString(),
+            status: 'COMPLETED'
         };
 
-        // Save order to database
-        const response = await fetch(ORDERS_URL, {
+        // Save purchase to database
+        const response = await fetch(PURCHASES_URL, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'x-apikey': APIKEY,
                 'Cache-Control': 'no-cache'
             },
-            body: JSON.stringify(order)
+            body: JSON.stringify(purchase)
         });
 
-        if (!response.ok) throw new Error('Failed to create order');
+        if (!response.ok) throw new Error('Failed to create purchase');
 
-        alert('Order placed successfully!');
+        // Clear cart after successful purchase
         cart = [];
         localStorage.setItem('cart', JSON.stringify(cart));
-        displayCart();
-        updateCartCount();
-        window.location.href = 'payment.html';
+        alert('Purchase successful!');
+        window.location.href = 'purchasehistory.html';
 
     } catch (error) {
-        console.error('Error processing order:', error);
-        alert('Failed to process order. Please try again.');
+        console.error('Error processing purchase:', error);
+        alert('Failed to process purchase. Please try again.');
     }
 }
-
-// Initialize cart when page loads
+// Initializinng cart whwn page loads
 document.addEventListener('DOMContentLoaded', () => {
     cart = JSON.parse(localStorage.getItem('cart')) || [];
     updateCartCount();
@@ -180,3 +188,34 @@ document.addEventListener('DOMContentLoaded', () => {
         displayCart();
     }
 });
+
+async function handleCheckout() {
+    const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+    const totalAmount = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
+    const purchaseData = {
+        items: cartItems.map(item => ({
+            itemName: item.itemName,
+            quantity: item.quantity,
+            price: item.price,
+            itemId: item._id
+        })),
+        totalAmount: totalAmount,
+        orderDate: new Date().toISOString(),
+        status: 'COMPLETED'
+    };
+
+    try {
+        const purchase = await createPurchase(purchaseData);
+        if (purchase) {
+            // Clear cart after successful purchase
+            localStorage.removeItem('cart');
+            updateCartDisplay();
+            alert('Purchase successful!');
+            window.location.href = 'purchasehistory.html';
+        }
+    } catch (error) {
+        console.error('Checkout failed:', error);
+        alert('Checkout failed. Please try again.');
+    }
+}

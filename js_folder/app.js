@@ -10,13 +10,13 @@
 //     const stripe = Stripe(CONFIG.STRIPE_KEY);
 //   });
   
-//   // Mobile menu toggle
-//   function toggleMenu() {
-//     const menu = document.querySelector('.menu');
-//     const hamburger = document.querySelector('.hamburger');
-//     menu.classList.toggle('active');
-//     hamburger.classList.toggle('active');
-//   }
+  // Mobile menu toggle
+  function toggleMenu() {
+    const menu = document.querySelector('.menu');
+    const hamburger = document.querySelector('.hamburger');
+    menu.classList.toggle('active');
+    hamburger.classList.toggle('active');
+  }
   
   
 //   // Language change handler
