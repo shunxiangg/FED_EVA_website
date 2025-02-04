@@ -25,3 +25,11 @@ function checkloginAuthencation() {
 
 // Check auth on page load
 document.addEventListener('DOMContentLoaded', checkloginAuthencation);
+
+
+
+
+// In your login function after successful login
+localStorage.setItem('userEmail', email);
+// Add this line:
+checkLoginStatus(); // This will trigger the popup ad
