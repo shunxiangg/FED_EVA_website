@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MokeSell - Buy and Sell Online</title>
+  <link rel="stylesheet" href="css_folder/modal.css">
+  <link rel="stylesheet" href="css_folder/styles.css">
+  <link rel="stylesheet" href="css_folder/home.css">
+  <link rel="stylesheet" href="css_folder/cart.css">
+  <link rel="stylesheet" href="css_folder/ads.css">
+  <link rel="stylesheet" href="css_folder/purchasehistory.css">
+  <link rel="stylesheet" href="css_folder/chat.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+
+  <div class="chat-container">
+    <div class="chat-header">
+        <h2>Chat</h2>
+    </div>
+    
+    <div class="chat-sidebar">
+        <div class="search-chat">
+            <input type="text" placeholder="Search" id="searchChat">
+        </div>
+        <div class="chat-list" id="chatList">
+            <!-- contacts will come here -->
+        </div>
+    </div>
+    
+    <div class="chat-main">
+        <div class="chat-messages" id="chatMessages">
+            <!-- messages here -->
+        </div>
+        
+        <div class="chat-input">
+            <input type="text" placeholder="Message" id="messageInput">
+            <button id="sendMessage">Send</button>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.socket.io/socket.io-3.0.0.min.js"></script>
+<script src="js_folder/chat.js"></script>
+<script src="js_api_folder/socket.js"></script>
+</body>
+</html>
