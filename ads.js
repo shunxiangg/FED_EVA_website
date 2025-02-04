@@ -45,7 +45,7 @@ async function displayRandomAd() {
 
         // Show popup if user is logged in 
         const userEmail = localStorage.getItem('userEmail');
-        if (userEmail && Math.random() < 0.5) {
+        if (userEmail && Math.random() < 0.9) {
             showPopupAd(randomAd);
         }
 
@@ -234,10 +234,18 @@ function checkAuth() {
 }
 
 // ============= Initialization =============
+
+function startAdRotation() {
+    displayRandomAd();
+    setInterval(displayRandomAd, 30000);
+}
+
+
+// Update the initialization code
 document.addEventListener('DOMContentLoaded', function() {
     // Home page initialization
-    if (document.getElementById('ad-container')) {
-        startAdRotation();
+    if (document.getElementById('ad-slides')) {
+        initializeSlideshow();  // Use this instead of startAdRotation
     }
     
     // Ad management page initialization
@@ -258,20 +266,55 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
+let currentSlide = 0;
+let slides = [];
+let slideInterval;
 
-// Add this to your ads.js
-let hasShownLoginAd = false; // Track if we've shown the login ad
+// Function to display slides
+function showSlides(n) {
+    const slideContainer = document.getElementById('ad-slides');
+    if (!slideContainer) return;
 
-function checkLoginStatus() {
-    const userEmail = localStorage.getItem('userEmail');
-    if (userEmail && !hasShownLoginAd) {
-        // User is logged in and we haven't shown the ad yet
-        displayLoginAd();
-        hasShownLoginAd = true;
-    }
+    // Reset current slide if out of bounds
+    if (n >= slides.length) currentSlide = 0;
+    if (n < 0) currentSlide = slides.length - 1;
+    else currentSlide = n;
+
+    // Update slide visibility
+    const slideElements = slideContainer.getElementsByClassName('slide');
+    Array.from(slideElements).forEach(slide => {
+        slide.classList.remove('active');
+    });
+    slideElements[currentSlide].classList.add('active');
+
+    // Update dots
+    const dots = document.getElementsByClassName('dot');
+    Array.from(dots).forEach(dot => {
+        dot.classList.remove('active');
+    });
+    dots[currentSlide].classList.add('active');
 }
 
-async function displayLoginAd() {
+// Function to change slides
+function changeSlide(direction) {
+    showSlides(currentSlide + direction);
+    resetSlideTimer();
+}
+
+// Function to go to a specific slide
+function goToSlide(n) {
+    showSlides(n);
+    resetSlideTimer();
+}
+
+// Reset the automatic slide timer
+function resetSlideTimer() {
+    clearInterval(slideInterval);
+    slideInterval = setInterval(() => changeSlide(1), 5000);
+}
+
+// Initialize slideshow
+async function initializeSlideshow() {
     try {
         const response = await fetch(ADS_URL, {
             method: "GET",
@@ -283,157 +326,109 @@ async function displayLoginAd() {
         });
 
         if (!response.ok) throw new Error('Failed to fetch ads');
-        const ads = await response.json();
+        slides = await response.json();
 
-        if (ads.length > 0) {
-            // Select random ad from available ads
-            const randomAd = ads[Math.floor(Math.random() * ads.length)];
-            showPopupAd(randomAd);
-        }
-    } catch (error) {
-        console.error('Error displaying login ad:', error);
-    }
-}
-
-// In displayRandomAd function, add these logs
-async function displayRandomAd() {
-    try {
-        const adContainer = document.getElementById('ad-container');
-        if (!adContainer) {
-            console.log('No ad container found on this page'); // Debug log
-            return;
-        }
-
-        console.log('Found ad container, fetching ads...'); // Debug log
-        const response = await fetch(ADS_URL, {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-                "x-apikey": APIKEY,
-                "Cache-Control": "no-cache"
+        if (slides.length === 0) {
+            const slideContainer = document.getElementById('ad-slides');
+            if (slideContainer) {
+                slideContainer.innerHTML = '<p class="slide active">No advertisements available</p>';
             }
-        });
-
-        if (!response.ok) throw new Error('Failed to fetch ads');
-        const ads = await response.json();
-        console.log('Fetched ads:', ads); // Debug log
-
-        if (ads.length === 0) {
-            console.log('No ads available in database'); // Debug log
-            adContainer.innerHTML = '<p class="ad-text">No advertisements available</p>';
             return;
         }
 
-        // Rest of the code remains exactly the same...
+        // Create slides
+        const slideContainer = document.getElementById('ad-slides');
+        const dotsContainer = document.getElementById('slide-dots');
+        
+        if (!slideContainer || !dotsContainer) return;
+
+        // Generate slides HTML
+        slideContainer.innerHTML = slides.map((ad, index) => `
+            <div class="slide ${index === 0 ? 'active' : ''}">
+                <img src="${ad.imageUrl || '/api/placeholder/600/400'}" 
+                     alt="${ad.title}" 
+                     class="slide-image"
+                     onerror="this.src='/api/placeholder/600/400'">
+                <div class="slide-content">
+                    <h2 class="ad-title">${ad.title}</h2>
+                    <p class="ad-description">${ad.description}</p>
+                </div>
+            </div>
+        `).join('');
+
+        // Generate navigation dots
+        dotsContainer.innerHTML = slides.map((_, index) => `
+            <span class="dot ${index === 0 ? 'active' : ''}" 
+                  onclick="goToSlide(${index})"></span>
+        `).join('');
+
+        // Start automatic slideshow
+        resetSlideTimer();
+
     } catch (error) {
-        console.error('Error displaying ad:', error);
-        const adContainer = document.getElementById('ad-container');
-        if (adContainer) {
-            adContainer.innerHTML = '<p class="ad-text">Error loading advertisement</p>';
+        console.error('Error initializing slideshow:', error);
+        const slideContainer = document.getElementById('ad-slides');
+        if (slideContainer) {
+            slideContainer.innerHTML = '<p class="slide active">Error loading advertisements</p>';
         }
     }
 }
 
-// In startAdRotation function, add a log
-function startAdRotation() {
-    console.log('Starting ad rotation...'); // Debug log
-    displayRandomAd();
-    setInterval(displayRandomAd, 30000);
-}
-
-// In initialization, add a log
+// Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('DOM loaded, checking for ad container...'); // Debug log
-    // Home page initialization
-    const adContainer = document.getElementById('ad-container');
-    if (adContainer) {
-        console.log('Found ad container, will start rotation'); // Debug log
-        startAdRotation();
+    if (document.getElementById('ad-slides')) {
+        initializeSlideshow();
     }
     
-    // Rest of the code remains exactly the same...
+    // Rest of your existing DOMContentLoaded code...
 });
 
+function renderSlides() {
+    const slideContainer = document.getElementById('ad-slides');
+    const dotsContainer = document.getElementById('slide-dots');
 
-
-
-
-
-
-
-
-
-
-// Update the displayLoginAd function
-async function displayLoginAd() {
-    const userEmail = localStorage.getItem('userEmail'); // Add this line
-    if (!userEmail) {
-        console.log('No user email found');
+    if (!slideContainer || !dotsContainer) {
+        console.error("Slideshow containers not found!");
         return;
     }
 
-    try {
-        const response = await fetch(ADS_URL, {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-                "x-apikey": APIKEY,
-                "Cache-Control": "no-cache"
-            }
-        });
+    // Create slide elements
+    slideContainer.innerHTML = slides
+        .map(
+            (ad, index) => `
+            <div class="slide ${index === 0 ? "active" : ""}">
+                <img src="${ad.imageUrl || "/api/placeholder/200/120"}" 
+                     alt="${ad.title}" 
+                     class="slide-image"
+                     onerror="this.src='/api/placeholder/200/120'">
+                <div class="slide-content">
+                    <span class="special-tag">Special Offer</span>
+                    <h2 class="ad-title">${ad.title}</h2>
+                    <p class="ad-description">${ad.description}</p>
+                </div>
+            </div>
+        `
+        )
+        .join("");
 
-        if (!response.ok) throw new Error('Failed to fetch ads');
-        const ads = await response.json();
+    // Create navigation dots
+    dotsContainer.innerHTML = slides
+        .map(
+            (_, index) => `
+            <span class="dot ${index === 0 ? "active" : ""}" onclick="goToSlide(${index})"></span>
+        `
+        )
+        .join("");
 
-        if (ads.length > 0) {
-            // Select random ad from available ads
-            const randomAd = ads[Math.floor(Math.random() * ads.length)];
-            showPopupAd(randomAd);
-        }
-    } catch (error) {
-        console.error('Error displaying login ad:', error);
-    }
+    // Start automatic rotation
+    resetSlideTimer();
 }
 
-// Update checkLoginStatus
-function checkLoginStatus() {
-    const userEmail = localStorage.getItem('userEmail');
-    if (userEmail && !hasShownLoginAd) {
-        console.log('User logged in, displaying ad');
-        displayLoginAd();
-        hasShownLoginAd = true;
-    } else {
-        console.log('User not logged in or ad already shown');
-    }
+// Update automatic slide rotation
+function resetSlideTimer() {
+    clearInterval(slideInterval);
+    slideInterval = setInterval(() => {
+        currentSlide = (currentSlide + 1) % slides.length;
+        showSlides(currentSlide);
+    }, 3000); // Changed to 3 seconds for faster rotation
 }
-
-
-// Update initialization section
-document.addEventListener('DOMContentLoaded', function() {
-    // Home page initialization
-    if (document.getElementById('ad-container')) {
-        console.log('Starting ad rotation on home page');
-        startAdRotation();
-    }
-    
-    // Ad management page initialization
-    if (document.getElementById('adForm')) {
-        const userEmail = localStorage.getItem('userEmail');
-        if (!userEmail) {
-            console.log('User not logged in, redirecting');
-            alert('Please login to manage advertisements');
-            window.location.href = 'home.html';
-            return;
-        }
-        
-        console.log('Initializing ad management page');
-        initImagePreview();
-        initAdForm();
-        loadUserAds();
-        
-        const userDisplay = document.getElementById('userDisplay');
-        if (userDisplay) {
-            userDisplay.textContent = userEmail;
-        }
-    }
-});
