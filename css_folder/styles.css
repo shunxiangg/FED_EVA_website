@@ -151,13 +151,19 @@ h1 {
   border-radius: 8px;
   margin-bottom: 30px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .filters label {
-  display: inline-block;
-  margin-right: 15px;
   font-weight: bold;
   color: var(--text-color);
+  white-space: nowrap;
 }
 
 .filters select,
@@ -188,6 +194,32 @@ h1 {
 #apply-filters:hover {
   background-color: #45a049;
 }
+/* search bar on nav bar */
+.navbar input[type="text"] {
+  width: 500px;
+  height: 18px;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  margin: 0 20px;
+}
+
+.search-bar:hover {
+  color: rgb(255, 52, 164);
+}
+
+
+/* Adjust navbar layout */
+.navbar {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  gap: 20px;
+}
+
+
+
 
 /* Product Grid Styles */
 .product-grid {
@@ -364,4 +396,38 @@ footer {
   }
 }
 
-
+/* back button */
+.back-button-main {
+    position: fixed;
+    top: 13%;
+    left: 20px;
+    background-color: var(--base-color);
+    border: none;
+    font-size: 1.2rem;
+    color: var(--text-color);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+  }
+  
+  .back-button-main:hover {
+    background-color: var(--accent-color);
+    color: var(--base-color);
+    transform: scale(1.1); /* zoom on hover */
+  }
+  
+  .back-button-main:focus {
+    outline: none;
+  }
+  
+  .back-button-main svg {
+    margin-right: 8px;
+    fill: var(--text-color);
+    width: 24px;
+    height: 24px;
+  }
+  

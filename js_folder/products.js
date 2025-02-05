@@ -88,7 +88,10 @@ function applyFilters() {
     const maxPrice = parseFloat(document.getElementById('price').value);
     const condition = document.getElementById('condition').value;
     const searchQuery = document.getElementById('search').value.toLowerCase();
-
+    const loadingSpinner = document.getElementById('loading-spinner');
+ 
+    loadingSpinner.style.display = 'block';
+    
     fetchDatabaseProducts()
         .then(products => {
             const filteredProducts = products.filter(product => {
@@ -100,12 +103,14 @@ function applyFilters() {
                 
                 return matchesCategory && matchesPrice && matchesCondition && matchesSearch;
             });
-
+ 
             displayProducts(filteredProducts);
         })
-        .catch(error => console.error('Error applying filters:', error));
-}
-
+        .catch(error => console.error('Error applying filters:', error))
+        .finally(() => {
+            loadingSpinner.style.display = 'none';
+        });
+ }
 
 
 // Display product information
@@ -128,7 +133,7 @@ function displayProducts(products) {
             </div>
             <div class="product-details">
                 <h3>${product.itemName}</h3>
-                <p class="product-description">${product.description}</p>
+                <p class="product-description">${truncateText(product.description, 50)}</p>
                 <p class="product-category">Category: ${product.category}</p>
                 <p class="product-condition">Condition: ${product.condition}</p>
                 <p class="product-price">$${product.price}</p>
@@ -140,3 +145,31 @@ function displayProducts(products) {
         </div>
     `).join('');
 }
+function truncateText(text, maxLength) {
+    return text.length > maxLength ? text.slice(0, maxLength) + '...' : text;
+ }
+// event listener for enter key to search
+document.addEventListener('DOMContentLoaded', function() {
+    const navbarSearch = document.querySelector('.navbar input[type="text"]');
+    const loadingSpinner = document.getElementById('loading-spinner');
+    
+    navbarSearch.addEventListener('keypress', async function(e) {
+        if (e.key === 'Enter') {
+            const searchQuery = this.value.toLowerCase();
+            loadingSpinner.style.display = 'block';
+            
+            try {
+                const products = await fetchDatabaseProducts();
+                const filteredProducts = products.filter(product => 
+                    product.itemName.toLowerCase().includes(searchQuery) ||
+                    product.description.toLowerCase().includes(searchQuery)
+                );
+                displayProducts(filteredProducts);
+            } catch (error) {
+                console.error('Error searching products:', error);
+            } finally {
+                loadingSpinner.style.display = 'none';
+            }
+        }
+    });
+  });
