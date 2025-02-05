@@ -172,8 +172,7 @@ async function proceedToCheckout() {
         // Clear cart after successful purchase
         cart = [];
         localStorage.setItem('cart', JSON.stringify(cart));
-        alert('Purchase successful!');
-        window.location.href = 'purchasehistory.html';
+        window.location.href = 'browse.html';
 
     } catch (error) {
         console.error('Error processing purchase:', error);
@@ -211,11 +210,10 @@ async function handleCheckout() {
             // Clear cart after successful purchase
             localStorage.removeItem('cart');
             updateCartDisplay();
-            alert('Purchase successful!');
-            window.location.href = 'purchasehistory.html';
+            window.location.href = 'browse.html';
         }
     } catch (error) {
         console.error('Checkout failed:', error);
-        alert('Checkout failed. Please try again.');
+        alert('checkout faile please try again.');
     }
 }
