@@ -95,6 +95,12 @@ nav .nav-link_active{
   color: white;
 }
 
+.nav-link, .nav-link_active {
+  width: 70px;  /* Fixed width */
+  text-align: center;
+  display: inline-block;
+}
+
 /* Logout Button */
 #logoutBtn {
   background: var(--accent-color);

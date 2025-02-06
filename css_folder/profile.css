@@ -28,49 +28,6 @@ a {
     color: inherit;
 }
   
-/* Navbar Styles */
-.navbar {
-    background-color: var(--text-color);
-    padding: 20px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: relative;
-}
-  
-.navbar .logo {
-    font-size: 24px;
-    color: var(--base-color);
-    font-weight: bold;
-}
-  
-.navbar .menu {
-    list-style: none;
-    display: flex;
-    margin: 0;
-    padding: 0;
-    flex-grow: 1;
-    justify-content: flex-end;
-    align-items: center;
-}
-  
-.navbar .menu li {
-    margin-left: 20px;
-}
-  
-.navbar .menu a {
-    color: var(--base-color);
-    padding: 10px;
-    display: block;
-    transition: all 0.3s ease;
-}
-  
-.navbar .menu a:hover {
-    text-decoration: underline;
-    color: var(--accent-color); 
-    transform: translateY(-5px);
-}
-
 /* Hamburger Styles */
 .hamburger {
     display: none;
@@ -203,3 +160,8 @@ a {
     gap: 1rem;
     margin-top: 1rem;
   }
+
+  /* Ads icon styles */
+  .fa-ad {
+    font-size: 20px;  /* Adjust size as needed */
+}
