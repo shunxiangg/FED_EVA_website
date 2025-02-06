@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +10,7 @@
     <link rel="stylesheet" href="css_folder/cart.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
+
 <body>
     <header>
         <nav class="navbar">
@@ -63,12 +65,107 @@
         </div>
     </main>
 
+    <!-- Add this HTML at the end of the body tag -->
+    <div id="success-popup" class="success-popup">
+        <div class="popup-content">
+            <div class="checkmark">
+                <div class="check-circle">
+                    <div class="check-mark"></div>
+                </div>
+            </div>
+            <h2>Purchase Complete!</h2>
+        </div>
+    </div>
+
+    <style>
+        .success-popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .popup-content {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            animation: popIn 0.3s ease-out;
+        }
+
+        .checkmark {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+        }
+
+        .check-circle {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 4px solid #4CAF50;
+            position: relative;
+            animation: circleIn 0.3s ease-out forwards;
+        }
+
+        .check-mark {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            width: 30px;
+            height: 60px;
+            border-right: 4px solid #4CAF50;
+            border-bottom: 4px solid #4CAF50;
+            transform-origin: 50% 50%;
+            animation: checkIn 0.3s ease-out 0.3s forwards;
+        }
+
+        @keyframes popIn {
+            0% {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes circleIn {
+            0% {
+                transform: scale(0);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes checkIn {
+            0% {
+                transform: translate(-50%, -50%) rotate(45deg) scale(0);
+            }
+
+            100% {
+                transform: translate(-50%, -50%) rotate(45deg) scale(1);
+            }
+        }
+    </style>
+
     <footer>
         <div class="footer-content">
             <p>&copy; 2025 EVA. All rights reserved.</p>
             <div class="footer-links">
-                <a href="/about">About Us</a> | 
-                <a href="/privacy-policy">Privacy Policy</a> | 
+                <a href="/about">About Us</a> |
+                <a href="/privacy-policy">Privacy Policy</a> |
                 <a href="/terms-of-service">Terms of Service</a>
             </div>
             <div class="social-media">
@@ -83,4 +180,5 @@
     <script src="js_folder/data.js"></script>
     <script src="js_folder/cart.js"></script>
 </body>
+
 </html>
