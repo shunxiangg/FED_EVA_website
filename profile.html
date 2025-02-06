@@ -5,9 +5,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MokeSell - Buy and Sell Online</title>
-  <link rel="stylesheet" href="css_folder/modal.css">
+  <!-- <link rel="stylesheet" href="css_folder/modal.css"> -->
   <link rel="stylesheet" href="css_folder/styles.css">
-  <link rel="stylesheet" href="css_folder/home.css">
+  <!-- <link rel="stylesheet" href="css_folder/home.css"> -->
   <link rel="stylesheet" href="css_folder/cart.css">
   <link rel="stylesheet" href="css_folder/profile.css">
   <link rel="stylesheet" href="css_folder/purchasehistory.css">
@@ -22,13 +22,11 @@
           EVA
         </a>
       </div>
-      <div class="search-bar">
-        <input type="text" placeholder="Search">
-      </div>
+   
       <ul class="menu">
-        <!-- Add after userDisplay span in navbar -->
+        
         <li><span id="userDisplay"></span></li>
-        <li><button id="logoutBtn" onclick="logout()" style="display: none;">Logout</button></li>
+        <li><a href="ads.html" class="nav-link">ads</a></li>
         <li><a href="home.html" class="nav-link">Home</a></li>
         <li><a href="browse.html" class="nav-link">Browse</a></li>
         <li><a href="sell.html" class="nav-link">Sell</a></li>
@@ -44,33 +42,58 @@
       </div>
     </nav>
   </header>
+  
 
   <div class="profile-container">
-    <div class="profile-image"></div>
-
     <div class="profile-info">
-      <p>Name: <span id="displayName">John Doe</span></p>
-      <p>Gender: <span id="displayGender">Male</span></p>
-      <p>Email: <span id="displayEmail">john@example.com</span></p>
-      <p>Contact: <span id="displayContact">123-456-7890</span></p>
+      <h2>Profile Information</h2>
+      <div class="info-display">
+        <p><strong>Name:</strong> <span id="display-name"></span></p>
+        <p><strong>Email:</strong> <span id="display-email"></span></p>
+        <p><strong>Gender:</strong> <span id="display-gender"></span></p>
+        <p><strong>Phone:</strong> <span id="display-phone"></span></p>
+      </div>
+      <button id="edit-btn" class="btn">Edit Profile</button>
     </div>
-
-    <form class="profile-form" id="profileForm">
-      <input type="text" id="name" placeholder="Name">
-      <select id="gender">
-        <option value="">Select Gender</option>
-        <option value="Male">Male</option>
-        <option value="Female">Female</option>
-      </select>
-      <input type="email" id="email" placeholder="Email">
-      <input type="text" id="contact" placeholder="Contact Information">
-      <button type="submit" class="update-btn">Update</button>
-    </form>
-
-    <button class="logout-btn" onclick="logout()">Logout</button>
+    
+  
+    <div id="edit-modal" class="modal">
+      <div class="modal-content">
+        <h3>Edit Profile</h3>
+        <form id="edit-form">
+          <div class="form-group">
+            <label for="edit-name">Name</label>
+            <input type="text" id="edit-name" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="edit-email">Email</label>
+            <input type="email" id="edit-email" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="edit-gender">Gender</label>
+            <select id="edit-gender" required>
+              <option value="">Select Gender</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="edit-phone">Phone</label>
+            <input type="tel" id="edit-phone" required>
+          </div>
+  
+          <div class="button-group">
+            <button type="submit" class="btn btn-primary">Update</button>
+            <button type="button" class="btn btn-secondary" id="cancel-btn">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
   </div>
-
-
+  <button id="logoutBtn" onclick="logout()" style="display: none;">Logout</button>
   <section class="purchase-history-section">
     <h2>Purchase History</h2>
     <div class="purchase-header-row">
@@ -84,7 +107,7 @@
     </div>
   </section>
 
-
+  <script src="js_api_folder/api.js"></script>
   <script src="js_folder/profile.js"></script>
   <script src="js_folder/purchasehistory.js"></script>
 </body>

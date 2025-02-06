@@ -22,14 +22,14 @@
           EVA
         </a>
       </div>
-    
-        <input type="text" id="search" placeholder="Search products...">
+
+      <!--  SEARchh-->
+      <input type="text" class="search-bar" id="search" placeholder="Search products...">
 
       <!-- <div class="search-bar">
         <input type="text" placeholder="Search">
       </div> -->
       <ul class="menu">
-        <!-- Add after userDisplay span in navbar -->
         <li><span id="userDisplay"></span></li>
         <!-- <li><button id="logoutBtn" onclick="logout()" style="display: none;">Logout</button></li> -->
         <li><a href="home.html" class="nav-link_active">Home</a></li>
@@ -38,7 +38,7 @@
         <!-- <li><a href="signup.html" class="nav-link">Sign Up</a></li> -->
         <li><a class="fas fa-user" href="profile.html" class="nav-link"></a></li>
 
-        <li><a href="ads.html" class="nav-link">ads</a></li>
+        <!-- <li><a href="ads.html" class="nav-link">ads</a></li> -->
       </ul>
       <div class="hamburger" onclick="toggleMenu()">
         <span class="bar"></span>
@@ -49,19 +49,19 @@
   </header>
   <div class="slideshow-container">
     <div id="ad-slides" class="ad-card">
-        <!-- Slides will be inserted here by JavaScript -->
+      <!-- Slides will be inserted here by JavaScript -->
     </div>
-    
+
     <!-- Navigation buttons -->
     <button class="slide-nav prev" onclick="changeSlide(-1)">❮</button>
     <button class="slide-nav next" onclick="changeSlide(1)">❯</button>
-    
+
     <!-- Navigation dots -->
     <div class="slide-dots" id="slide-dots">
-        <!-- Dots will be inserted here by JavaScript -->
+      <!-- Dots will be inserted here by JavaScript -->
     </div>
-</div>
-  
+  </div>
+
   <main>
     <h1>Welcome to EVA!</h1>
 
@@ -366,7 +366,7 @@
     </div>
   </section>
 
- 
+
   <footer>
     <div id="language-selector">
       <select id="language-dropdown" onchange="changeLanguage()">
@@ -413,7 +413,7 @@
   <script src="js_api_folder/loginAuthencation.js"></script>
 
   <script src="https://js.stripe.com/v3/"></script>
-  
+
 </body>
 
 </html>

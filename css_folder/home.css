@@ -28,48 +28,6 @@ a {
     color: inherit;
 }
   
-/* Navbar Styles */
-.navbar {
-    background-color: var(--text-color);
-    padding: 20px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: relative;
-}
-  
-.navbar .logo {
-    font-size: 24px;
-    color: var(--base-color);
-    font-weight: bold;
-}
-  
-.navbar .menu {
-    list-style: none;
-    display: flex;
-    margin: 0;
-    padding: 0;
-    flex-grow: 1;
-    justify-content: flex-end;
-    align-items: center;
-}
-  
-.navbar .menu li {
-    margin-left: 20px;
-}
-  
-.navbar .menu a {
-    color: var(--base-color);
-    padding: 10px;
-    display: block;
-    transition: all 0.3s ease;
-}
-  
-.navbar .menu a:hover {
-    text-decoration: underline;
-    color: var(--accent-color); 
-    transform: translateY(-5px);
-}
 
 #logoutBtn {
     background: var(--accent-color);
@@ -102,16 +60,28 @@ a {
     border-radius: 50px;
 }
   
-.search-bar {
-    flex-grow: 1;
-    margin: 0 2rem;
+/* search bar on nav bar */
+.navbar input[type="text"] {
+  width: 500px;
+  height: 18px;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  margin: 0 20px;
 }
 
-.search-bar input {
-    width: 150%;
-    padding: 0.5rem;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+.search-bar:hover {
+  color: rgb(255, 52, 164);
+}
+
+
+/* Adjust navbar layout */
+.navbar {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  gap: 20px;
 }
 
 
