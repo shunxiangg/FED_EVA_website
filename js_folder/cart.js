@@ -142,7 +142,6 @@ async function proceedToCheckout() {
     }
 
     try {
-        // Create purchase object
         const purchase = {
             userEmail: userEmail,
             items: cart.map(item => ({
@@ -156,7 +155,6 @@ async function proceedToCheckout() {
             status: 'COMPLETED'
         };
 
-        // Save purchase to database
         const response = await fetch(PURCHASES_URL, {
             method: 'POST',
             headers: {
@@ -169,10 +167,15 @@ async function proceedToCheckout() {
 
         if (!response.ok) throw new Error('Failed to create purchase');
 
-        // Clear cart after successful purchase
+        const popup = document.getElementById('success-popup');
+        popup.style.display = 'flex';
+         
         cart = [];
         localStorage.setItem('cart', JSON.stringify(cart));
-        window.location.href = 'browse.html';
+        
+        setTimeout(() => {
+            window.location.href = 'browse.html';
+        }, 1000);
 
     } catch (error) {
         console.error('Error processing purchase:', error);
