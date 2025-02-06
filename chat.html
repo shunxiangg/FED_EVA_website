@@ -24,7 +24,7 @@
     
     <div class="chat-sidebar">
         <div class="search-chat">
-            <input type="text" placeholder="Search" id="searchChat">
+            <input type="text" placeholder="Search Chats..." id="searchChat">
         </div>
         <div class="chat-list" id="chatList">
             <!-- contacts will come here -->
@@ -32,97 +32,28 @@
     </div>
     
     <div class="chat-main">
-        <div class="chat-messages" id="chatMessages">
-            <!-- messages here -->
-        </div>
-        
-        <div class="chat-input">
-            <input type="text" placeholder="Message" id="messageInput">
-            <button id="sendMessage">Send</button>
-        </div>
-    </div>
+      <div id="no-chat-placeholder" class="no-chat">
+          <p>Select a chat to start messaging</p>
+      </div>
+      <div id="chat-content" style="display: none;">
+          <div class="chat-user-header" id="chatUserHeader">
+              <!-- Selected user info will appear here -->
+          </div>
+          <div class="chat-messages" id="chatMessages">
+              <!-- Messages will appear here -->
+          </div>
+          <div class="chat-input">
+              <input type="text" placeholder="Type a message..." id="messageInput">
+              <button id="sendMessage">
+                  <i class="fas fa-paper-plane"></i>
+              </button>
+          </div>
+      </div>
+  </div>
 </div>
 
-<!-- Add this HTML at the end of the body tag -->
-<div id="success-popup" class="success-popup">
-    <div class="popup-content">
-      <div class="checkmark">
-        <div class="check-circle">
-          <div class="check-mark"></div>
-        </div>
-      </div>
-      <h2>Purchase Complete!</h2>
-    </div>
-  </div>
   
-  <style>
-  .success-popup {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 1000;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .popup-content {
-    background: white;
-    padding: 40px;
-    border-radius: 20px;
-    text-align: center;
-    animation: popIn 0.3s ease-out;
-  }
-  
-  .checkmark {
-    width: 80px;
-    height: 80px;
-    margin: 0 auto 20px;
-  }
-  
-  .check-circle {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    border: 4px solid #4CAF50;
-    position: relative;
-    animation: circleIn 0.3s ease-out forwards;
-  }
-  
-  .check-mark {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0);
-    width: 30px;
-    height: 60px;
-    border-right: 4px solid #4CAF50;
-    border-bottom: 4px solid #4CAF50;
-    transform-origin: 50% 50%;
-    animation: checkIn 0.3s ease-out 0.3s forwards;
-  }
-  
-  @keyframes popIn {
-    0% { transform: scale(0.8); opacity: 0; }
-    100% { transform: scale(1); opacity: 1; }
-  }
-  
-  @keyframes circleIn {
-    0% { transform: scale(0); }
-    100% { transform: scale(1); }
-  }
-  
-  @keyframes checkIn {
-    0% { transform: translate(-50%, -50%) rotate(45deg) scale(0); }
-    100% { transform: translate(-50%, -50%) rotate(45deg) scale(1); }
-  }
-  </style>
-  
-<script src="https://cdn.socket.io/socket.io-3.0.0.min.js"></script>
+
 <script src="js_folder/chat.js"></script>
-<script src="js_api_folder/socket.js"></script>
 </body>
 </html>
