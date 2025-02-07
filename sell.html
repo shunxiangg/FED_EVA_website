@@ -171,7 +171,38 @@
       <button type="submit">List Item</button>
   </form>
 </main> -->
-
+<div id="editListingModal" class="modal" style="display: none;">
+  <div class="modal-content">
+    <h2>Edit Listing</h2>
+    <form id="editListingForm">
+      <input type="hidden" id="edit-listing-id">
+      <div class="image-upload">
+        <input type="file" id="editPhotoUpload" accept="image/*" hidden>
+        <div class="upload-box" onclick="document.getElementById('editPhotoUpload').click()">
+          <span>Update Photo</span>
+        </div>
+      </div>
+      <div class="category-group">
+        <select id="edit-category" required>
+          <option value="electronics">Electronics</option>
+          <option value="furniture">Furniture</option>
+          <option value="clothing">Clothing</option>
+          <option value="books">Books</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <input type="text" id="edit-item-name" placeholder="Item Name" required>
+        <input type="number" id="edit-price" placeholder="$ Price" required>
+        <textarea id="edit-description" placeholder="Description" required></textarea>
+        <input type="number" id="edit-quantity" placeholder="Item Quantity" required>
+      </div>
+      <div class="button-group">
+        <button type="submit" class="save-btn">Save Changes</button>
+        <button type="button" class="cancel-btn" onclick="closeEditModal()">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
 <footer>
   <div id="language-selector">
     <select id="language-dropdown" onchange="changeLanguage()">
