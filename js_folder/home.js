@@ -1,5 +1,35 @@
-// search filter products for home page
+function navigateTo(page) {
+    if (page === 'voucher') {
+        window.location.href = 'voucher.html';
+    }
+    else if (page === 'rewards') {
+        window.location.href = 'rewards.html';
+    }
+    else if (page === 'deals') {
+        window.location.href = 'deals.html';
+    }
+    else if (page === 'events') {
+        window.location.href = 'events.html';
+    }
+    else if (page === 'shipping') {
+        window.location.href = 'shipping.html';
+    }
+    else if (page === 'discounts') {
+        window.location.href = 'discounts.html';
+    }
+    else if (page === 'products') {
+        window.location.href = 'browse.html'; 
+    }
+    else if (page === 'sell') {
+        window.location.href = 'sell.html'; 
+    }
+    else {
+        console.error('Unknown page:', page);
+    }
+}
 
+
+// search filter products for home page
 document.addEventListener('DOMContentLoaded', function() {
     loadDatabaseProducts();
     initializeCategoryFilters();
@@ -112,3 +142,4 @@ function truncateText(text, maxLength) {
     if (!text) return '';
     return text.length > maxLength ? text.slice(0, maxLength) + '...' : text;
 }
+

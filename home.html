@@ -73,26 +73,37 @@
   <nav class="directory">
     <h2 class="section-title">Navigation</h2>
     <div class="direct-grid">
-      <div class="direct-item" onclick="navigateTo('voucher')">
+      <div class="direct-item" onclick="navigateTo('voucher')" role="button" tabindex="0">
+        <i class="fas fa-ticket-alt"></i>
         <p>Voucher </p>
       </div>
-      <div class="direct-item" onclick="navigateTo('rewards')">
+      <div class="direct-item" onclick="navigateTo('rewards')" role="button" tabindex="0">
+        <i class="fas fa-award"></i>
         <p>Rewards </p>
       </div>
-      <div class="direct-item" onclick="navigateTo('deals')">
+      <div class="direct-item" onclick="navigateTo('deals')" role="button" tabindex="0">
+        <i class="fas fa-tag"></i>
         <p>Deals </p>
       </div>
-      <div class="direct-item" onclick="navigateTo('events')">
+      <div class="direct-item" onclick="navigateTo('events')" role="button" tabindex="0">
+        <i class="fas fa-calendar"></i>
         <p>Events </p>
       </div>
-      <div class="direct-item" onclick="navigateTo('shipping')">
+      <div class="direct-item" onclick="navigateTo('shipping')" role="button" tabindex="0">
+        <i class="fas fa-truck"></i>
         <p>Shipping </p>
       </div>
-      <div class="direct-item" onclick="navigateTo('discounts')">
+      <div class="direct-item" onclick="navigateTo('discounts')" role="button" tabindex="0">
+        <i class="fas fa-percent"></i>
         <p>Discounts</p>
       </div>
-      <div class="direct-item" onclick="navigateTo('products')">
+      <div class="direct-item" onclick="navigateTo('products')" role="button" tabindex="0">
+        <i class="fas fa-shopping-bag"></i>
         <p>Products </p>
+      </div>
+      <div class="direct-item" onclick="navigateTo('sell')" role="button" tabindex="0">
+        <i class="fas fa-store"></i>
+        <p>Sell </p>
       </div>
     </div>
   </nav>
@@ -222,7 +233,7 @@
 
 
 <section class="recommended">
-  <h2 class="section-title">recommended</h2>
+  <h2 class="section-title">Recommended</h2>
   <section id="product-list" class="product-grid" src="productInformation.html">
     <!-- products will be dynamicaly insert here from products.js-->
   </section>
@@ -331,7 +342,7 @@
   </footer>
 
   <!-- Scripts -->
-  <script src="js_folder/home-products.js"></script>
+  <script src="js_folder/home.js"></script>
   <script src="js_folder/products.js"></script>
   <script src="ads.js"></script>
   <script src="js_folder/index.js"></script>

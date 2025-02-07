@@ -93,29 +93,74 @@ a {
 }
 
 .directory {
-    padding: 1rem;
-    margin-bottom: 2rem;
+    padding: 2rem 2rem 1.5rem;
+    background-color: #f8f9fa;
 }
 
 .direct-grid {
     display: grid;
-    grid-template-columns: repeat(8, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 1rem;
-    margin-left: 10rem;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 1rem;
 }
 
 .direct-item {
-    background-color:gray;
-    padding: 1rem;
-    text-align: center;
-    border-radius: 10px;
+    background-color: white;
+    border-radius: 16px;
+    padding: 1.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+    min-height: 100px;
+    aspect-ratio: 1.6/1;
+    position: relative;
+}
+
+.direct-item i {
+    font-size: 1.75rem;
+    margin-bottom: 0.75rem;
+    color: var(--text-color);
+    transition: all 0.2s ease;
+}
+.direct-item::before {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+    transition: all 0.3s ease;
 }
 
 .direct-item:hover {
-    background-color: #e8e8e8;
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(161, 154, 211, 0.15);
+    background-color: var(--accent-color);
 }
+.direct-item p {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-color);
+    transition: all 0.2s ease;
+}
+
+/* add subtle effect when clicing */
+.direct-item:hover i,
+.direct-item:hover p {
+    color: white;
+}
+
+
+.direct-item:active {
+    transform: scale(0.98);
+}
+
 
 .categories {
     padding: 1rem;
@@ -189,9 +234,24 @@ a {
 }
 
 .section-title {
-    margin-bottom: 1rem;
-    font-size: 1.2rem;
-    color: #333;
+    font-size: 1.75rem;
+    color: var(--text-color);
+    margin: 0 0 2rem 1rem;
+    font-weight: 600;
+    font-family: Poppins, Arial, sans-serif;
+    position: relative;
+    display: inline-block;
+}
+/* Add a subtle accent line under the title */
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 40px;
+    height: 3px;
+    background-color: var(--accent-color);
+    border-radius: 2px;
 }
 
 .discounts {
@@ -265,6 +325,18 @@ footer {
 
 
 /* Responsive Styles */
+@media screen and (max-width: 1024px) {
+    .direct-grid {
+        max-width: 800px;
+        gap: 0.875rem;
+    }
+    
+    .direct-item {
+        padding: 1.25rem 1rem;
+        min-height: 90px;
+    }
+}
+
 @media screen and (max-width: 768px) {
     .navbar .menu{
         display:none;
@@ -299,6 +371,27 @@ footer {
         display: flex;
     }
 
+    .directory {
+        padding: 1rem;
+    }
+    
+    .direct-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.75rem;
+        padding: 0 0.5rem;
+    }
+    .direct-item {
+        min-height: 80px;
+        padding: 1rem;
+    }
+    .direct-item i {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+    }
+    .direct-item p {
+        font-size: 0.9rem;
+    }
+
     .footer-links {
         flex-direction: column;
     }
@@ -314,3 +407,20 @@ footer {
         border-radius: 4px;
     }
 }
+@media screen and (max-width: 480px) {
+    .directory {
+        padding: 0.75rem;
+    }
+    
+    .section-title {
+        font-size: 1.1rem;
+        margin-bottom: 1rem;
+    }
+    
+    .direct-grid {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+    }
+}
+
+
