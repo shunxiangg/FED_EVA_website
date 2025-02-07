@@ -27,7 +27,7 @@ a {
     text-decoration: none;
     color: inherit;
 }
-  
+
 
 #logoutBtn {
     background: var(--accent-color);
@@ -62,7 +62,7 @@ a {
   
 /* search bar on nav bar */
 .navbar input[type="text"] {
-  width: 500px;
+  width: 800px;
   height: 18px;
   padding: 8px;
   border: 1px solid #ddd;
@@ -78,10 +78,18 @@ a {
 
 /* Adjust navbar layout */
 .navbar {
-  display: flex;
-  align-items: center;
-  padding: 1rem;
-  gap: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    gap: 20px;
+}
+.navbar #userDisplay {
+    color: var(--base-color);
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+    margin-right: 1rem;
 }
 
 
