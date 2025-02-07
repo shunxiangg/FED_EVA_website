@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', checkloginAuthencation);
 
 
 
-
+const email = localStorage.getItem('userEmail');
 // In your login function after successful login
 localStorage.setItem('userEmail', email);
 // Add this line:

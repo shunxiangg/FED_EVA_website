@@ -116,7 +116,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 async function displayListingChats() {
     const userEmail = localStorage.getItem('userEmail');
-    const APIKEY = "6787a92c77327a0a035a5437";
     const BASE_URL = "https://evadatabase-f3b8.restdb.io/rest";
 
     try {

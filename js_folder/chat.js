@@ -619,7 +619,7 @@ document.addEventListener('DOMContentLoaded', function() {
             loadMessages(activeChatId);
         }
         loadChats();
-    }, 10000);
+    }, 20000);
 
     initialize();
 });
