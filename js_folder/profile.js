@@ -110,3 +110,55 @@ document.addEventListener('DOMContentLoaded', function() {
         window.location.href = 'login.html';
     };
 });
+
+
+
+
+async function displayListingChats() {
+    const userEmail = localStorage.getItem('userEmail');
+    const APIKEY = "6787a92c77327a0a035a5437";
+    const BASE_URL = "https://evadatabase-f3b8.restdb.io/rest";
+
+    try {
+        // Fetch user's listings
+        const listingsResponse = await fetch(`${BASE_URL}/sell?q={"sellerEmail":"${userEmail}"}`, {
+            headers: { 'x-apikey': APIKEY }
+        });
+        const listings = await listingsResponse.json();
+
+        // For each listing, fetch associated chats
+        const listingsWithChats = await Promise.all(listings.map(async (listing) => {
+            const chatsResponse = await fetch(`${BASE_URL}/chats?q={"productId":"${listing._id}"}`, {
+                headers: { 'x-apikey': APIKEY }
+            });
+            const chats = await chatsResponse.json();
+            return { ...listing, chats };
+        }));
+
+        const myListingsContainer = document.getElementById('my-listings');
+        myListingsContainer.innerHTML = listingsWithChats.map(listing => `
+            <div class="listing-item">
+                <img src="${listing.imageData || 'placeholder.jpg'}" alt="${listing.itemName}">
+                <div class="listing-details">
+                    <h3>${listing.itemName}</h3>
+                    <p>Price: $${listing.price}</p>
+                    <p>Potential Buyers: ${listing.chats.length}</p>
+                    <button onclick="manageBuyerChats('${listing._id}')" class="manage-chats-btn">
+                        Manage Buyer Chats (${listing.chats.length})
+                    </button>
+                </div>
+            </div>
+        `).join('');
+    } catch (error) {
+        console.error('Error fetching listings and chats:', error);
+    }
+}
+
+function manageBuyerChats(productId) {
+    window.location.href = `chat.html?product=${productId}`;
+}
+
+// Add this to your existing initialization or DOMContentLoaded event
+document.addEventListener('DOMContentLoaded', () => {
+    displayListingChats();
+});

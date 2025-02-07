@@ -47,7 +47,7 @@
         <div id="product-details">Loading...</div>
     </main>
     <button id="messageSellerBtn" class="message-seller-btn">
-        <i class="fas fa-comment"></i> Message Seller
+        <i class="fas fa-comment"></i>
     </button>
     <!-- cart button conner right -->
     <button id="cart-toggle" class="cart-toggle" onclick="window.location.href='cart.html'">
@@ -82,19 +82,20 @@
     </footer>
 
     <script src="js_folder/cart.js"></script>
-    <script>
+    <script src="js_folder/chat.js"></script>
+    <script src="js_folder/productinformation.js"></script>
+    <!-- <script>
         const APIKEY = "6787a92c77327a0a035a5437";
         const DATABASE_URL = "https://evadatabase-f3b8.restdb.io/rest/sell";
+        let globalProduct; // Global variable to store product details
 
         async function getProductDetails() {
             const urlParams = new URLSearchParams(window.location.search);
             const productId = urlParams.get('id');
-
             if (!productId) {
                 document.getElementById('product-details').innerHTML = 'Product not found';
                 return;
             }
-
             try {
                 const response = await fetch(`${DATABASE_URL}/${productId}`, {
                     headers: {
@@ -102,8 +103,8 @@
                         "x-apikey": APIKEY
                     }
                 });
-                const product = await response.json();
-                displayProductDetails(product);
+                globalProduct = await response.json(); // Store product globally
+                displayProductDetails(globalProduct);
             } catch (error) {
                 console.error('Error:', error);
                 document.getElementById('product-details').innerHTML = 'Error loading product';
@@ -133,13 +134,91 @@
                     </button>
                 </div>
             </div>
-        `;
+            `;
             document.getElementById('product-details').innerHTML = detailsHtml;
         }
 
-        document.addEventListener('DOMContentLoaded', getProductDetails);
-    </script>
+        async function startChatWithSeller() {
+            if (!globalProduct) {
+                console.error('No product selected');
+                return;
+            }
 
+            const buyerEmail = localStorage.getItem('userEmail');
+
+            if (!buyerEmail) {
+                alert('Please log in to start a chat');
+                localStorage.setItem('returnUrl', window.location.href);
+                window.location.href = 'login.html';
+                return;
+            }
+
+            if (buyerEmail === globalProduct.sellerEmail) {
+                alert('You cannot chat about your own product');
+                return;
+            }
+
+            try {
+                // Check for existing chat
+                const existingChatQuery = JSON.stringify({
+                    buyer: buyerEmail,
+                    seller: globalProduct.sellerEmail,
+                    productId: globalProduct._id
+                });
+
+                const existingChatResponse = await fetch(`https://evadatabase-f3b8.restdb.io/rest/chats?q=${existingChatQuery}`, {
+                    headers: {
+                        "Content-Type": "application/json",
+                        "x-apikey": APIKEY
+                    }
+                });
+
+                const existingChats = await existingChatResponse.json();
+
+                let chatId;
+                if (existingChats.length === 0) {
+                    // Create new chat
+                    const newChat = {
+                        buyer: buyerEmail,
+                        seller: globalProduct.sellerEmail,
+                        productId: globalProduct._id,
+                        productName: globalProduct.itemName,
+                        lastMessageTime: new Date().toISOString(),
+                        messages: [] // Add this
+                    };
+
+                    const createChatResponse = await fetch(`https://evadatabase-f3b8.restdb.io/rest/chats`, {
+                        method: 'POST',
+                        headers: {
+                            "Content-Type": "application/json",
+                            "x-apikey": APIKEY
+                        },
+                        body: JSON.stringify(newChat)
+                    });
+
+                    const createdChat = await createChatResponse.json();
+                    chatId = createdChat._id;
+                } else {
+                    chatId = existingChats[0]._id;
+                }
+
+                // Redirect to chat page
+                window.location.href = `chat.html?chatId=${chatId}`;
+            } catch (error) {
+                console.error('Error starting chat:', error);
+                alert('Failed to start chat. Please try again.');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            getProductDetails();
+
+            const messageSellerBtn = document.getElementById('messageSellerBtn');
+            if (messageSellerBtn) {
+                messageSellerBtn.addEventListener('click', startChatWithSeller);
+            }
+        });
+    </script> -->
     <style>
         .product-details-container {
             max-width: 1200px;
@@ -182,7 +261,75 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        .message-seller-btn {
+         position: fixed;
+         bottom: 20px;
+         right: 20px;
+         background-color: var(--accent-color, #A19AD3);
+         color: white;
+         border: none;
+         border-radius: 50%;
+         width: 60px;
+         height: 60px;
+         cursor: pointer;
+         box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         transition: transform 0.2s, background-color 0.2s;
+         z-index: 1000;
+     }
+
+     .message-seller-btn:hover {
+         transform: scale(1.1);
+         background-color: var(--text-color, #2E2B41);
+     }
+
+     .message-seller-btn i {
+         font-size: 24px;
+     }
+
+     .cart-toggle {
+         position: fixed;
+         bottom: 90px;
+         right: 20px;
+         background-color: var(--accent-color, #A19AD3);
+         color: white;
+         border: none;
+         border-radius: 50%;
+         width: 60px;
+         height: 60px;
+         cursor: pointer;
+         box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         transition: transform 0.2s;
+         z-index: 1000;
+     }
+
+     .cart-toggle:hover {
+         transform: scale(1.1);
+         background-color: var(--text-color, #2E2B41);
+     }
+
+     .cart-count {
+         position: absolute;
+         top: -5px;
+         right: -5px;
+         background-color: #ff4444;
+         color: white;
+         border-radius: 50%;
+         width: 20px;
+         height: 20px;
+         font-size: 12px;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+     }
     </style>
 </body>
 <script src="js_folder/productinformation.js"></script>
+
 </html>

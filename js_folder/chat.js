@@ -1,398 +1,690 @@
-class ChatManager {
-    constructor() {
-        this.RESTDB_URL = 'https://evadatabase-f3b8.restdb.io/rest';
-        this.RESTDB_KEY = '67a2786e673edb588fd1d2e3';
-        this.currentUser = null;
-        this.selectedUser = null;
-        this.currentProduct = null;
-        this.messagePollingInterval = null;
-        this.POLLING_INTERVAL = 30000; // 30 seconds
-    }
+// document.addEventListener('DOMContentLoaded', function() {
+//     const APIKEY = "6787a92c77327a0a035a5437";
+//     const BASE_URL = "https://evadatabase-f3b8.restdb.io/rest";
+//     let currentUser = null;
+//     let activeChatId = null;
 
-    async init() {
-        try {
-            // Get current user from localStorage
-            const userEmail = localStorage.getItem('userEmail');
-            if (!userEmail) {
-                localStorage.setItem('returnUrl', window.location.href);
-                window.location.href = 'login.html';
-                return;
+//     async function initialize() {
+//         const userEmail = localStorage.getItem('userEmail');
+//         console.log('Current user email:', userEmail);
+        
+//         if (!userEmail) {
+//             window.location.href = 'login.html';
+//             return;
+//         }
+
+//         currentUser = userEmail;
+//         setupEventListeners();
+//         await loadChats();
+        
+//         const urlParams = new URLSearchParams(window.location.search);
+//         const chatId = urlParams.get('chatId');
+//         if (chatId) {
+//             console.log('Opening specific chat:', chatId);
+//             await openChat(chatId);
+//         }
+//     }
+
+//     async function loadChats() {
+//         try {
+//             const query = JSON.stringify({
+//                 "$or": [
+//                     { "buyer": currentUser },
+//                     { "seller": currentUser }
+//                 ]
+//             });
+            
+//             console.log('Fetching chats with query:', query);
+            
+//             const response = await fetch(`${BASE_URL}/chats?q=${query}`, {
+//                 headers: {
+//                     'x-apikey': APIKEY
+//                 }
+//             });
+
+//             const chats = await response.json();
+//             console.log('Fetched chats:', chats);
+            
+//             // Add error checking for response
+//             if (!response.ok) {
+//                 throw new Error(`HTTP error! status: ${response.status}`);
+//             }
+            
+//             displayChats(chats);
+//         } catch (error) {
+//             console.error('Error loading chats:', error);
+//             console.error('Error details:', {
+//                 message: error.message,
+//                 stack: error.stack
+//             });
+//         }
+//     }
+
+//     function displayChats(chats) {
+//         const chatList = document.getElementById('chatList');
+//         console.log('Chat list element:', chatList);
+//         console.log('Displaying chats:', chats);
+        
+//         if (!chatList) {
+//             console.error('chatList element not found');
+//             return;
+//         }
+
+//         chatList.innerHTML = '';
+
+//         if (!Array.isArray(chats) || chats.length === 0) {
+//             console.log('No chats to display');
+//             chatList.innerHTML = '<div class="no-chats">No conversations yet</div>';
+//             return;
+//         }
+
+//         // Sort chats by last message time
+//         chats.sort((a, b) => new Date(b.lastMessageTime || 0) - new Date(a.lastMessageTime || 0));
+
+//         chats.forEach(chat => {
+//             console.log('Processing chat:', chat);
+//             const otherUser = chat.buyer === currentUser ? chat.seller : chat.buyer;
+//             const div = document.createElement('div');
+//             div.className = 'chat-item' + (chat._id === activeChatId ? ' active' : '');
+
+//             div.innerHTML = `
+//                 <div class="chat-preview">
+//                     <h4>${chat.productName || 'Unnamed Product'}</h4>
+//                     <p>Chat with: ${otherUser}</p>
+//                     <small>Last active: ${new Date(chat.lastMessageTime || Date.now()).toLocaleString()}</small>
+//                 </div>
+//             `;
+
+//             div.addEventListener('click', () => {
+//                 console.log('Chat clicked:', chat._id);
+//                 openChat(chat._id);
+//             });
+//             chatList.appendChild(div);
+//         });
+//     }
+
+//     async function openChat(chatId) {
+//         try {
+//             console.log('Opening chat:', chatId);
+//             activeChatId = chatId;
+            
+//             const response = await fetch(`${BASE_URL}/chats/${chatId}`, {
+//                 headers: {
+//                     'x-apikey': APIKEY
+//                 }
+//             });
+            
+//             if (!response.ok) {
+//                 throw new Error(`HTTP error! status: ${response.status}`);
+//             }
+
+//             const chat = await response.json();
+//             console.log('Fetched chat details:', chat);
+
+//             const noChat = document.getElementById('no-chat-placeholder');
+//             const chatContent = document.getElementById('chat-content');
+//             const chatHeader = document.getElementById('chatUserHeader');
+
+//             if (noChat) noChat.style.display = 'none';
+//             if (chatContent) chatContent.style.display = 'flex';
+            
+//             if (chatHeader) {
+//                 chatHeader.innerHTML = `
+//                     <h3>${chat.productName || 'Chat'}</h3>
+//                     <p>Chatting with: ${chat.buyer === currentUser ? chat.seller : chat.buyer}</p>
+//                 `;
+//             }
+
+//             await loadMessages(chatId);
+//         } catch (error) {
+//             console.error('Error opening chat:', error);
+//             console.error('Error details:', {
+//                 message: error.message,
+//                 stack: error.stack
+//             });
+//         }
+//     }
+
+
+//     async function loadMessages(chatId) {
+//         try {
+//             const response = await fetch(`${BASE_URL}/messages?q={"chatId":"${chatId}"}`, {
+//                 headers: {
+//                     'x-apikey': APIKEY
+//                 }
+//             });
+
+//             const messages = await response.json();
+//             displayMessages(messages);
+//         } catch (error) {
+//             console.error('Error loading messages:', error);
+//         }
+//     }
+
+//     function displayMessages(messages) {
+//         const messagesContainer = document.getElementById('chatMessages');
+//         if (!messagesContainer) return;
+
+//         messagesContainer.innerHTML = '';
+
+//         if (messages.length === 0) {
+//             messagesContainer.innerHTML = '<p class="no-messages">No messages yet</p>';
+//             return;
+//         }
+
+//         messages.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp))
+//                 .forEach(message => {
+//             const div = document.createElement('div');
+//             div.className = `message ${message.sender === currentUser ? 'sent' : 'received'}`;
+            
+//             const time = new Date(message.timestamp).toLocaleTimeString();
+            
+//             div.innerHTML = `
+//                 <div class="message-content">${message.content}</div>
+//                 <div class="message-time">${time}</div>
+//             `;
+//             messagesContainer.appendChild(div);
+//         });
+
+//         messagesContainer.scrollTop = messagesContainer.scrollHeight;
+//     }
+
+//     async function sendMessage() {
+//         if (!activeChatId) return;
+
+//         const messageInput = document.getElementById('messageInput');
+//         const content = messageInput.value.trim();
+        
+//         if (!content) return;
+
+//         try {
+//             const message = {
+//                 chatId: activeChatId,
+//                 sender: currentUser,
+//                 content: content,
+//                 timestamp: new Date().toISOString(),
+//                 read: false
+//             };
+
+//             const response = await fetch(`${BASE_URL}/messages`, {
+//                 method: 'POST',
+//                 headers: {
+//                     'Content-Type': 'application/json',
+//                     'x-apikey': APIKEY
+//                 },
+//                 body: JSON.stringify(message)
+//             });
+
+//             if (response.ok) {
+//                 messageInput.value = '';
+                
+//                 // Update chat's last message
+//                 await fetch(`${BASE_URL}/chats/${activeChatId}`, {
+//                     method: 'PATCH',
+//                     headers: {
+//                         'Content-Type': 'application/json',
+//                         'x-apikey': APIKEY
+//                     },
+//                     body: JSON.stringify({
+//                         lastMessage: content,
+//                         lastMessageTime: new Date().toISOString()
+//                     })
+//                 });
+
+//                 await loadMessages(activeChatId);
+//                 await loadChats();
+//             }
+//         } catch (error) {
+//             console.error('Error sending message:', error);
+//         }
+//     }
+
+//     function setupEventListeners() {
+//         const sendButton = document.getElementById('sendMessage');
+//         const messageInput = document.getElementById('messageInput');
+//         const searchInput = document.getElementById('searchChat');
+
+//         if (sendButton) {
+//             sendButton.addEventListener('click', sendMessage);
+//         }
+
+//         if (messageInput) {
+//             messageInput.addEventListener('keypress', (e) => {
+//                 if (e.key === 'Enter' && !e.shiftKey) {
+//                     e.preventDefault();
+//                     sendMessage();
+//                 }
+//             });
+//         }
+
+//         if (searchInput) {
+//             searchInput.addEventListener('input', (e) => searchChats(e.target.value));
+//         }
+//     }
+
+//     async function searchChats(query) {
+//         if (!query.trim()) {
+//             await loadChats();
+//             return;
+//         }
+
+//         try {
+//             const response = await fetch(`${BASE_URL}/chats`, {
+//                 headers: {
+//                     'x-apikey': APIKEY
+//                 }
+//             });
+
+//             const chats = await response.json();
+//             const filteredChats = chats.filter(chat => {
+//                 const isParticipant = chat.buyer === currentUser || chat.seller === currentUser;
+//                 const matchesSearch = chat.productName.toLowerCase().includes(query.toLowerCase());
+//                 return isParticipant && matchesSearch;
+//             });
+
+//             displayChats(filteredChats);
+//         } catch (error) {
+//             console.error('Error searching chats:', error);
+//         }
+//     }
+
+//     // Start the application
+//     initialize();
+
+//     // Set up periodic updates
+//     setInterval(() => {
+//         if (activeChatId) {
+//             loadMessages(activeChatId);
+//         }
+//         loadChats();
+//     }, 10000);
+
+//     console.log('Initializing chat system');
+//     initialize();
+// });
+
+document.addEventListener('DOMContentLoaded', function() {
+    const APIKEY = "6787a92c77327a0a035a5437";
+    const BASE_URL = "https://evadatabase-f3b8.restdb.io/rest";
+    let currentUser = null;
+    let activeChatId = null;
+
+    async function initialize() {
+        const userEmail = localStorage.getItem('userEmail');
+        if (!userEmail) {
+            window.location.href = 'login.html';
+            return;
+        }
+
+        currentUser = userEmail;
+        await loadChats();
+        setupEventListeners();
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const seller = urlParams.get('seller');
+        const productId = urlParams.get('product');
+        
+        if (seller && productId) {
+            await initializeChat(seller, productId);
+        } else {
+            const chatId = urlParams.get('chatId');
+            if (chatId) {
+                await openChat(chatId);
             }
-
-            // Fetch current user details
-            this.currentUser = await this.fetchUserDetails(userEmail);
-            if (!this.currentUser) {
-                console.error('Could not fetch current user details');
-                return;
-            }
-
-            // Check URL parameters for direct chat
-            const urlParams = new URLSearchParams(window.location.search);
-            const sellerEmail = urlParams.get('seller');
-            const productId = urlParams.get('product');
-
-            this.setupEventListeners();
-            await this.loadChatList();
-
-            if (sellerEmail && productId) {
-                this.currentProduct = productId;
-                const sellerDetails = await this.fetchUserDetails(sellerEmail);
-                if (sellerDetails) {
-                    await this.selectUser(sellerDetails);
-                }
-            }
-
-            this.startMessagePolling();
-        } catch (error) {
-            console.error('Error initializing chat:', error);
         }
     }
 
-    async fetchUserDetails(email) {
+    async function fetchProductDetails(productId) {
+        const response = await fetch(`${BASE_URL}/sell/${productId}`, {
+            headers: { 'x-apikey': APIKEY }
+        });
+        return response.json();
+    }
+
+    async function loadChats() {
         try {
             const query = JSON.stringify({
-                "email": email
+                "$or": [
+                    { "buyer": currentUser },
+                    { "seller": currentUser }
+                ]
             });
             
-            const response = await fetch(`${this.RESTDB_URL}/accounts?q=${query}`, {
-                headers: {
-                    'x-apikey': this.RESTDB_KEY
-                }
+            const response = await fetch(`${BASE_URL}/chats?q=${query}`, {
+                headers: { 'x-apikey': APIKEY }
             });
+
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
             
-            const users = await response.json();
-            return users[0];
+            const chats = await response.json();
+            const enhancedChats = await Promise.all(chats.map(async chat => {
+                const product = await fetchProductDetails(chat.productId);
+                return { ...chat, product };
+            }));
+            
+            displayChats(enhancedChats);
         } catch (error) {
-            console.error('Error fetching user details:', error);
-            return null;
+            console.error('Error loading chats:', error);
         }
     }
 
-    setupEventListeners() {
-        const sendButton = document.getElementById('sendMessage');
-        const messageInput = document.getElementById('messageInput');
-        const searchInput = document.getElementById('searchChat');
 
-        if (sendButton && messageInput) {
-            sendButton.addEventListener('click', () => this.handleSendMessage());
-            messageInput.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter' && !e.shiftKey) {
-                    e.preventDefault();
-                    this.handleSendMessage();
-                }
-            });
+
+
+
+    
+
+    function displayChats(chats) {
+        const chatList = document.getElementById('chatList');
+        if (!chatList) return;
+
+        chatList.innerHTML = '';
+
+        if (!chats.length) {
+            chatList.innerHTML = '<div class="no-chats">No conversations yet</div>';
+            return;
         }
 
-        if (searchInput) {
-            searchInput.addEventListener('input', (e) => this.searchChats(e.target.value));
-        }
+        chats.sort((a, b) => new Date(b.lastMessageTime || 0) - new Date(a.lastMessageTime || 0))
+             .forEach(chat => {
+                const otherUser = chat.buyer === currentUser ? chat.seller : chat.buyer;
+                const div = document.createElement('div');
+                div.className = 'chat-item' + (chat._id === activeChatId ? ' active' : '');
+
+                div.innerHTML = `
+                    <div class="chat-preview">
+                        <div class="product-info">
+                            ${chat.product?.imageData ? 
+                                `<img src="${chat.product.imageData}" alt="${chat.productName}" class="product-thumb">` : 
+                                '<div class="no-image">No Image</div>'
+                            }
+                            <div class="product-details">
+                                <h4>${chat.productName}</h4>
+                                <p class="price">$${chat.product?.price || 'N/A'}</p>
+                                <p class="category">${chat.product?.category || 'N/A'}</p>
+                                <p class="condition">${chat.product?.condition || 'N/A'}</p>
+                            </div>
+                        </div>
+                        <div class="chat-meta">
+                            <p class="chat-with">Chat with: ${otherUser}</p>
+                            <small class="last-active">Last active: ${new Date(chat.lastMessageTime || Date.now()).toLocaleString()}</small>
+                            ${chat.lastMessage ? `<p class="last-message">${chat.lastMessage}</p>` : ''}
+                        </div>
+                    </div>
+                `;
+
+                div.addEventListener('click', () => openChat(chat._id));
+                chatList.appendChild(div);
+             });
     }
 
-    async handleSendMessage() {
-        const messageInput = document.getElementById('messageInput');
-        const message = messageInput.value.trim();
-        
-        if (message && this.selectedUser) {
-            try {
-                await this.sendMessage(message);
-                messageInput.value = '';
-                await this.loadMessages();
-            } catch (error) {
-                console.error('Error sending message:', error);
-            }
-        }
-    }
-
-    async sendMessage(message) {
-        const messageData = {
-            sender_id: this.currentUser.email,
-            receiver_id: this.selectedUser.email,
-            message: message,
-            timestamp: new Date().toISOString(),
-            product_id: this.currentProduct,
-            read: false
-        };
-
+    async function loadMessages(chatId) {
         try {
-            const response = await fetch(`${this.RESTDB_URL}/chats`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'x-apikey': this.RESTDB_KEY
-                },
-                body: JSON.stringify(messageData)
+            const response = await fetch(`${BASE_URL}/messages?q={"chatId":"${chatId}"}`, {
+                headers: { 'x-apikey': APIKEY }
             });
 
-            if (!response.ok) throw new Error('Failed to send message');
-        } catch (error) {
-            console.error('Error sending message:', error);
-            throw error;
-        }
-    }
-
-    async loadMessages() {
-        if (!this.selectedUser) return;
-
-        const query = {
-            "$or": [
-                {
-                    "$and": [
-                        {"sender_id": this.currentUser.email},
-                        {"receiver_id": this.selectedUser.email}
-                    ]
-                },
-                {
-                    "$and": [
-                        {"sender_id": this.selectedUser.email},
-                        {"receiver_id": this.currentUser.email}
-                    ]
-                }
-            ]
-        };
-
-        try {
-            const response = await fetch(`${this.RESTDB_URL}/chats?q=${JSON.stringify(query)}`, {
-                headers: {
-                    'x-apikey': this.RESTDB_KEY
-                }
-            });
             const messages = await response.json();
-            this.displayMessages(messages);
-            await this.markMessagesAsRead(messages);
+            displayMessages(messages);
         } catch (error) {
             console.error('Error loading messages:', error);
         }
     }
 
-    displayMessages(messages) {
-        const chatMessages = document.getElementById('chatMessages');
-        chatMessages.innerHTML = '';
-        
+    function displayMessages(messages) {
+        const messagesContainer = document.getElementById('chatMessages');
+        if (!messagesContainer) return;
+
+        messagesContainer.innerHTML = '';
+
+        if (!messages.length) {
+            messagesContainer.innerHTML = '<p class="no-messages">No messages yet</p>';
+            return;
+        }
+
         messages.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp))
-               .forEach(msg => {
-            const messageDiv = document.createElement('div');
-            messageDiv.className = `message ${msg.sender_id === this.currentUser.email ? 'sent' : 'received'}`;
+                .forEach(message => {
+            const div = document.createElement('div');
+            div.className = `message ${message.sender === currentUser ? 'sent' : 'received'}`;
             
-            const time = new Date(msg.timestamp).toLocaleTimeString('en-US', {
-                hour: '2-digit',
-                minute: '2-digit'
-            });
+            const time = new Date(message.timestamp).toLocaleTimeString();
             
-            messageDiv.innerHTML = `
-                <div class="message-content">${msg.message}</div>
+            div.innerHTML = `
+                <div class="message-content">${message.content}</div>
                 <div class="message-time">${time}</div>
             `;
-            
-            chatMessages.appendChild(messageDiv);
+            messagesContainer.appendChild(div);
         });
 
-        chatMessages.scrollTop = chatMessages.scrollHeight;
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
     }
 
-    async loadChatList() {
+    async function openChat(chatId) {
         try {
-            const chatQuery = {
-                "$or": [
-                    {"sender_id": this.currentUser.email},
-                    {"receiver_id": this.currentUser.email}
-                ]
+            activeChatId = chatId;
+            
+            const response = await fetch(`${BASE_URL}/chats/${chatId}`, {
+                headers: { 'x-apikey': APIKEY }
+            });
+            
+            const chat = await response.json();
+            const product = await fetchProductDetails(chat.productId);
+
+            const chatContent = document.getElementById('chat-content');
+            const chatHeader = document.getElementById('chatUserHeader');
+            const productInfo = document.getElementById('productInfo');
+
+            if (chatContent) chatContent.style.display = 'flex';
+            
+            if (chatHeader) {
+                chatHeader.innerHTML = `
+                    <div class="chat-header-content">
+                        <div class="user-info">
+                            <h3>Chat Participants</h3>
+                            <p class="seller">Seller: ${chat.seller}</p>
+                            <p class="buyer">Buyer: ${chat.buyer}</p>
+                        </div>
+                    </div>
+                `;
+            }
+
+            if (productInfo) {
+                productInfo.innerHTML = `
+                    <div class="product-details-panel">
+                        <h3>Product Details</h3>
+                        <div class="product-image">
+                            ${product.imageData ? 
+                                `<img src="${product.imageData}" alt="${chat.productName}">` : 
+                                '<div class="no-image">No Image Available</div>'
+                            }
+                        </div>
+                        <div class="product-info-details">
+                            <h4>${chat.productName}</h4>
+                            <p class="price">Price: $${product.price}</p>
+                            <p class="category">Category: ${product.category}</p>
+                            <p class="condition">Condition: ${product.condition}</p>
+                            <p class="description">${product.description || 'No description available'}</p>
+                            <button onclick="window.location.href='productinformation.html?id=${chat.productId}'" class="view-product-btn">
+                                View Full Product Details
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }
+
+            await loadMessages(chatId);
+        } catch (error) {
+            console.error('Error opening chat:', error);
+        }
+    }
+
+    async function sendMessage() {
+        if (!activeChatId) return;
+
+        const messageInput = document.getElementById('messageInput');
+        const content = messageInput.value.trim();
+        
+        if (!content) return;
+
+        try {
+            const message = {
+                chatId: activeChatId,
+                sender: currentUser,
+                content: content,
+                timestamp: new Date().toISOString(),
+                read: false
             };
 
-            const response = await fetch(`${this.RESTDB_URL}/chats?q=${JSON.stringify(chatQuery)}`, {
+            const response = await fetch(`${BASE_URL}/messages`, {
+                method: 'POST',
                 headers: {
-                    'x-apikey': this.RESTDB_KEY
-                }
-            });
-            const chats = await response.json();
-
-            // Get unique user emails from chats
-            const userEmails = new Set();
-            chats.forEach(chat => {
-                const otherEmail = chat.sender_id === this.currentUser.email ? 
-                    chat.receiver_id : chat.sender_id;
-                userEmails.add(otherEmail);
+                    'Content-Type': 'application/json',
+                    'x-apikey': APIKEY
+                },
+                body: JSON.stringify(message)
             });
 
-            // Fetch user details and last messages
-            const chatUsers = await Promise.all(
-                Array.from(userEmails).map(async email => {
-                    const user = await this.fetchUserDetails(email);
-                    if (user) {
-                        const userChats = chats.filter(chat => 
-                            chat.sender_id === email || chat.receiver_id === email
-                        );
-                        const lastChat = userChats.sort((a, b) => 
-                            new Date(b.timestamp) - new Date(a.timestamp)
-                        )[0];
-
-                        const unreadCount = userChats.filter(chat => 
-                            chat.receiver_id === this.currentUser.email && !chat.read
-                        ).length;
-
-                        return {
-                            ...user,
-                            lastMessage: lastChat?.message || '',
-                            lastMessageTime: lastChat?.timestamp,
-                            unreadCount
-                        };
-                    }
-                    return null;
-                })
-            );
-
-            this.displayChatList(chatUsers.filter(Boolean));
-        } catch (error) {
-            console.error('Error loading chat list:', error);
-        }
-    }
-
-    displayChatList(users) {
-        const chatList = document.getElementById('chatList');
-        chatList.innerHTML = '';
-        
-        users.sort((a, b) => {
-            if (!a.lastMessageTime) return 1;
-            if (!b.lastMessageTime) return -1;
-            return new Date(b.lastMessageTime) - new Date(a.lastMessageTime);
-        }).forEach(user => {
-            const userDiv = document.createElement('div');
-            userDiv.className = `chat-item ${user.unreadCount > 0 ? 'unread' : ''}`;
-            
-            const time = user.lastMessageTime ? 
-                this.formatMessageTime(new Date(user.lastMessageTime)) : '';
-            
-            userDiv.innerHTML = `
-                <div class="chat-avatar">${user.name.charAt(0).toUpperCase()}</div>
-                <div class="chat-info">
-                    <h4>${user.name}</h4>
-                    <p>${user.lastMessage || 'No messages yet'}</p>
-                    <div class="chat-time">${time}</div>
-                    ${user.unreadCount ? `<span class="unread-badge">${user.unreadCount}</span>` : ''}
-                </div>
-            `;
-            
-            userDiv.addEventListener('click', () => this.selectUser(user));
-            chatList.appendChild(userDiv);
-        });
-    }
-
-    async selectUser(user) {
-        this.selectedUser = user;
-        
-        document.getElementById('no-chat-placeholder').style.display = 'none';
-        document.getElementById('chat-content').style.display = 'flex';
-        
-        const headerDiv = document.getElementById('chatUserHeader');
-        headerDiv.innerHTML = `
-            <div class="chat-avatar">${user.name.charAt(0).toUpperCase()}</div>
-            <div class="user-info">
-                <h3>${user.name}</h3>
-                <p>${user.email}</p>
-            </div>
-        `;
-        
-        await this.loadMessages();
-        
-        const messageInput = document.getElementById('messageInput');
-        if (messageInput) {
-            messageInput.focus();
-        }
-    }
-
-    async markMessagesAsRead(messages) {
-        const unreadMessages = messages.filter(msg => 
-            msg.receiver_id === this.currentUser.email && !msg.read
-        );
-
-        for (const message of unreadMessages) {
-            try {
-                await fetch(`${this.RESTDB_URL}/chats/${message._id}`, {
+            if (response.ok) {
+                messageInput.value = '';
+                
+                await fetch(`${BASE_URL}/chats/${activeChatId}`, {
                     method: 'PATCH',
                     headers: {
                         'Content-Type': 'application/json',
-                        'x-apikey': this.RESTDB_KEY
+                        'x-apikey': APIKEY
                     },
-                    body: JSON.stringify({ read: true })
+                    body: JSON.stringify({
+                        lastMessage: content,
+                        lastMessageTime: new Date().toISOString()
+                    })
                 });
-            } catch (error) {
-                console.error('Error marking message as read:', error);
+
+                await loadMessages(activeChatId);
+                await loadChats();
             }
+        } catch (error) {
+            console.error('Error sending message:', error);
         }
     }
 
-    async searchChats(query) {
+    function setupEventListeners() {
+        const sendButton = document.getElementById('sendMessage');
+        const messageInput = document.getElementById('messageInput');
+        const searchInput = document.getElementById('searchChat');
+
+        if (sendButton) {
+            sendButton.addEventListener('click', sendMessage);
+        }
+
+        if (messageInput) {
+            messageInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    sendMessage();
+                }
+            });
+        }
+
+        if (searchInput) {
+            searchInput.addEventListener('input', (e) => searchChats(e.target.value));
+        }
+    }
+
+    async function searchChats(query) {
         if (!query.trim()) {
-            await this.loadChatList();
+            await loadChats();
             return;
         }
 
         try {
-            const searchQuery = {
-                "name": {
-                    "$regex": query,
-                    "$options": "i"
-                }
-            };
-
-            const response = await fetch(`${this.RESTDB_URL}/accounts?q=${JSON.stringify(searchQuery)}`, {
-                headers: {
-                    'x-apikey': this.RESTDB_KEY
-                }
+            const response = await fetch(`${BASE_URL}/chats`, {
+                headers: { 'x-apikey': APIKEY }
             });
-            const users = await response.json();
-            this.displayChatList(users);
+
+            const chats = await response.json();
+            const filteredChats = chats.filter(chat => {
+                const isParticipant = chat.buyer === currentUser || chat.seller === currentUser;
+                const matchesSearch = chat.productName.toLowerCase().includes(query.toLowerCase());
+                return isParticipant && matchesSearch;
+            });
+
+            displayChats(filteredChats);
         } catch (error) {
             console.error('Error searching chats:', error);
         }
     }
 
-    formatMessageTime(date) {
-        const now = new Date();
-        const diff = now - date;
-        const oneDay = 24 * 60 * 60 * 1000;
-
-        if (diff < oneDay && date.getDate() === now.getDate()) {
-            return date.toLocaleTimeString('en-US', {
-                hour: '2-digit',
-                minute: '2-digit'
-            });
-        } else if (diff < 7 * oneDay) {
-            return date.toLocaleDateString('en-US', { weekday: 'short' });
-        } else {
-            return date.toLocaleDateString('en-US', {
-                month: 'short',
-                day: 'numeric'
-            });
+    setInterval(() => {
+        if (activeChatId) {
+            loadMessages(activeChatId);
         }
+        loadChats();
+    }, 10000);
+
+    initialize();
+});
+
+
+async function initializeChat(seller, productId) {
+    const buyerEmail = localStorage.getItem('userEmail');
+
+    if (!buyerEmail) {
+        window.location.href = 'login.html';
+        return;
     }
 
-    startMessagePolling() {
-        if (this.messagePollingInterval) {
-            clearInterval(this.messagePollingInterval);
-        }
+    try {
+        // Check for existing chat
+        const existingChatQuery = JSON.stringify({
+            buyer: buyerEmail,
+            seller: seller,
+            productId: productId
+        });
 
-        this.messagePollingInterval = setInterval(() => {
-            if (this.selectedUser) {
-                this.loadMessages();
+        const existingChatResponse = await fetch(`${BASE_URL}/chats?q=${existingChatQuery}`, {
+            headers: {
+                "Content-Type": "application/json",
+                "x-apikey": APIKEY
             }
-            this.loadChatList();
-        }, this.POLLING_INTERVAL);
-    }
+        });
 
-    stopMessagePolling() {
-        if (this.messagePollingInterval) {
-            clearInterval(this.messagePollingInterval);
+        const existingChats = await existingChatResponse.json();
+
+        let chatId;
+        if (existingChats.length === 0) {
+            // Create new chat if no existing chat
+            const productResponse = await fetch(`${BASE_URL}/sell/${productId}`, {
+                headers: { 'x-apikey': APIKEY }
+            });
+            const product = await productResponse.json();
+
+            const newChat = {
+                buyer: buyerEmail,
+                seller: seller,
+                productId: productId,
+                productName: product.itemName,
+                lastMessageTime: new Date().toISOString(),
+                messages: []
+            };
+
+            const createChatResponse = await fetch(`${BASE_URL}/chats`, {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json",
+                    "x-apikey": APIKEY
+                },
+                body: JSON.stringify(newChat)
+            });
+
+            const createdChat = await createChatResponse.json();
+            chatId = createdChat._id;
+        } else {
+            chatId = existingChats[0]._id;
         }
+
+        // Open the chat
+        await openChat(chatId);
+    } catch (error) {
+        console.error('Error initializing chat:', error);
     }
 }
-
-// Initialize chat manager when DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
-    const chatManager = new ChatManager();
-    chatManager.init();
-
-    // Cleanup on page unload
-    window.addEventListener('beforeunload', () => {
-        chatManager.stopMessagePolling();
-    });
-});
