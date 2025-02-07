@@ -1,4 +1,4 @@
-// Constants
+// Products info gives more information about an item when click on the item section
 const APIKEY = "6787a92c77327a0a035a5437";
 const DATABASE_URL = "https://evadatabase-f3b8.restdb.io/rest/sell";
 

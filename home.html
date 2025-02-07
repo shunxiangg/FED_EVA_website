@@ -10,7 +10,9 @@
   <link rel="stylesheet" href="css_folder/home.css">
   <link rel="stylesheet" href="css_folder/cart.css">
   <link rel="stylesheet" href="css_folder/ads.css">
+  <link rel="stylesheet" href="css_folder/home-products.css">
   <link rel="stylesheet" href="css_folder/purchasehistory.css">
+  <link rel="stylesheet" href="css_folder/keyframesLoading.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 
@@ -62,9 +64,10 @@
     </div>
   </div>
 
+ 
   <main>
     <h1>Welcome to EVA!</h1>
-
+    
     <section class="filters">
       <label for="category">Category:</label>
       <select id="category">
@@ -87,13 +90,13 @@
         <option value="second-hand">Second Hand</option>
       </select>
 
-      <label for="search">Search:</label>
-      <input type="text" id="search" placeholder="Search products...">
-
+ 
       <button id="apply-filters">Apply Filters</button>
     </section>
 
+  
   </main>
+
 
   <nav class="directory">
     <h2 class="section-title">Navigation</h2>
@@ -122,36 +125,40 @@
     </div>
   </nav>
 
-  <section class="categories">
-    <h2 class="section-title">Categories</h2>
-    <div class="category-grid" id="category">
-      <div class="category-item" value="electronics">
-        <p>Electronics</p>
-      </div>
-      <div class="category-item" value="furniture">
-        <p>Furniture</p>
-      </div>
-      <div class="category-item" value="clothing">
-        <p>Clothing</p>
-      </div>
-      <div class="category-item" value="books">
-        <p>Books</p>
-      </div>
-      <div class="category-item">
-        <p>Cars</p>
-      </div>
-      <div class="category-item">
-        <p>Food & Beverages</p>
-      </div>
-      <div class="category-item">
-        <p>Toys</p>
-      </div>
-      <div class="category-item">
-        <p>Jewellery</p>
-      </div>
+  <section class="filters">
+    <h2 class="section-title">Filters</h2>
+    
+    <!-- Category buttons -->
+    <div class="category-grid">
+      <div class="category-item" value="all">
+        <p>All</p>
     </div>
-  </section>
-
+        <div class="category-item" value="electronics">
+            <p>Electronics</p>
+        </div>
+        <div class="category-item" value="furniture">
+            <p>Furniture</p>
+        </div>
+        <div class="category-item" value="clothing">
+            <p>Clothing</p>
+        </div>
+        <div class="category-item" value="books">
+            <p>Books</p>
+        </div>
+        <div class="category-item" value="cars">
+            <p>Cars</p>
+        </div>
+        <div class="category-item" value="food">
+            <p>Food & Beverages</p>
+        </div>
+        <div class="category-item" value="toys">
+            <p>Toys</p>
+        </div>
+        <div class="category-item" value="jewellery">
+            <p>Jewellery</p>
+        </div>
+    </div>
+</section>
 
 
   <!-- Edit Listing Modal -->
@@ -181,7 +188,7 @@
           </select>
         </div>
 
-        <div class="condition-group">
+        <!-- <div class="condition-group">
           <label>Condition</label>
           <div class="radio-group">
             <input type="radio" name="edit-condition" id="edit-brandNew">
@@ -227,7 +234,7 @@
               <input type="radio" id="edit-express" name="edit-delivery">
             </label>
           </div>
-        </div>
+        </div> -->
 
         <div class="button-group">
           <button type="submit" class="save-btn">Save Changes</button>
@@ -240,62 +247,18 @@
     </div>
   </div>
 
-  <!-- Add this container for displaying listings -->
-  <!-- <div class="my-listings-container">
-    <h2>My Listings</h2>
-    <div id="listings-list" class="listings-grid">
-    </div>
-  </div> -->
 
 
-  <section class="recommended">
-    <h2 class="section-title">Recommended For You</h2>
 
-    <section id="product-list" class="product-grid">
-      <!-- Products will be dynamically inserted here from products.js-->
-    </section>
-
-    <div class="product-grid">
-
-      <div class="product-card">
-        <div class="product-image"></div>
-        <h3 class="product-title">Style Item</h3>
-        <p class="product-price">€100</p>
-        <button class="add-to-cart">Add to Cart</button>
-      </div>
-      <!-- Repeated product cards -->
-      <div class="product-card">
-        <div class="product-image"></div>
-        <h3 class="product-title">Style Item</h3>
-        <p class="product-price">€100</p>
-        <button class="add-to-cart">Add to Cart</button>
-      </div>
-      <div class="product-card">
-        <div class="product-image"></div>
-        <h3 class="product-title">Style Item</h3>
-        <p class="product-price">€100</p>
-        <button class="add-to-cart">Add to Cart</button>
-      </div>
-      <div class="product-card">
-        <div class="product-image"></div>
-        <h3 class="product-title">Style Item</h3>
-        <p class="product-price">€100</p>
-        <button class="add-to-cart">Add to Cart</button>
-      </div>
-      <div class="product-card">
-        <div class="product-image"></div>
-        <h3 class="product-title">Style Item</h3>
-        <p class="product-price">€100</p>
-        <button class="add-to-cart">Add to Cart</button>
-      </div>
-      <div class="product-card">
-        <div class="product-image"></div>
-        <h3 class="product-title">Style Item</h3>
-        <p class="product-price">€100</p>
-        <button class="add-to-cart">Add to Cart</button>
-      </div>
-    </div>
+ <!-- Remove the static product cards and replace with this structure -->
+<section class="recommended">
+  <h2 class="section-title">recommended</h2>
+  <section id="product-list" class="product-grid" src="productInformation.html">
+    <!-- products will be dynamicaly insert here from products.js-->
   </section>
+</section>
+
+
 
   <section class="discounts">
     <h2 class="section-title">Discounts</h2>
@@ -366,6 +329,10 @@
     </div>
   </section>
 
+  <div id="loading-spinner" class="loading-spinner">
+    <div class="spinner"></div>
+    <p>Searching...</p>
+  </div>
 
   <footer>
     <div id="language-selector">
@@ -394,25 +361,21 @@
   </footer>
 
   <!-- Scripts -->
+  <script src="js_folder/home-products.js"></script>
+  <script src="js_folder/products.js"></script>
   <script src="ads.js"></script>
   <script src="js_folder/index.js"></script>
   <script src="js_folder/app.js"></script>
   <script src="js_folder/cart.js"></script>
   <script src="js_folder/config.js"></script>
-  <!-- <script src="js_folder/config.js"></script>
-  <script src="js_folder/data.js"></script>
-  <script src="js_folder/filters.js"></script> -->
-  <script src="js_folder/products.js"></script>
   <script src="js_folder/profile.js"></script>
   <script src="js_folder/listings.js"></script>
   <script src="js_folder/purchasehistory.js"></script>
   <script src="sell.js"></script>
-
+  <script src="js_folder/recommendations.js"></script>
   <script src="slideshow.js"></script>
   <script src="js_folder/welcome_msg.js"></script>
   <script src="js_api_folder/loginAuthencation.js"></script>
-
-  <script src="https://js.stripe.com/v3/"></script>
 
 </body>
 

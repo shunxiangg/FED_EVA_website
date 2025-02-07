@@ -6,7 +6,7 @@
   <title>MokeSell - Buy and Sell Online</title>
   <link rel="stylesheet" href="css_folder/modal.css">
   <link rel="stylesheet" href="css_folder/styles.css">
-  
+  <link rel="stylesheet" href="css_folder/keyframesLoading.css">
   <link rel="stylesheet" href="css_folder/cart.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
@@ -63,20 +63,14 @@
         <option value="second-hand">Second Hand</option>
       </select>
 
-      <!-- <label for="search">Search:</label>
-      <input type="text" id="search" placeholder="Search products..."> -->
-
+ 
       <button id="apply-filters">Apply Filters</button>
     </section>
 
     <section id="product-list" class="product-grid" src="productInformation.html">
-      <!-- Products will be dynamically inserted here from products.js-->
+      <!-- products will be dynamicaly insert here from products.js-->
     </section>
   </main>
-
-
-
-
 
 <!-- cart button conner right -->
 <button id="cart-toggle" class="cart-toggle" onclick="window.location.href='cart.html'">
@@ -89,39 +83,6 @@
   <div class="spinner"></div>
   <p>Searching...</p>
 </div>
-
-<style>
-.loading-spinner {
-  display: none;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  background: rgba(255, 255, 255, 0.9);
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-  z-index: 1000;
-}
-
-.spinner {
-  width: 40px;
-  height: 40px;
-  margin: 0 auto 10px;
-  border: 4px solid #f3f3f3;
-  border-top: 4px solid #3498db;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-</style>
-
-
  
   <footer>
     <div id="language-selector">
@@ -159,7 +120,5 @@
   <script src="js_folder/profile.js"></script>
   <script src="js_folder/welcome_msg.js"></script>
   <script src="js_api_folder/loginAuthencation.js"></script>
-
-  <script src="https://js.stripe.com/v3/"></script>
 </body>
 </html>
