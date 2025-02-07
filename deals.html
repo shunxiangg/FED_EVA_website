@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MokeSell - Buy and Sell Online</title>
+  <link rel="stylesheet" href="css_folder/modal.css">
+  <link rel="stylesheet" href="css_folder/styles.css">
+  <link rel="stylesheet" href="css_folder/home.css">
+  <link rel="stylesheet" href="css_folder/cart.css">
+  <link rel="stylesheet" href="css_folder/ads.css">
+  <link rel="stylesheet" href="css_folder/home-products.css">
+  <link rel="stylesheet" href="css_folder/purchasehistory.css">
+  <link rel="stylesheet" href="css_folder/keyframesLoading.css">
+  <link rel="stylesheet" href="css_folder/deals.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+  <header>
+    <nav class="navbar">
+      <div class="logo">
+        <a href="home.html">
+          EVA
+        </a>
+      </div>
+
+      <!--  SEARchh-->
+      <input type="text" class="search-bar" id="search" placeholder="Search products...">
+
+      <!-- <div class="search-bar">
+        <input type="text" placeholder="Search">
+      </div> -->
+      <ul class="menu">
+        <li><span id="userDisplay"></span></li>
+        <!-- <li><button id="logoutBtn" onclick="logout()" style="display: none;">Logout</button></li> -->
+        <li><a href="home.html" class="nav-link_active">Home</a></li>
+        <li><a href="browse.html" class="nav-link">Browse</a></li>
+        <li><a href="sell.html" class="nav-link">Sell</a></li>
+        <!-- <li><a href="signup.html" class="nav-link">Sign Up</a></li> -->
+        <li><a class="fas fa-user" href="profile.html" class="nav-link"></a></li>
+
+        <!-- <li><a href="ads.html" class="nav-link">ads</a></li> -->
+      </ul>
+      <div class="hamburger" onclick="toggleMenu()">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </div>
+    </nav>
+  </header>
+  <div class="slideshow-container">
+    <div id="ad-slides" class="ad-card">
+      <!-- Slides will be inserted here by JavaScript -->
+    </div>
+
+    <!-- Navigation buttons -->
+    <button class="slide-nav prev" onclick="changeSlide(-1)">❮</button>
+    <button class="slide-nav next" onclick="changeSlide(1)">❯</button>
+
+    <!-- Navigation dots -->
+    <div class="slide-dots" id="slide-dots">
+      <!-- Dots will be inserted here by JavaScript -->
+    </div>
+  </div>
+
+
+  <div class="container">
+    <h1>EVA Deals This Month</h1>
+
+    <div class="deal-card">
+        <div class="deal-title">Summer Sale Special</div>
+        <p class="deal-description">Get up to 50% off on all summer essentials! From beachwear to outdoor gear, don't miss out on our biggest seasonal discount. Limited time offer available on selected items.</p>
+        <div class="deal-meta">
+            <span class="deal-tag">Summer Collection</span>
+            <span>Valid until July 31, 2025</span>
+            <span class="discount-badge">50% OFF</span>
+        </div>
+    </div>
+
+    <div class="deal-card">
+        <div class="deal-title">Tech Gadgets Bundle</div>
+        <p class="deal-description">Buy any smartphone and get 30% off on accessories. Bundle includes protective case, screen protector, and wireless charger. Perfect time to upgrade your tech collection!</p>
+        <div class="deal-meta">
+            <span class="deal-tag">Electronics</span>
+            <span>Valid until July 25, 2025</span>
+            <span class="discount-badge">30% OFF</span>
+        </div>
+    </div>
+
+    <div class="deal-card">
+        <div class="deal-title">Eco-Friendly Products</div>
+        <p class="deal-description">Support sustainable living with our eco-friendly product line. Get 25% off on all sustainable products including reusable bags, water bottles, and organic items.</p>
+        <div class="deal-meta">
+            <span class="deal-tag">Sustainable</span>
+            <span>Valid until July 22, 2025</span>
+            <span class="discount-badge">25% OFF</span>
+        </div>
+    </div>
+
+    <div class="deal-card">
+        <div class="deal-title">Fashion Flash Sale</div>
+        <p class="deal-description">48-hour flash sale on designer brands! Get amazing discounts on this season's latest fashion trends. Additional 10% off for rewards members.</p>
+        <div class="deal-meta">
+            <span class="deal-tag">Fashion</span>
+            <span>July 15-16, 2025</span>
+            <span class="discount-badge">Up to 70% OFF</span>
+        </div>
+    </div>
+</div>
+
+
+<!-- Scripts -->
+<script src="js_folder/home.js"></script>
+<script src="js_folder/products.js"></script>
+<script src="ads.js"></script>
+<script src="js_folder/index.js"></script>
+<script src="js_folder/app.js"></script>
+<script src="js_folder/cart.js"></script>
+<script src="js_folder/config.js"></script>
+<script src="js_folder/profile.js"></script>
+<script src="js_folder/listings.js"></script>
+<script src="js_folder/purchasehistory.js"></script>
+<script src="sell.js"></script>
+<script src="js_folder/recommendations.js"></script>
+<script src="slideshow.js"></script>
+<script src="js_folder/welcome_msg.js"></script>
+<script src="js_api_folder/loginAuthencation.js"></script>
+
+</body>
+</html>
