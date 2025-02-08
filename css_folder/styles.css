@@ -59,7 +59,8 @@ a {
 }
 
 .navbar .menu li {
-  margin-left: 20px;
+  margin-left: 10px;
+  white-space: nowrap; 
 }
 
 .navbar .menu a {
