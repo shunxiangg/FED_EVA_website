@@ -15,19 +15,40 @@ function navigateTo(page) {
         window.location.href = 'shipping.html';
     }
     else if (page === 'discounts') {
-        window.location.href = 'discounts.html';
+        // Check if on home page
+        if (window.location.pathname.includes('home.html')) {
+            // Scroll to discounts section
+            const discountsSection = document.querySelector('.discounts');
+            if (discountsSection) {
+                discountsSection.scrollIntoView({ behavior: 'smooth' });
+            }
+        } else {
+            // Redirect to home page and focus on discounts section
+            window.location.href = 'home.html#discounts';
+        }
     }
     else if (page === 'products') {
-        window.location.href = 'browse.html'; 
+        window.location.href = 'browse.html';
     }
     else if (page === 'sell') {
-        window.location.href = 'sell.html'; 
+        window.location.href = 'sell.html';
     }
     else {
         console.error('Unknown page:', page);
     }
 }
-
+document.addEventListener('DOMContentLoaded', () => {
+    // Check if there's a hash in the URL
+    if (window.location.hash === '#discounts-section') {
+        const discountsSection = document.getElementById('discounts-section');
+        if (discountsSection) {
+            // Scroll to discounts section after a short delay to ensure page is loaded
+            setTimeout(() => {
+                discountsSection.scrollIntoView({ behavior: 'smooth' });
+            }, 100);
+        }
+    }
+});
 
 // search filter products for home page
 document.addEventListener('DOMContentLoaded', function() {
