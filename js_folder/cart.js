@@ -17,7 +17,7 @@
 //         });
 
 //         if (!response.ok) throw new Error('Failed to fetch product');
-        
+
 //         const product = await response.json();
 //         console.log('Product fetched:', product);
 
@@ -37,7 +37,7 @@
 
 //         localStorage.setItem('cart', JSON.stringify(cart));
 //         updateCartCount();
-        
+
 //         if (window.location.pathname.includes('cart.html')) {
 //             displayCart();
 //         }
@@ -169,10 +169,10 @@
 
 //         const popup = document.getElementById('success-popup');
 //         popup.style.display = 'flex';
-         
+
 //         cart = [];
 //         localStorage.setItem('cart', JSON.stringify(cart));
-        
+
 //         setTimeout(() => {
 //             window.location.href = 'browse.html';
 //         }, 1000);
@@ -220,8 +220,6 @@
 //         alert('checkout faile please try again.');
 //     }
 // } 
-const APIKEY = "6787a92c77327a0a035a5437";
-const DATABASE_URL = "https://evadatabase-f3b8.restdb.io/rest/sell";
 let cart = [];
 
 // Function to load cart from localStorage
@@ -229,7 +227,7 @@ function loadCart() {
     try {
         const storedCart = localStorage.getItem('cart');
         console.log('Stored cart raw value:', storedCart);
-        
+
         if (storedCart === null || storedCart === 'undefined') {
             cart = [];
             localStorage.setItem('cart', JSON.stringify(cart));
@@ -238,14 +236,14 @@ function loadCart() {
         }
 
         // Validate cart items and ensure they have all necessary properties
-        cart = cart.filter(item => 
-            item && 
-            typeof item === 'object' && 
-            item.id && 
-            item.name && 
+        cart = cart.filter(item =>
+            item &&
+            typeof item === 'object' &&
+            item.id &&
+            item.name &&
             typeof item.price === 'number'
         );
-        
+
         console.log('Cart loaded:', cart);
         return cart;
     } catch (error) {
@@ -255,7 +253,12 @@ function loadCart() {
         return cart;
     }
 }
-window.addToCart = async function(productId) {
+
+
+window.addToCart = async function (productId) {
+
+    const APIKEY = "6787a92c77327a0a035a5437";
+    const DATABASE_URL = "https://evadatabase-f3b8.restdb.io/rest/sell";
     try {
         const response = await fetch(`${DATABASE_URL}/${productId}`, {
             method: "GET",
@@ -268,7 +271,7 @@ window.addToCart = async function(productId) {
 
         if (!response.ok) throw new Error('Failed to fetch product');
         const product = await response.json();
-        
+
         // Detailed logging
         console.log('Product details:', product);
         console.log('Product quantity:', product.quantity);
@@ -277,7 +280,7 @@ window.addToCart = async function(productId) {
         if (product.quantity === undefined || product.quantity === null) {
             throw new Error('Product quantity is undefined or null');
         }
-        
+
         // Check if product is in stock
         if (product.quantity <= 0) {
             showCustomAlert('This item is out of stock');
@@ -286,10 +289,10 @@ window.addToCart = async function(productId) {
 
         // Load existing cart
         loadCart();
-        
+
         // Find existing item in cart
         const existingItem = cart.find(item => item && item.id === productId);
-        
+
         // Detailed logging for existing item
         console.log('Existing cart item:', existingItem);
         console.log('Current cart:', cart);
@@ -298,12 +301,12 @@ window.addToCart = async function(productId) {
             // Check if can increment quantity
             console.log('Current item quantity:', existingItem.quantity);
             console.log('Available product quantity:', product.quantity);
-            
+
             if (existingItem.quantity >= product.quantity) {
                 showCustomAlert(`Cannot add more - only ${product.quantity} items available`);
                 return;
             }
-            
+
             // Increment existing item quantity
             existingItem.quantity += 1;
         } else {
@@ -321,7 +324,7 @@ window.addToCart = async function(productId) {
         // Update cart in localStorage
         localStorage.setItem('cart', JSON.stringify(cart));
         updateCartCount();
-        
+
         // Refresh cart display if on cart page
         if (window.location.pathname.includes('cart.html')) {
             displayCart();
@@ -448,7 +451,7 @@ function updateCartCount() {
     }
 }
 
-window.removeFromCart = function(productId) {
+window.removeFromCart = function (productId) {
     const index = cart.findIndex(item => item && item.id === productId);
     if (index > -1) {
         if (cart[index].quantity > 1) {
@@ -462,7 +465,7 @@ window.removeFromCart = function(productId) {
     }
 };
 
-window.proceedToCheckout = async function() {
+window.proceedToCheckout = async function () {
     if (!cart || cart.length === 0) {
         showCustomAlert('Your cart is empty!');
         return;
@@ -495,9 +498,9 @@ window.proceedToCheckout = async function() {
             });
 
             if (!productResponse.ok) throw new Error(`Failed to fetch product ${item.id}`);
-            
+
             const product = await productResponse.json();
-            
+
             // Calculate new quantity
             const newQuantity = (product.quantity || 0) - item.quantity;
 
@@ -561,10 +564,10 @@ window.proceedToCheckout = async function() {
 
         const popup = document.getElementById('success-popup');
         popup.style.display = 'flex';
-         
+
         cart = [];
         localStorage.setItem('cart', JSON.stringify(cart));
-        
+
         setTimeout(() => {
             window.location.href = 'browse.html';
         }, 1000);
@@ -588,17 +591,17 @@ function showCustomAlert(message) {
     // Create modal elements
     const alertModal = document.createElement('div');
     alertModal.className = 'custom-alert-modal';
-    
+
     const alertContent = document.createElement('div');
     alertContent.className = 'custom-alert-content';
-    
+
     const messageText = document.createElement('p');
     messageText.textContent = message;
-    
+
     const closeButton = document.createElement('button');
     closeButton.textContent = 'OK';
     closeButton.onclick = () => alertModal.remove();
-    
+
     alertContent.appendChild(messageText);
     alertContent.appendChild(closeButton);
     alertModal.appendChild(alertContent);
