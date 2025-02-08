@@ -17,51 +17,81 @@
 
 <body>
 
-  <div class="chat-container">
-    <div class="chat-header">
-        <h2>Chat</h2>
-    </div>
-    
-    <div class="chat-sidebar">
-        <div class="search-chat">
-            <input type="text" placeholder="Search Chats..." id="searchChat">
-        </div>
-        <div class="chat-list" id="chatList">
-            <!-- contacts will come here -->
-        </div>
-    </div>
-    
-    <div class="chat-main">
-      <div id="no-chat-placeholder" class="no-chat">
-          <p>Select a chat to start messaging</p>
+  <!-- Header Section -->
+  <header class="header">
+    <div class="top-bar">
+      <h1 class="logo">MokeSell</h1>
+      <div class="search-container">
+        <button class="search-icon"><i class="fas fa-search"></i></button>
+        <input type="text" class="search-bar" placeholder="Search Here...">
+        <button class="cam-icon"><i class="fas fa-camera"></i></button>
       </div>
-      <div id="chat-content" style="display: none;">
-          <div class="chat-user-header" id="chatUserHeader">
-              <!-- Selected user info will appear here -->
-          </div>
-          <div class="chat-messages" id="chatMessages">
-              <!-- Messages will appear here -->
-          </div>
-          <div class="chat-input">
-              <input type="text" placeholder="Type a message..." id="messageInput">
-              <button id="sendMessage">
-                  <i class="fas fa-paper-plane"></i>
-              </button>
-          </div>
+      <div class="right-icons">
+        <div class="icon-container">
+          <button class="menu-btn" onclick="routeChat()"><i class="fas fa-bars"></i></button>
+          <span>Chat</span>
+        </div>
+        <div class="icon-container">
+          <span class="icon-btn" onclick="routeHome()"><i class="fas fa-home"></i></span>
+          <span>Home</span>
+        </div>
+        <div class="icon-container">
+          <button class="icon-btn" onclick="routeGame()"><i class="fas fa-gamepad"></i></button>
+          <span>Game</span>
+        </div>
+        <div class="icon-container">
+          <button class="icon-btn" onclick="routeProfile()"><i class="fas fa-user"></i></button>
+          <span>Profile</span>
+        </div>
+        <div class="icon-container">
+          <button class="icon-btn" onclick="routeListing()"><i class="fas fa-bars"></i></button>
+          <span>List</span>
+        </div>
       </div>
-  </div>
-</div>
+    </div>
+  </header>
 
-<div id="chatHeader"></div>
-<div class="chat-container">
-    <div id="chatList"></div>
-    <div id="chat-content" style="display: none;">
-        <div id="chatUserHeader"></div>
-        <div id="productInfo"></div>
-        <div id="chatMessages"></div>
-        <div class="chat-input">
-            <input type="text" id="messageInput" placeholder="Type your message...">
-            <button id="sendMessage">Send</button>
+<!-- Main Layout -->
+<div class="main-layout">
+    <!-- Left Sidebar -->
+    <div class="left-sidebar">
+        <div class="contact-search">
+            <input type="text" placeholder="Search contacts..." />
+        </div>
+        <div class="contact-list">
+            <!-- Example Contacts -->
+            <div class="contact-item" onclick="switchChat('aiden')">
+                <img src="/src/images/avatar1.png" alt="Avatar" class="avatar" />
+                <div class="contact-info">
+                    <span class="contact-name">Aiden Chavez</span>
+                    <span class="contact-status">online</span>
+                </div>
+                <span class="status-dot online"></span>
+            </div>
+            <div class="contact-item" onclick="switchChat('vincent')">
+                <img src="/src/images/avatar2.png" alt="Avatar" class="avatar" />
+                <div class="contact-info">
+                    <span class="contact-name">Vincent Porter</span>
+                    <span class="contact-status">left 7 mins ago</span>
+                </div>
+                <span class="status-dot offline"></span>
+            </div>
+            <!-- Add more contacts here -->
+        </div>
+    </div>
+    
+    <!-- Main Chat Section -->
+    <div class="chat-section">
+        <div class="chat-header" id="chat-header" style="display: none;">
+            <img src="/src/images/avatar-placeholder.jpg" alt="Avatar" class="avatar" id="chat-avatar" />
+            <span class="chat-contact-name" id="chat-contact-name">Contact Name</span>
+        </div>
+        <div id="chat-container" class="chat-container-empty">
+            <p class="select-chat-text">Select a chat to start messaging</p>
+        </div>
+        <div class="chat-input-container" id="chat-input-container" style="display: none;">
+            <input type="text" class="chat-input" placeholder="Enter text here..." />
+            <button class="chat-send-button"><span class="bi bi-send"></span></button>
         </div>
     </div>
 </div>
