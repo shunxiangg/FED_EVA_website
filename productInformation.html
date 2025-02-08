@@ -81,144 +81,37 @@
         </div>
     </footer>
 
+
+    <script src='https://cdn.jotfor.ms/s/umd/latest/for-embedded-agent.js'></script>
+    <script>
+      window.addEventListener("DOMContentLoaded", function() {
+        window.AgentInitializer.init({
+          agentRenderURL: "https://agent.jotform.com/0194e55c77377697a8d98ac9f4e1fad8b333",
+          rootId: "JotformAgent-0194e55c77377697a8d98ac9f4e1fad8b333",
+          formID: "0194e55c77377697a8d98ac9f4e1fad8b333",
+          queryParams: ["skipWelcome=1", "maximizable=1"],
+          domain: "https://www.jotform.com",
+          isDraggable: false,
+          background: "linear-gradient(180deg, #FF98BC 0%, #FF98BC 100%)",
+          buttonBackgroundColor: "#972D54",
+          buttonIconColor: "#FFF",
+          variant: false,
+          customizations: {
+            "greeting": "Yes",
+            "greetingMessage": "Hi! How can I assist you?",
+            "openByDefault": "No",
+            "pulse": "Yes",
+            "position": "left",
+            "autoOpenChatIn": "0"
+          },
+          isVoice: undefined
+        });
+      });
+    </script>
     <script src="js_folder/cart.js"></script>
     <script src="js_folder/chat.js"></script>
     <script src="js_folder/productinformation.js"></script>
-    <!-- <script>
-        const APIKEY = "6787a92c77327a0a035a5437";
-        const DATABASE_URL = "https://evadatabase-f3b8.restdb.io/rest/sell";
-        let globalProduct; // Global variable to store product details
-
-        async function getProductDetails() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const productId = urlParams.get('id');
-            if (!productId) {
-                document.getElementById('product-details').innerHTML = 'Product not found';
-                return;
-            }
-            try {
-                const response = await fetch(`${DATABASE_URL}/${productId}`, {
-                    headers: {
-                        "Content-Type": "application/json",
-                        "x-apikey": APIKEY
-                    }
-                });
-                globalProduct = await response.json(); // Store product globally
-                displayProductDetails(globalProduct);
-            } catch (error) {
-                console.error('Error:', error);
-                document.getElementById('product-details').innerHTML = 'Error loading product';
-            }
-        }
-
-        function displayProductDetails(product) {
-            const detailsHtml = `
-            <div class="product-details-grid">
-                <div class="product-image-large">
-                    ${product.imageData ?
-                    `<img src="${product.imageData}" alt="${product.itemName}">` :
-                    '<div class="no-image">No Image Available</div>'
-                }
-                </div>
-                <div class="product-info">
-                    <h1>${product.itemName}</h1>
-                    <p class="price">$${product.price}</p>
-                    <p class="description">${product.description}</p>
-                    <div class="specs">
-                        <p><strong>Category:</strong> ${product.category}</p>
-                        <p><strong>Condition:</strong> ${product.condition}</p>
-                        <p><strong>Seller:</strong> ${product.sellerName}</p>
-                    </div>
-                    <button onclick="addToCart('${product._id}')" class="add-to-cart-btn">
-                        Add to Cart
-                    </button>
-                </div>
-            </div>
-            `;
-            document.getElementById('product-details').innerHTML = detailsHtml;
-        }
-
-        async function startChatWithSeller() {
-            if (!globalProduct) {
-                console.error('No product selected');
-                return;
-            }
-
-            const buyerEmail = localStorage.getItem('userEmail');
-
-            if (!buyerEmail) {
-                alert('Please log in to start a chat');
-                localStorage.setItem('returnUrl', window.location.href);
-                window.location.href = 'login.html';
-                return;
-            }
-
-            if (buyerEmail === globalProduct.sellerEmail) {
-                alert('You cannot chat about your own product');
-                return;
-            }
-
-            try {
-                // Check for existing chat
-                const existingChatQuery = JSON.stringify({
-                    buyer: buyerEmail,
-                    seller: globalProduct.sellerEmail,
-                    productId: globalProduct._id
-                });
-
-                const existingChatResponse = await fetch(`https://evadatabase-f3b8.restdb.io/rest/chats?q=${existingChatQuery}`, {
-                    headers: {
-                        "Content-Type": "application/json",
-                        "x-apikey": APIKEY
-                    }
-                });
-
-                const existingChats = await existingChatResponse.json();
-
-                let chatId;
-                if (existingChats.length === 0) {
-                    // Create new chat
-                    const newChat = {
-                        buyer: buyerEmail,
-                        seller: globalProduct.sellerEmail,
-                        productId: globalProduct._id,
-                        productName: globalProduct.itemName,
-                        lastMessageTime: new Date().toISOString(),
-                        messages: [] // Add this
-                    };
-
-                    const createChatResponse = await fetch(`https://evadatabase-f3b8.restdb.io/rest/chats`, {
-                        method: 'POST',
-                        headers: {
-                            "Content-Type": "application/json",
-                            "x-apikey": APIKEY
-                        },
-                        body: JSON.stringify(newChat)
-                    });
-
-                    const createdChat = await createChatResponse.json();
-                    chatId = createdChat._id;
-                } else {
-                    chatId = existingChats[0]._id;
-                }
-
-                // Redirect to chat page
-                window.location.href = `chat.html?chatId=${chatId}`;
-            } catch (error) {
-                console.error('Error starting chat:', error);
-                alert('Failed to start chat. Please try again.');
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            getProductDetails();
-
-            const messageSellerBtn = document.getElementById('messageSellerBtn');
-            if (messageSellerBtn) {
-                messageSellerBtn.addEventListener('click', startChatWithSeller);
-            }
-        });
-    </script> -->
+    
     <style>
         .product-details-container {
             max-width: 1200px;
@@ -330,6 +223,5 @@
      }
     </style>
 </body>
-<script src="js_folder/productinformation.js"></script>
 
 </html>
