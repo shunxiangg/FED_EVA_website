@@ -42,6 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 
                 if (account) {
+                    localStorage.setItem('loginId', account._id);
                     localStorage.setItem('userEmail', account.email);
                     localStorage.setItem('userName', account.name);
 
