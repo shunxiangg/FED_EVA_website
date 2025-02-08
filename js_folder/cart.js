@@ -256,11 +256,7 @@ function loadCart() {
 }
 
 window.addToCart = async function(productId) {
-    const APIKEY = "6787a92c77327a0a035a5437";
-    const DATABASE_URL = "https://evadatabase-f3b8.restdb.io/rest/sell";
-
     try {
-        // Fetch product details
         const response = await fetch(`${DATABASE_URL}/${productId}`, {
             method: "GET",
             headers: {
@@ -271,22 +267,26 @@ window.addToCart = async function(productId) {
         });
 
         if (!response.ok) throw new Error('Failed to fetch product');
-        
         const product = await response.json();
-        console.log('Product fetched:', product);
+        
+        // Check if product is in stock
+        if (!product.quantity || product.quantity <= 0) {
+            showCustomAlert('This item is out of stock');
+            return;
+        }
 
-        // Load existing cart
         loadCart();
-
-        // Check if product already exists in cart
         const existingItem = cart.find(item => item && item.id === productId);
         
+        // Check if adding more would exceed available stock
         if (existingItem) {
-            // If product exists, increase quantity
+            if (existingItem.quantity >= product.quantity) {
+                showCustomAlert(`Cannot add more - only ${product.quantity} items available`);
+                return;
+            }
             existingItem.quantity += 1;
         } else {
-            // If product doesn't exist, add new item to cart
-            const newCartItem = {
+            cart.push({
                 id: productId,
                 name: product.itemName,
                 price: parseFloat(product.price),
@@ -296,31 +296,23 @@ window.addToCart = async function(productId) {
                 condition: product.condition || '',
                 sellerName: product.sellerName || 'Unknown Seller',
                 quantity: 1,
+                maxQuantity: product.quantity, // Store max available quantity
                 deliveryMethod: product.deliveryMethod || 'standard',
                 deliveryCost: product.deliveryMethod === 'express' ? 5.00 : 4.50
-            };
-
-            cart.push(newCartItem);
+            });
         }
 
-        // Save updated cart to localStorage
         localStorage.setItem('cart', JSON.stringify(cart));
-        
-        // Update cart count and display
         updateCartCount();
         
-        // If on cart page, refresh cart display
         if (window.location.pathname.includes('cart.html')) {
             displayCart();
         }
 
-        // Optional: Show alert or notification
-        alert('Product added to cart successfully!');
-
-        console.log('Cart updated:', cart);
+        showCustomAlert('Product added to cart successfully!');
     } catch (error) {
         console.error('Error adding to cart:', error);
-        alert('Failed to add product to cart. Please try again.');
+        showCustomAlert('Failed to add product to cart. Please try again.');
     }
 };
 
@@ -366,29 +358,59 @@ function displayCart() {
     `}).join('');
 
     updateOrderSummary();
-}
+}function updateOrderSummary() {
+    const summary = document.querySelector('.cart-summary');
+    if (!summary) return;
 
-function updateOrderSummary() {
-    const subtotalElem = document.getElementById('cart-subtotal');
-    const totalElem = document.getElementById('cart-total-amount');
-
-    if (!subtotalElem || !totalElem) {
-        console.log('Summary elements not found');
-        return;
-    }
-
-    // Calculate totals with additional error checking
+    // Calculate subtotal and delivery fees with error checking
     const subtotal = cart.reduce((sum, item) => {
-        // Ensure item is valid and has price and quantity
         if (item && typeof item.price === 'number' && typeof item.quantity === 'number') {
             return sum + (item.price * item.quantity);
         }
         return sum;
     }, 0);
-    
-    // Update summary elements
-    subtotalElem.textContent = `$${subtotal.toFixed(2)}`;
-    totalElem.textContent = `$${subtotal.toFixed(2)}`;
+
+    const deliveryTotal = cart.reduce((sum, item) => {
+        if (item && typeof item.deliveryCost === 'number' && typeof item.quantity === 'number') {
+            return sum + (item.deliveryCost * item.quantity);
+        }
+        return sum;
+    }, 0);
+
+    const total = subtotal + deliveryTotal;
+
+    summary.innerHTML = `
+        <h2>Order Summary</h2>
+        ${cart.map(item => `
+            <div class="summary-item" data-id="${item.id}">
+                <div class="item-info">
+                    <span>${item.name} (x${item.quantity})</span>
+                    <span>$${(item.price * item.quantity).toFixed(2)}</span>
+                </div>
+                <div class="delivery-info">
+                    <span>${item.deliveryMethod} Delivery</span>
+                    <span>$${(item.deliveryCost * item.quantity).toFixed(2)}</span>
+                </div>
+            </div>
+        `).join('')}
+        <div class="summary-totals">
+            <div class="subtotal">
+                <span>Subtotal</span>
+                <span>$${subtotal.toFixed(2)}</span>
+            </div>
+            <div class="delivery-total">
+                <span>Delivery Total</span>
+                <span>$${deliveryTotal.toFixed(2)}</span>
+            </div>
+            <div class="total">
+                <span>Total</span>
+                <span id="cart-total-amount">$${total.toFixed(2)}</span>
+            </div>
+        </div>
+        <button onclick="proceedToCheckout()" class="checkout-btn">
+            <i class="fas fa-lock"></i> Proceed to Checkout
+        </button>
+    `;
 }
 
 function updateCartCount() {
@@ -421,7 +443,7 @@ window.removeFromCart = function(productId) {
 
 window.proceedToCheckout = async function() {
     if (!cart || cart.length === 0) {
-        alert('Your cart is empty!');
+        showCustomAlert('Your cart is empty!');
         return;
     }
 
@@ -431,7 +453,7 @@ window.proceedToCheckout = async function() {
     const userEmail = localStorage.getItem('userEmail');
 
     if (!userEmail) {
-        alert('Please login to checkout');
+        showCustomAlert('Please login to checkout');
         return;
     }
 
@@ -528,7 +550,7 @@ window.proceedToCheckout = async function() {
 
     } catch (error) {
         console.error('Error processing purchase:', error);
-        alert('Failed to process purchase. Please try again.');
+        showCustomAlert('Failed to process purchase. Please try again.');
     }
 }
 
@@ -540,3 +562,66 @@ document.addEventListener('DOMContentLoaded', () => {
         displayCart();
     }
 });
+
+function showCustomAlert(message) {
+    // Create modal elements
+    const alertModal = document.createElement('div');
+    alertModal.className = 'custom-alert-modal';
+    
+    const alertContent = document.createElement('div');
+    alertContent.className = 'custom-alert-content';
+    
+    const messageText = document.createElement('p');
+    messageText.textContent = message;
+    
+    const closeButton = document.createElement('button');
+    closeButton.textContent = 'OK';
+    closeButton.onclick = () => alertModal.remove();
+    
+    alertContent.appendChild(messageText);
+    alertContent.appendChild(closeButton);
+    alertModal.appendChild(alertContent);
+    document.body.appendChild(alertModal);
+}
+
+const styles = `
+.custom-alert-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.custom-alert-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    max-width: 300px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.custom-alert-content button {
+    margin-top: 15px;
+    padding: 8px 20px;
+    border: none;
+    border-radius: 4px;
+    background: #007bff;
+    color: white;
+    cursor: pointer;
+}
+
+.custom-alert-content button:hover {
+    background: #0056b3;
+}
+`;
+
+const styleSheet = document.createElement('style');
+styleSheet.textContent = styles;
+document.head.appendChild(styleSheet);
