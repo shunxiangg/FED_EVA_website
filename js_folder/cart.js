@@ -348,6 +348,7 @@ function displayCart() {
                 <h3>${item.name || 'Unknown Product'}</h3>
                 <p>$${(item.price || 0).toFixed(2)} x ${item.quantity || 1}</p>
                 <p>Seller: ${item.sellerName || 'Unknown Seller'}</p>
+                <p>Available Inventory: ${item.maxQuantity || 0}</p>
             </div>
             <div class="cart-item-controls">
                 <button onclick="removeFromCart('${item.id}')" class="quantity-btn">-</button>
@@ -358,7 +359,10 @@ function displayCart() {
     `}).join('');
 
     updateOrderSummary();
-}function updateOrderSummary() {
+}
+
+
+function updateOrderSummary() {
     const summary = document.querySelector('.cart-summary');
     if (!summary) return;
 

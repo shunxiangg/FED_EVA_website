@@ -34,38 +34,6 @@ async function fetchDatabaseProducts() {
     return await response.json();
 }
 
-// Frtach from database products
-function displayProducts(products) {
-    const productList = document.getElementById('product-list');
-    if (!productList) return;
-
-    if (products.length === 0) {
-        productList.innerHTML = "<p class='no-products'>No products found.</p>";
-        return;
-    }
-
-    productList.innerHTML = products.map(product => `
-        <div class="product-card">
-            <div class="product-image">
-                     ${product.imageData ? 
-                    `<img src="${product.imageData}" alt="${product.itemName}" class="product-image">` :
-                    '<div class="no-image">No Image Available</div>'
-                }
-            </div>
-            <div class="product-details">
-                <h3>${product.itemName}</h3>
-                <p class="product-description">${product.description}</p>
-                <p class="product-category">Category: ${product.category}</p>
-                <p class="product-condition">Condition: ${product.condition}</p>
-                <p class="product-price">$${product.price}</p>
-                <p class="seller-info">Seller: ${product.sellerName}</p>
-                <button onclick="addToCart('${product._id}')" class="add-to-cart-btn">
-                    Add to Cart
-                </button>
-            </div>
-        </div>
-    `).join('');
-}
 
 function initializeFilters() {
     const applyFiltersBtn = document.getElementById('apply-filters');
@@ -113,8 +81,7 @@ function applyFilters() {
  }
 
 
-// Display product information
-function displayProducts(products) {
+ function displayProducts(products) {
     const productList = document.getElementById('product-list');
     if (!productList) return;
 
@@ -133,18 +100,25 @@ function displayProducts(products) {
             </div>
             <div class="product-details">
                 <h3>${product.itemName}</h3>
-                <p class="product-description">${truncateText(product.description, 50)}</p>
                 <p class="product-category">Category: ${product.category}</p>
                 <p class="product-condition">Condition: ${product.condition}</p>
                 <p class="product-price">$${product.price}</p>
+                <p class="inventory-count">Inventory: ${product.quantity || 0} items</p>
                 <p class="seller-info">Seller: ${product.sellerName}</p>
-                <button onclick="event.stopPropagation(); addToCart('${product._id}')" class="add-to-cart-btn">
-                    Add to Cart
+                <button 
+                    onclick="event.stopPropagation(); addToCart('${product._id}')" 
+                    class="add-to-cart-btn"
+                    ${(product.quantity || 0) <= 0 ? 'disabled' : ''}
+                >
+                    ${(product.quantity || 0) > 0 ? 'Add to Cart' : 'Out of Stock'}
                 </button>
             </div>
         </div>
     `).join('');
 }
+
+
+
 function truncateText(text, maxLength) {
     return text.length > maxLength ? text.slice(0, maxLength) + '...' : text;
  }

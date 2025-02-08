@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="css_folder/styles.css">
   <link rel="stylesheet" href="css_folder/home.css">
   <link rel="stylesheet" href="css_folder/sell.css">
+  <link rel="stylesheet" href="css_folder/keyframesLoading.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
@@ -203,6 +204,13 @@
     </form>
   </div>
 </div>
+
+<div id="loading-spinner" class="spinner" style="display: none;">
+  <div class="spinner-border" role="status">
+      <span class="sr-only">Loading...</span>
+  </div>
+</div>
+
 <footer>
   <div id="language-selector">
     <select id="language-dropdown" onchange="changeLanguage()">
