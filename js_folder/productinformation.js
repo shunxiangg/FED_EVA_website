@@ -194,11 +194,40 @@ const APIKEY = "6787a92c77327a0a035a5437";
 const DATABASE_URL = "https://evadatabase-f3b8.restdb.io/rest/sell";
 let globalProduct;
 
-// Check if user is authenticated
-function checkAuthentication() {
-    const userEmail = localStorage.getItem('userEmail');
-    return userEmail != null;
+// Calculate discounted price
+function calculateDiscountedPrice(product) {
+    const originalPrice = parseFloat(product.price);
+    
+    // Check if discount is active
+    if (product.discountPercentage && product.discountPercentage > 0) {
+        const currentDate = new Date();
+        const startDate = product.discountStartDate ? new Date(product.discountStartDate) : null;
+        const endDate = product.discountEndDate ? new Date(product.discountEndDate) : null;
+
+        const isDiscountActive = (!startDate || currentDate >= startDate) && 
+                                 (!endDate || currentDate <= endDate);
+
+        if (isDiscountActive) {
+            const discountedPrice = originalPrice * (1 - product.discountPercentage / 100);
+            return {
+                originalPrice: originalPrice,
+                discountedPrice: discountedPrice,
+                discountPercentage: product.discountPercentage
+            };
+        }
+    }
+
+    // If no active discount
+    return {
+        originalPrice: originalPrice,
+        discountedPrice: originalPrice,
+        discountPercentage: 0
+    };
 }
+
+
+
+
 
 // Capitalize first letter of each word in a string
 function capitalizeFirstLetter(string) {
@@ -248,8 +277,65 @@ async function getProductDetails() {
     }
 }
 
+
+
+
+// Get product details from database
+async function getProductDetails() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const productId = urlParams.get('id');
+    
+    if (!productId) {
+        document.getElementById('product-details').innerHTML = 'Product not found';
+        return;
+    }
+
+    try {
+        const response = await fetch(`${DATABASE_URL}/${productId}`, {
+            headers: {
+                "Content-Type": "application/json",
+                "x-apikey": APIKEY
+            }
+        });
+        
+        if (!response.ok) {
+            throw new Error('Failed to fetch product details');
+        }
+
+        globalProduct = await response.json();
+        displayProductDetails(globalProduct);
+        updateCartButton();
+    } catch (error) {
+        console.error('Error:', error);
+        document.getElementById('product-details').innerHTML = 'Error loading product';
+    }
+}
+
+
+
 // Display product details on the page
 function displayProductDetails(product) {
+    // Calculate pricing with discount
+    const pricing = calculateDiscountedPrice(product);
+
+    // Create price display HTML
+    let priceHtml = '';
+    if (pricing.discountPercentage > 0) {
+        priceHtml = `
+            <div class="price-container">
+                <span class="original-price">$${pricing.originalPrice.toFixed(2)}</span>
+                <span class="discounted-price">$${pricing.discountedPrice.toFixed(2)}</span>
+                <span class="discount-tag">${pricing.discountPercentage}% OFF</span>
+            </div>
+        `;
+    } else {
+        priceHtml = `
+            <div class="price-container">
+                <span class="current-price">$${pricing.originalPrice.toFixed(2)}</span>
+            </div>
+        `;
+    }
+
     const detailsHtml = `
         <div class="product-details-grid">
             <div class="product-image-large">
@@ -259,13 +345,14 @@ function displayProductDetails(product) {
                 }
             </div>
             <div class="product-info">
-                <h1>${product.itemName}</h1>
-                <p class="price">$${product.price}</p>
+                <h2>${product.itemName}</h2>
+                ${priceHtml}
                 <p class="description">${product.description}</p>
                 <div class="specs">
                     <p><strong>Category:</strong> ${capitalizeFirstLetter(product.category)}</p>
                     <p><strong>Condition:</strong> ${capitalizeFirstLetter(product.condition)}</p>
                     <p><strong>Seller:</strong> ${product.sellerName}</p>
+                    <p><strong>Inventory:</strong> ${product.quantity || 0} items</p>
                 </div>
                 <button onclick="addToCart('${product._id}')" class="add-to-cart-btn">
                     Add to Cart
@@ -274,8 +361,41 @@ function displayProductDetails(product) {
         </div>
     `;
     document.getElementById('product-details').innerHTML = detailsHtml;
-}
 
+    // Add custom styles for pricing
+    const styleTag = document.createElement('style');
+    styleTag.textContent = `
+        .price-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 15px 0;
+        }
+        .original-price {
+            text-decoration: line-through;
+            color: #888;
+            font-size: 0.9em;
+        }
+        .discounted-price {
+            color: #1a73e8;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        .discount-tag {
+            background-color: #ff6b6b;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.8em;
+        }
+        .current-price {
+            color: #1a73e8;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+    `;
+    document.head.appendChild(styleTag);
+}
 // Add product to cart
 function addToCart(productId) {
     if (!checkAuthentication()) {
