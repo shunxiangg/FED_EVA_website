@@ -256,7 +256,6 @@ function loadCart() {
 
 
 window.addToCart = async function (productId) {
-
     const APIKEY = "6787a92c77327a0a035a5437";
     const DATABASE_URL = "https://evadatabase-f3b8.restdb.io/rest/sell";
     try {
@@ -264,80 +263,177 @@ window.addToCart = async function (productId) {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
-                "x-apikey": APIKEY,
-                "Cache-Control": "no-cache"
+                "x-apikey": APIKEY
             }
         });
 
         if (!response.ok) throw new Error('Failed to fetch product');
         const product = await response.json();
 
-        // Detailed logging
-        console.log('Product details:', product);
-        console.log('Product quantity:', product.quantity);
-
-        // Validate product quantity
         if (product.quantity === undefined || product.quantity === null) {
             throw new Error('Product quantity is undefined or null');
         }
 
-        // Check if product is in stock
         if (product.quantity <= 0) {
             showCustomAlert('This item is out of stock');
             return;
         }
 
-        // Load existing cart
         loadCart();
+        const existingItem = cart.find(item => item.id === productId);
 
-        // Find existing item in cart
-        const existingItem = cart.find(item => item && item.id === productId);
+        // Use the product's delivery method and calculate cost
+        const deliveryMethod = product.deliveryMethod || 'standard';
+        let deliveryCost = 0;
 
-        // Detailed logging for existing item
-        console.log('Existing cart item:', existingItem);
-        console.log('Current cart:', cart);
+        // Match the delivery method pricing from the sell page
+        switch (deliveryMethod) {
+            case 'standard':
+                deliveryCost = 4.50;
+                break;
+            case 'express':
+                deliveryCost = 5.00;
+                break;
+            default:
+                deliveryCost = 0;
+        }
+
+        // Calculate discounted price if applicable
+        let finalPrice = parseFloat(product.price);
+        let discountInfo = null;
+
+        // Check if discount is active
+        if (product.discountPercentage && product.discountPercentage > 0) {
+            const currentDate = new Date();
+            const startDate = product.discountStartDate ? new Date(product.discountStartDate) : null;
+            const endDate = product.discountEndDate ? new Date(product.discountEndDate) : null;
+
+            const isDiscountActive = (!startDate || currentDate >= startDate) &&
+                (!endDate || currentDate <= endDate);
+
+            if (isDiscountActive) {
+                finalPrice = finalPrice * (1 - product.discountPercentage / 100);
+                discountInfo = {
+                    originalPrice: parseFloat(product.price),
+                    discountPercentage: product.discountPercentage
+                };
+            }
+        }
 
         if (existingItem) {
-            // Check if can increment quantity
-            console.log('Current item quantity:', existingItem.quantity);
-            console.log('Available product quantity:', product.quantity);
-
             if (existingItem.quantity >= product.quantity) {
                 showCustomAlert(`Cannot add more - only ${product.quantity} items available`);
                 return;
             }
-
-            // Increment existing item quantity
             existingItem.quantity += 1;
         } else {
-            // Add new item to cart
             cart.push({
                 id: productId,
                 name: product.itemName,
-                price: parseFloat(product.price),
-                imageData: product.imageData || '',
+                price: finalPrice,
+                originalPrice: parseFloat(product.price),
+                imageData: product.imageData,
                 quantity: 1,
-                maxQuantity: product.quantity
+                maxQuantity: product.quantity,
+                deliveryMethod: deliveryMethod,
+                deliveryCost: deliveryCost,
+                discountInfo: discountInfo
             });
         }
 
-        // Update cart in localStorage
         localStorage.setItem('cart', JSON.stringify(cart));
         updateCartCount();
 
-        // Refresh cart display if on cart page
         if (window.location.pathname.includes('cart.html')) {
             displayCart();
         }
 
         showCustomAlert('Product added to cart successfully!');
     } catch (error) {
-        console.error('Complete error details:', error);
+        console.error('Error adding to cart:', error);
         showCustomAlert(`Error: ${error.message}`);
     }
 };
+
+// -------------------styles for the discount section --------------------
+const style = document.createElement('style');
+style.textContent = `
+.discount-section {
+    padding: 2rem;
+    margin-top: 2rem;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.discount-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.listing-card {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.2s;
+}
+
+.listing-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.listing-image {
+    height: 200px;
+    background-color: #f5f5f5;
+    position: relative;
+}
+
+.listing-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.listing-details {
+    padding: 1rem;
+}
+
+.listing-details h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.1rem;
+}
+
+.listing-details p {
+    margin: 0.25rem 0;
+    color: #666;
+}
+
+.price {
+    font-weight: bold;
+    color: #2c5282;
+}
+
+.discount-badge {
+    background-color: #f56565;
+    color: white;
+    padding: 0.3rem 0.5rem;
+    border-radius: 4px;
+    display: inline-block;
+    font-size: 0.9rem;
+}
+`;
+document.head.appendChild(style);
+
+
+
+
+
+
+// Function to display cart items
 function displayCart() {
-    // Reload cart from localStorage
     loadCart();
 
     const cartItems = document.getElementById('cart-items');
@@ -361,14 +457,30 @@ function displayCart() {
             console.warn('Invalid cart item:', item);
             return '';
         }
+
+        // Prepare price display with potential discount
+        let priceDisplay = `$${(item.price || 0).toFixed(2)}`;
+        let discountBadge = '';
+        let originalPriceDisplay = '';
+
+        if (item.discountInfo) {
+            originalPriceDisplay = `<p class="original-price"><s>$${item.originalPrice.toFixed(2)}</s></p>`;
+            priceDisplay = `$${(item.price || 0).toFixed(2)}`;
+        }
+
         return `
         <div class="cart-item" data-id="${item.id}">
-            <img src="${item.imageData || ''}" alt="${item.name || 'Product'}" class="cart-item-image">
+            <div class="cart-item-image-container">
+                <img src="${item.imageData || ''}" alt="${item.name || 'Product'}" class="cart-item-image">
+                ${discountBadge}
+            </div>
             <div class="cart-item-details">
                 <h3>${item.name || 'Unknown Product'}</h3>
-                <p>$${(item.price || 0).toFixed(2)} x ${item.quantity || 1}</p>
+                ${originalPriceDisplay}
+                <p>${priceDisplay} x ${item.quantity || 1}</p>
                 <p>Seller: ${item.sellerName || 'Unknown Seller'}</p>
                 <p>Available Inventory: ${item.maxQuantity || 0}</p>
+                <p>Delivery: ${item.deliveryMethod || 'Standard'} ($${(item.deliveryCost || 0).toFixed(2)})</p>
             </div>
             <div class="cart-item-controls">
                 <button onclick="removeFromCart('${item.id}')" class="quantity-btn">-</button>
@@ -380,6 +492,79 @@ function displayCart() {
 
     updateOrderSummary();
 }
+
+function updateOrderSummary() {
+    const summary = document.querySelector('.cart-summary');
+    if (!summary) return;
+
+    // Calculate subtotal and delivery fees with error checking
+    const subtotal = cart.reduce((sum, item) => {
+        if (item && typeof item.price === 'number' && typeof item.quantity === 'number') {
+            return sum + (item.price * item.quantity);
+        }
+        return sum;
+    }, 0);
+
+    const deliveryTotal = cart.reduce((sum, item) => {
+        if (item && typeof item.deliveryCost === 'number' && typeof item.quantity === 'number') {
+            return sum + (item.deliveryCost * item.quantity);
+        }
+        return sum;
+    }, 0);
+
+    const total = subtotal + deliveryTotal;
+
+    summary.innerHTML = `
+        <h2>Order Summary</h2>
+        ${cart.map(item => {
+        // Prepare item price display with potential discount
+        const itemTotal = item.price * item.quantity;
+        let priceDisplay = `$${itemTotal.toFixed(2)}`;
+        let originalPriceDisplay = '';
+        let discountBadge = '';
+
+        if (item.discountInfo) {
+            const originalItemTotal = item.originalPrice * item.quantity;
+            originalPriceDisplay = `<span class="original-price"><s>$${originalItemTotal.toFixed(2)}</s></span>`;
+            discountBadge = `<span class="discount-badge">${item.discountInfo.discountPercentage}% OFF</span>`;
+            priceDisplay = `$${itemTotal.toFixed(2)}`;
+        }
+
+        return `
+            <div class="summary-item" data-id="${item.id}">
+                <div class="item-info">
+                    <span>${item.name} (x${item.quantity})</span>
+                    ${originalPriceDisplay}
+                    <span>${priceDisplay} ${discountBadge}</span>
+                </div>
+                <div class="delivery-info">
+                    <span>${item.deliveryMethod} Delivery</span>
+                    <span>$${(item.deliveryCost * item.quantity).toFixed(2)}</span>
+                </div>
+            </div>
+        `}).join('')}
+        <div class="summary-totals">
+            <div class="subtotal">
+                <span>Subtotal</span>
+                <span>$${subtotal.toFixed(2)}</span>
+            </div>
+            <div class="delivery-total">
+                <span>Delivery Total</span>
+                <span>$${deliveryTotal.toFixed(2)}</span>
+            </div>
+            <div class="total">
+                <span>Total</span>
+                <span id="cart-total-amount">$${total.toFixed(2)}</span>
+            </div>
+        </div>
+        <button onclick="proceedToCheckout()" class="checkout-btn">
+            <i class="fas fa-lock"></i> Proceed to Checkout
+        </button>
+    `;
+}
+
+
+
 
 
 function updateOrderSummary() {

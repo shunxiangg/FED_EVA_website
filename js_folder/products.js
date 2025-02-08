@@ -6,19 +6,50 @@ document.addEventListener('DOMContentLoaded', function() {
     loadDatabaseProducts();
     initializeFilters();
 });
-
 async function loadDatabaseProducts() {
     try {
         const dbProducts = await fetchDatabaseProducts();
         displayProducts(dbProducts);
+        displayDiscountedProducts(dbProducts); // Call new function
     } catch (error) {
         console.error('Error loading products:', error);
-        const productList = document.getElementById('product-list');
-        if (productList) {
-            productList.innerHTML = "<p class='no-products'>Error loading products.</p>";
-        }
     }
 }
+
+function displayDiscountedProducts(products) {
+    const discountList = document.getElementById('discounts-list');
+    if (!discountList) return;
+    
+    const discountedProducts = products.filter(product => 
+        product.discountPercentage > 0 && 
+        (!product.discountStartDate || new Date(product.discountStartDate) <= new Date()) &&
+        (!product.discountEndDate || new Date(product.discountEndDate) >= new Date())
+    );
+    
+    if (discountedProducts.length === 0) {
+        discountList.innerHTML = "<p>No discounted products available.</p>";
+        return;
+    }
+    
+    discountList.innerHTML = discountedProducts.map(product => {
+        const discountedPrice = (product.price * (1 - product.discountPercentage / 100)).toFixed(2);
+        return `
+            <div class="listing-card">
+                <div class="listing-image">
+                    <img src="${product.imageData}" alt="${product.itemName}">
+                </div>
+                <div class="listing-details">
+                    <h3>${product.itemName}</h3>
+                    <p class="price">Original: <s>$${product.price}</s></p>
+                    <p class="price">Now: $${discountedPrice}</p>
+                    <p class="discount-badge">${product.discountPercentage}% OFF</p>
+                    <button onclick="addToCart('${product._id}')">Add to Cart</button>
+                </div>
+            </div>`;
+    }).join('');
+}
+
+
 
 async function fetchDatabaseProducts() {
     const settings = {
@@ -81,6 +112,9 @@ function applyFilters() {
  }
 
 
+
+
+
  function displayProducts(products) {
     const productList = document.getElementById('product-list');
     if (!productList) return;
@@ -90,7 +124,48 @@ function applyFilters() {
         return;
     }
 
-    productList.innerHTML = products.map(product => `
+    productList.innerHTML = products.map(product => {
+        // Calculate discounted price if discount is active
+        let displayPrice = parseFloat(product.price);
+        let priceDisplay = '';
+        let discountBadge = '';
+
+        // Check if discount is active
+        if (product.discountPercentage && product.discountPercentage > 0) {
+            const currentDate = new Date();
+            const startDate = product.discountStartDate ? new Date(product.discountStartDate) : null;
+            const endDate = product.discountEndDate ? new Date(product.discountEndDate) : null;
+
+            const isDiscountActive = (!startDate || currentDate >= startDate) && 
+                                     (!endDate || currentDate <= endDate);
+
+            if (isDiscountActive) {
+                const discountedPrice = displayPrice * (1 - product.discountPercentage / 100);
+                displayPrice = discountedPrice;
+                
+                priceDisplay = `
+                    <div class="product-price-container">
+                        <span class="original-price">$${parseFloat(product.price).toFixed(2)}</span>
+                        <span class="current-price">$${displayPrice.toFixed(2)}</span>
+                        <span class="discount-badge">${product.discountPercentage}% OFF</span>
+                    </div>
+                `;
+            } else {
+                priceDisplay = `
+                    <div class="product-price-container">
+                        <span class="current-price">$${displayPrice.toFixed(2)}</span>
+                    </div>
+                `;
+            }
+        } else {
+            priceDisplay = `
+                <div class="product-price-container">
+                    <span class="current-price">$${displayPrice.toFixed(2)}</span>
+                </div>
+            `;
+        }
+
+        return `
         <div class="product-card" onclick="window.location.href='productInformation.html?id=${product._id}'">
             <div class="product-image">
                 ${product.imageData ? 
@@ -102,7 +177,7 @@ function applyFilters() {
                 <h3>${product.itemName}</h3>
                 <p class="product-category">Category: ${product.category}</p>
                 <p class="product-condition">Condition: ${product.condition}</p>
-                <p class="product-price">$${product.price}</p>
+                ${priceDisplay}
                 <p class="inventory-count">Inventory: ${product.quantity || 0} items</p>
                 <p class="seller-info">Seller: ${product.sellerName}</p>
                 <button 
@@ -114,7 +189,7 @@ function applyFilters() {
                 </button>
             </div>
         </div>
-    `).join('');
+    `}).join('');
 }
 
 

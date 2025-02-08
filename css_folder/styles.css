@@ -239,7 +239,49 @@ h1 {
 
 
 
+/* Ensure consistent product card layout */
+.product-card, .listing-card {
+  display: flex;
+  flex-direction: column;
+}
 
+.product-details {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.add-to-cart-btn {
+  margin-top: auto; /* Push the button to the bottom */
+  align-self: stretch; /* Make button full width */
+}
+
+/* Pricing display */
+.product-price-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.original-price {
+  color: #888;
+  text-decoration: line-through;
+}
+
+.current-price {
+  font-weight: bold;
+  color: #2c5282;
+}
+
+.discount-badge {
+  background-color: #ff6b6b;
+  color: white;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.8em;
+  margin-left: 10px;
+}
 
 
 
@@ -298,7 +340,7 @@ h1 {
 }
 
 .product-price {
-  font-size: 20px;
+  font-size: 15px;
   font-weight: bold;
   color: var(--text-color);
   margin: 10px 0;
@@ -460,3 +502,6 @@ footer {
   width: 24px;
   height: 24px;
 }
+
+
+
