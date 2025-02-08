@@ -10,16 +10,27 @@ document.addEventListener('DOMContentLoaded', function() {
 
     async function fetchAndDisplayUser() {
         try {
-            const response = await fetch("https://evadatabase-f3b8.restdb.io/rest/accounts", {
+            // Get the logged-in user's email from localStorage
+            const userEmail = localStorage.getItem('userEmail');
+
+            if (!userEmail) {
+                console.error('No user email found in localStorage');
+                return;
+            }
+
+            const response = await fetch(`https://evadatabase-f3b8.restdb.io/rest/accounts?q={"email":"${userEmail}"}`, {
                 headers: {
                     "x-apikey": APIKEY,
                     "Cache-Control": "no-cache"
                 }
             });
             const data = await response.json();
+            
             if (data.length > 0) {
                 currentUser = data[0];
                 displayUserInfo(currentUser);
+            } else {
+                console.error('No user found with the given email');
             }
         } catch (error) {
             console.error('Error:', error);
@@ -111,9 +122,6 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 });
 
-
-
-
 async function displayListingChats() {
     const userEmail = localStorage.getItem('userEmail');
     const BASE_URL = "https://evadatabase-f3b8.restdb.io/rest";
@@ -152,6 +160,8 @@ async function displayListingChats() {
         console.error('Error fetching listings and chats:', error);
     }
 }
+
+
 
 function manageBuyerChats(productId) {
     window.location.href = `chat.html?product=${productId}`;
