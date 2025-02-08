@@ -276,7 +276,7 @@ a {
 .section-title::after {
     content: '';
     position: absolute;
-    bottom: -8px;
+    bottom: 0;
     left: 0;
     width: 40px;
     height: 3px;
