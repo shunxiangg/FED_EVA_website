@@ -212,7 +212,7 @@ h1 {
 
 /* search bar on nav bar */
 .navbar input[type="text"] {
-  width: 500px;
+  width: 800px;
   height: 18px;
   padding: 8px;
   border: 1px solid #ddd;
