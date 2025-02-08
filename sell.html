@@ -130,7 +130,36 @@
             </label>
           </div>
        </div>
-
+       <div class="discount-section">
+        <h3>Discount Options (Optional)</h3>
+        <div class="form-group">
+            <label for="discountPercentage">Discount Percentage</label>
+            <input 
+                type="number" 
+                id="discountPercentage" 
+                name="discountPercentage" 
+                min="0" 
+                max="100" 
+                placeholder="Enter discount percentage (0-100)"
+            >
+        </div>
+        <div class="form-group">
+            <label for="discountStartDate">Discount Start Date</label>
+            <input 
+                type="date" 
+                id="discountStartDate" 
+                name="discountStartDate"
+            >
+        </div>
+        <div class="form-group">
+            <label for="discountEndDate">Discount End Date</label>
+            <input 
+                type="date" 
+                id="discountEndDate" 
+                name="discountEndDate"
+            >
+        </div>
+    </div>
         <button type="submit" class="list-now">List Now</button>
     </form>
 </div>
@@ -197,6 +226,32 @@
         <textarea id="edit-description" placeholder="Description" required></textarea>
         <input type="number" id="edit-quantity" placeholder="Item Quantity" required>
       </div>
+      <div class="discount-section">
+        <h3>Discount Options</h3>
+        <div class="form-group">
+            <label for="edit-discount-percentage">Discount Percentage</label>
+            <input 
+                type="number" 
+                id="edit-discount-percentage" 
+                name="edit-discount-percentage" 
+                min="0" 
+                max="100" 
+                placeholder="Enter discount percentage (0-100)"
+            >
+        </div>
+        <div class="form-group">
+            <label for="edit-discount-start">Discount Start Date</label>
+            <input 
+                type="date" 
+                id="edit-discount-start" 
+                name="edit-discount-start"
+            >
+        </div>
+        <div class="form-group">
+            <label for="edit-discount-end">Discount End Date</label>
+            <input type="date" id="edit-discount-end" name="edit-discount-end">
+        </div>
+    </div>
       <div class="button-group">
         <button type="submit" class="save-btn">Save Changes</button>
         <button type="button" class="cancel-btn" onclick="closeEditModal()">Cancel</button>
@@ -241,7 +296,45 @@
 <script src="js_folder/profile.js"></script>
 <script src="js_api_folder/listings.js"></script>
 <script src="sell.js"></script>
-
+<style>
+  .discount-section {
+      background-color: #f9f9f9;
+      padding: 15px;
+      border-radius: 8px;
+      margin-top: 15px;
+  }
+  
+  .discount-section h3 {
+      margin-top: 0;
+      color: #333;
+  }
+  
+  .discount-section .form-group {
+      margin-bottom: 10px;
+  }
+  
+  .discount-section label {
+      display: block;
+      margin-bottom: 5px;
+      color: #666;
+  }
+  
+  .discount-section input {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+  }
+  
+  .discount-badge {
+      background-color: #ff6b6b;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 4px;
+      display: inline-block;
+      margin: 10px 0;
+  }
+  </style>
 </body>
 </html>
 

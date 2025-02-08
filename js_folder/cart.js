@@ -220,7 +220,8 @@
 //         alert('checkout faile please try again.');
 //     }
 // } 
-
+const APIKEY = "6787a92c77327a0a035a5437";
+const DATABASE_URL = "https://evadatabase-f3b8.restdb.io/rest/sell";
 let cart = [];
 
 // Function to load cart from localStorage
@@ -254,7 +255,6 @@ function loadCart() {
         return cart;
     }
 }
-
 window.addToCart = async function(productId) {
     try {
         const response = await fetch(`${DATABASE_URL}/${productId}`, {
@@ -269,53 +269,70 @@ window.addToCart = async function(productId) {
         if (!response.ok) throw new Error('Failed to fetch product');
         const product = await response.json();
         
+        // Detailed logging
+        console.log('Product details:', product);
+        console.log('Product quantity:', product.quantity);
+
+        // Validate product quantity
+        if (product.quantity === undefined || product.quantity === null) {
+            throw new Error('Product quantity is undefined or null');
+        }
+        
         // Check if product is in stock
-        if (!product.quantity || product.quantity <= 0) {
+        if (product.quantity <= 0) {
             showCustomAlert('This item is out of stock');
             return;
         }
 
+        // Load existing cart
         loadCart();
+        
+        // Find existing item in cart
         const existingItem = cart.find(item => item && item.id === productId);
         
-        // Check if adding more would exceed available stock
+        // Detailed logging for existing item
+        console.log('Existing cart item:', existingItem);
+        console.log('Current cart:', cart);
+
         if (existingItem) {
+            // Check if can increment quantity
+            console.log('Current item quantity:', existingItem.quantity);
+            console.log('Available product quantity:', product.quantity);
+            
             if (existingItem.quantity >= product.quantity) {
                 showCustomAlert(`Cannot add more - only ${product.quantity} items available`);
                 return;
             }
+            
+            // Increment existing item quantity
             existingItem.quantity += 1;
         } else {
+            // Add new item to cart
             cart.push({
                 id: productId,
                 name: product.itemName,
                 price: parseFloat(product.price),
                 imageData: product.imageData || '',
-                description: product.description || '',
-                category: product.category || '',
-                condition: product.condition || '',
-                sellerName: product.sellerName || 'Unknown Seller',
                 quantity: 1,
-                maxQuantity: product.quantity, // Store max available quantity
-                deliveryMethod: product.deliveryMethod || 'standard',
-                deliveryCost: product.deliveryMethod === 'express' ? 5.00 : 4.50
+                maxQuantity: product.quantity
             });
         }
 
+        // Update cart in localStorage
         localStorage.setItem('cart', JSON.stringify(cart));
         updateCartCount();
         
+        // Refresh cart display if on cart page
         if (window.location.pathname.includes('cart.html')) {
             displayCart();
         }
 
         showCustomAlert('Product added to cart successfully!');
     } catch (error) {
-        console.error('Error adding to cart:', error);
-        showCustomAlert('Failed to add product to cart. Please try again.');
+        console.error('Complete error details:', error);
+        showCustomAlert(`Error: ${error.message}`);
     }
 };
-
 function displayCart() {
     // Reload cart from localStorage
     loadCart();

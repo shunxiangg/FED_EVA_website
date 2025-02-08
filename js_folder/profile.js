@@ -39,16 +39,19 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('edit-gender').value = user.userGender || '';
         document.getElementById('edit-phone').value = user.userPhone || '';
     }
-
+    if (editBtn) {
     editBtn.onclick = function() {
         populateEditForm(currentUser);
         modal.style.display = 'block';
     }
-
+}
     cancelBtn.onclick = function() {
         modal.style.display = 'none';
     }
-
+    const logoutBtn = document.getElementById('logoutBtn');
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', logout);
+    }
     editForm.onsubmit = async function(e) {
         e.preventDefault();
         

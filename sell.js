@@ -34,31 +34,41 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // [STEP 1]: Create new listing
-  const sellForm = document.getElementById("sellForm");
-  if (sellForm) {
-    sellForm.addEventListener("submit", function (e) {
-      e.preventDefault();
+// [STEP 1]: Create new listing
+const sellForm = document.getElementById("sellForm");
+if (sellForm) {
+  sellForm.addEventListener("submit", function (e) {
+    e.preventDefault();
 
-      // Get all form values
-      let jsondata = {
-        "sellerId": localStorage.getItem('userEmail'),
-        "sellerName": localStorage.getItem('userName'),
-        "imageData": null,
-        "videoLink": document.querySelector('.video-link input').value,
-        "category": document.querySelector('.category-group select').value,
-        "condition": document.querySelector('input[name="condition"]:checked')?.id || '',
-        "itemName": document.querySelector('input[placeholder="Item Name"]').value,
-        "price": document.querySelector('input[placeholder="$ Price"]').value,
-        "description": document.querySelector('textarea[placeholder="Description"]').value,
-        "quantity": document.querySelector('input[placeholder="Item Quantity"]').value,
-        "pickupAddress": document.querySelector('.pickup-address').value,
-        "unitNo": document.querySelector('.unit-no').value,
-        "postalCode": document.querySelector('.postal-code').value,
-        "deliveryMethod": document.querySelector('input[name="deliveryMethod"]:checked')?.id || '',
-        "status": "available",
-        "datePosted": new Date().toISOString()
-      };
+    // Get discount values directly from the form
+    const discountPercentage = document.getElementById('discountPercentage')?.value;
+    const discountStartDate = document.getElementById('discountStartDate')?.value;
+    const discountEndDate = document.getElementById('discountEndDate')?.value;
+
+    // Get all form values
+    let jsondata = {
+      "sellerId": localStorage.getItem('userEmail'),
+      "sellerName": localStorage.getItem('userName'),
+      "imageData": null,
+      "videoLink": document.querySelector('.video-link input').value,
+      "category": document.querySelector('.category-group select').value,
+      "condition": document.querySelector('input[name="condition"]:checked')?.id || '',
+      "itemName": document.querySelector('input[placeholder="Item Name"]').value,
+      "price": document.querySelector('input[placeholder="$ Price"]').value,
+      "description": document.querySelector('textarea[placeholder="Description"]').value,
+      "quantity": document.querySelector('input[placeholder="Item Quantity"]').value,
+      "pickupAddress": document.querySelector('.pickup-address').value,
+      "unitNo": document.querySelector('.unit-no').value,
+      "postalCode": document.querySelector('.postal-code').value,
+      "deliveryMethod": document.querySelector('input[name="deliveryMethod"]:checked')?.id || '',
+      "status": "available",
+      "datePosted": new Date().toISOString(),
+
+      // New discount fields
+      "discountPercentage": discountPercentage ? parseFloat(discountPercentage) : null,
+      "discountStartDate": discountStartDate || null,
+      "discountEndDate": discountEndDate || null
+    };
 
       // Handle image upload
       const imageFile = document.getElementById('photoUpload').files[0];
@@ -74,8 +84,15 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   }
-
   function createListing(jsondata) {
+    // Ensure discount fields are always present, even if null
+    const listingData = {
+      ...jsondata,
+      discountPercentage: jsondata.discountPercentage || null,
+      discountStartDate: jsondata.discountStartDate || null,
+      discountEndDate: jsondata.discountEndDate || null
+    };
+  
     const settings = {
       method: "POST",
       headers: {
@@ -83,9 +100,9 @@ document.addEventListener("DOMContentLoaded", function () {
         "x-apikey": APIKEY,
         "Cache-Control": "no-cache"
       },
-      body: JSON.stringify(jsondata)
+      body: JSON.stringify(listingData)
     };
-
+  
     fetch(DATABASE_URL, settings)
       .then(response => response.json())
       .then(data => {
@@ -93,7 +110,7 @@ document.addEventListener("DOMContentLoaded", function () {
         alert('Item listed successfully!');
         sellForm.reset();
         resetImageUpload();
-        getUserListings(); // Refresh listings after creating new one
+        getUserListings();
       })
       .catch(error => {
         console.error('Error:', error);
@@ -129,35 +146,62 @@ document.addEventListener("DOMContentLoaded", function () {
         console.error('Error:', error);
       });
   }
+// Modify displayListings to show discount information
+function displayListings(listings, container) {
+  let content = "";
+  listings.forEach(listing => {
+    // Calculate discounted price if discount exists
+    const originalPrice = parseFloat(listing.price);
+    let displayPrice = originalPrice;
+    let discountInfo = '';
 
-  function displayListings(listings, container) {
-    let content = "";
-    listings.forEach(listing => {
-      content += `
-        <div class="listing-card" id="${listing._id}">
-          <div class="listing-image">
-            ${listing.imageData ? 
-              `<img src="${listing.imageData}" alt="${listing.itemName}">` :
-              '<div class="no-image">No Image</div>'
-            }
-          </div>
-          <div class="listing-details">
-            <h3>${listing.itemName}</h3>
-            <p>Price: $${listing.price}</p>
-            <p>Category: ${listing.category.charAt(0).toUpperCase() + listing.category.slice(1)}</p>
-            <p>Condition: ${listing.condition === 'brandNew' ? 'Brand New' : listing.condition.charAt(0).toUpperCase() + listing.condition.slice(1)}</p>
-            <p>Status: ${listing.status.charAt(0).toUpperCase() + listing.status.slice(1)}</p>
-            <div class="listing-actions">
-              <button onclick="editListing('${listing._id}')" class="edit-btn">Edit</button>
-              <button onclick="deleteListing('${listing._id}')" class="delete-btn">Delete</button>
-            </div>
+    if (listing.discountPercentage && listing.discountPercentage > 0) {
+      const currentDate = new Date();
+      const startDate = listing.discountStartDate ? new Date(listing.discountStartDate) : null;
+      const endDate = listing.discountEndDate ? new Date(listing.discountEndDate) : null;
+
+      // Check if current date is within discount period
+      const isDiscountActive = (!startDate || currentDate >= startDate) && 
+                                (!endDate || currentDate <= endDate);
+
+      if (isDiscountActive) {
+        displayPrice = originalPrice * (1 - listing.discountPercentage / 100);
+        discountInfo = `
+          <p class="discount-badge">
+            ${listing.discountPercentage}% OFF 
+            ${startDate ? `(From ${startDate.toLocaleDateString()})` : ''} 
+            ${endDate ? `(Until ${endDate.toLocaleDateString()})` : ''}
+          </p>
+        `;
+      }
+    }
+
+    content += `
+      <div class="listing-card" id="${listing._id}">
+        <div class="listing-image">
+          ${listing.imageData ? 
+            `<img src="${listing.imageData}" alt="${listing.itemName}">` :
+            '<div class="no-image">No Image</div>'
+          }
+        </div>
+        <div class="listing-details">
+          <h3>${listing.itemName}</h3>
+          <p>Original Price: $${originalPrice.toFixed(2)}</p>
+          <p>Current Price: $${displayPrice.toFixed(2)}</p>
+          ${discountInfo}
+          <p>Category: ${listing.category.charAt(0).toUpperCase() + listing.category.slice(1)}</p>
+          <p>Condition: ${listing.condition === 'brandNew' ? 'Brand New' : listing.condition.charAt(0).toUpperCase() + listing.condition.slice(1)}</p>
+          <p>Status: ${listing.status.charAt(0).toUpperCase() + listing.status.slice(1)}</p>
+          <div class="listing-actions">
+            <button onclick="editListing('${listing._id}')" class="edit-btn">Edit</button>
+            <button onclick="deleteListing('${listing._id}')" class="delete-btn">Delete</button>
           </div>
         </div>
-      `;
-    });
-    container.innerHTML = content || '<p>You haven\'t posted any listings yet.</p>';
-  }
-
+      </div>
+    `;
+  });
+  container.innerHTML = content || '<p>You haven\'t posted any listings yet.</p>';
+}
   // [STEP 3]: Update listing
   window.editListing = function(id) {
     const settings = {
@@ -237,7 +281,13 @@ document.addEventListener("DOMContentLoaded", function () {
       price: document.getElementById('edit-price').value,
       category: document.getElementById('edit-category').value,
       description: document.getElementById('edit-description').value,
-      quantity: document.getElementById('edit-quantity').value
+      quantity: document.getElementById('edit-quantity').value,
+
+
+          // Discount fields
+    discountPercentage: document.getElementById('edit-discount-percentage')?.value || null,
+    discountStartDate: document.getElementById('edit-discount-start')?.value || null,
+    discountEndDate: document.getElementById('edit-discount-end')?.value || null
     };
 
     // Handle image upload for editing
