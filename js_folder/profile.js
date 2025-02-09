@@ -167,7 +167,7 @@ function manageBuyerChats(productId) {
     window.location.href = `chat.html?product=${productId}`;
 }
 
-// Add this to your existing initialization or DOMContentLoaded event
+
 document.addEventListener('DOMContentLoaded', () => {
     displayListingChats();
 });
