@@ -3,12 +3,13 @@ const DATABASE_URL = "https://evadatabase-f3b8.restdb.io/rest/sell";
 document.addEventListener('DOMContentLoaded', function() {
     loadDatabaseProducts();
     initializeFilters();
+
 });
 async function loadDatabaseProducts() {
     try {
         const dbProducts = await fetchDatabaseProducts();
         displayProducts(dbProducts);
-        displayDiscountedProducts(dbProducts); // Call new function
+        displayDiscountedProducts(dbProducts); 
     } catch (error) {
         console.error('Error loading products:', error);
     }
@@ -64,22 +65,6 @@ async function fetchDatabaseProducts() {
 }
 
 
-// function initializeFilters() {
-//     const applyFiltersBtn = document.getElementById('apply-filters');
-//     if (applyFiltersBtn) {
-//         applyFiltersBtn.addEventListener('click', applyFilters);
-//     }
-
-//     // Initialize price display
-//     const priceInput = document.getElementById('price');
-//     const priceDisplay = document.getElementById('price-display');
-//     if (priceInput && priceDisplay) {
-//         priceInput.addEventListener('input', function() {
-//             priceDisplay.textContent = `Price: $0 - $${this.value}`;
-//         });
-//     }
-// }
-
 function initializeFilters() {
     // Initialize price input and display
     const priceInput = document.getElementById('price');
@@ -132,35 +117,6 @@ function initializeFilters() {
         });
     }
 }
-
-// function applyFilters() {
-//     const category = document.getElementById('category').value;
-//     const maxPrice = parseFloat(document.getElementById('price').value);
-//     const condition = document.getElementById('condition').value;
-//     const searchQuery = document.getElementById('search').value.toLowerCase();
-//     const loadingSpinner = document.getElementById('loading-spinner');
- 
-//     loadingSpinner.style.display = 'block';
-    
-//     fetchDatabaseProducts()
-//         .then(products => {
-//             const filteredProducts = products.filter(product => {
-//                 const matchesCategory = category === 'all' || product.category === category;
-//                 const matchesPrice = parseFloat(product.price) <= maxPrice;
-//                 const matchesCondition = condition === 'all' || product.condition === condition;
-//                 const matchesSearch = product.itemName.toLowerCase().includes(searchQuery) ||
-//                                   product.description.toLowerCase().includes(searchQuery);
-                
-//                 return matchesCategory && matchesPrice && matchesCondition && matchesSearch;
-//             });
- 
-//             displayProducts(filteredProducts);
-//         })
-//         .catch(error => console.error('Error applying filters:', error))
-//         .finally(() => {
-//             loadingSpinner.style.display = 'none';
-//         });
-//  }
 
 
 function applyFilters() {
@@ -270,10 +226,14 @@ function applyFilters() {
         return `
         <div class="product-card" onclick="window.location.href='productInformation.html?id=${product._id}'">
             <div class="product-image">
-                ${product.imageData ? 
-                    `<img src="${product.imageData}" alt="${product.itemName}" class="product-image">` :
-                    '<div class="no-image">No Image Available</div>'
-                }
+            ${product.imageData ? 
+                `<div class="product-image1">
+                    <img src="${product.imageData}" alt="${product.itemName}" loading="lazy">
+                 </div>` :
+                `<div class="product-image">
+                    <div class="no-image">No Image Available</div>
+                 </div>`
+            }
             </div>
             <div class="product-details">
                 <h3>${product.itemName}</h3>
@@ -294,6 +254,8 @@ function applyFilters() {
         </div>
     `}).join('');
 }
+
+
 
 
 

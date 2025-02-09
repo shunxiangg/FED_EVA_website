@@ -46,8 +46,7 @@
     <main class="product-details-container">
         <div id="product-details">Loading...</div>
     </main>
-    <button id="messageSellerBtn" class="message-seller-btn">
-        <i class="fas fa-comment"></i>
+
     </button>
     <!-- cart button conner right -->
     <button id="cart-toggle" class="cart-toggle" onclick="window.location.href='cart.html'">
@@ -84,34 +83,34 @@
 
     <script src='https://cdn.jotfor.ms/s/umd/latest/for-embedded-agent.js'></script>
     <script>
-      window.addEventListener("DOMContentLoaded", function() {
-        window.AgentInitializer.init({
-          agentRenderURL: "https://agent.jotform.com/0194e55c77377697a8d98ac9f4e1fad8b333",
-          rootId: "JotformAgent-0194e55c77377697a8d98ac9f4e1fad8b333",
-          formID: "0194e55c77377697a8d98ac9f4e1fad8b333",
-          queryParams: ["skipWelcome=1", "maximizable=1"],
-          domain: "https://www.jotform.com",
-          isDraggable: false,
-          background: "linear-gradient(180deg, #FF98BC 0%, #FF98BC 100%)",
-          buttonBackgroundColor: "#972D54",
-          buttonIconColor: "#FFF",
-          variant: false,
-          customizations: {
-            "greeting": "Yes",
-            "greetingMessage": "Hi! How can I assist you?",
-            "openByDefault": "No",
-            "pulse": "Yes",
-            "position": "left",
-            "autoOpenChatIn": "0"
-          },
-          isVoice: undefined
+        window.addEventListener("DOMContentLoaded", function () {
+            window.AgentInitializer.init({
+                agentRenderURL: "https://agent.jotform.com/0194e55c77377697a8d98ac9f4e1fad8b333",
+                rootId: "JotformAgent-0194e55c77377697a8d98ac9f4e1fad8b333",
+                formID: "0194e55c77377697a8d98ac9f4e1fad8b333",
+                queryParams: ["skipWelcome=1", "maximizable=1"],
+                domain: "https://www.jotform.com",
+                isDraggable: false,
+                background: "linear-gradient(180deg, #FF98BC 0%, #FF98BC 100%)",
+                buttonBackgroundColor: "#972D54",
+                buttonIconColor: "#FFF",
+                variant: false,
+                customizations: {
+                    "greeting": "Yes",
+                    "greetingMessage": "Hi! How can I assist you?",
+                    "openByDefault": "No",
+                    "pulse": "Yes",
+                    "position": "left",
+                    "autoOpenChatIn": "0"
+                },
+                isVoice: undefined
+            });
         });
-      });
     </script>
     <script src="js_folder/cart.js"></script>
     <script src="js_folder/chat.js"></script>
     <script src="js_folder/productinformation.js"></script>
-    
+
     <style>
         :root {
             --accent-color: #A19AD3;
@@ -138,45 +137,88 @@
         }
 
         .product-image-large {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #f8f9fa;
-    padding: 2rem;
-}
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f8f9fa;
+            padding: 2rem;
+        }
 
-.product-image-large img {
-    max-width: 80%;  /* Slightly smaller than container */
-    height: auto;
-    object-fit: contain;
-    display: block;
-    margin: auto;
-}
+        .product-image-large img {
+            max-width: 80%;
+            /* Slightly smaller than container */
+            height: auto;
+            object-fit: contain;
+            display: block;
+            margin: auto;
+        }
 
-/* For a smaller container layout */
-.product-details-grid {
-    display: grid;
-    grid-template-columns: minmax(300px, 400px) 1fr; /* Fixed width for image column */
-    gap: 2rem;
-    align-items: start;
-    background: white;
-    padding: 1.5rem;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
+        /* For a smaller container layout */
+        .product-details-grid {
+            display: grid;
+            grid-template-columns: minmax(300px, 400px) 1fr;
+            gap: 2rem;
+            align-items: start;
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
 
-/* Responsive adjustment */
-@media (max-width: 768px) {
-    .product-details-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .product-image-large {
-        height: 300px;  /* Even smaller on mobile */
-    }
-}
+        .price-container {
+            display: flex;
+            align-items: baseline;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            background: #f0f7ff;
+            padding: 1.25rem;
+            border-radius: 8px;
+            border: 1px solid #e1e7f5;
+        }
+
+        .original-price {
+            font-size: 1.2rem;
+            color: #666;
+            text-decoration: line-through;
+            display: flex;
+            align-items: center;
+        }
+
+        .current-price {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+
+        .discount-tag {
+            background: var(--primary-blue);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        
+        .discounted-price {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+
+        /* Responsive adjustment */
+        @media (max-width: 768px) {
+            .product-details-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .product-image-large {
+                height: 300px;
+                /* Even smaller on mobile */
+            }
+        }
 
         .discount-badge {
             position: absolute;
