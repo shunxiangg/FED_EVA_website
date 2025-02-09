@@ -58,7 +58,7 @@ The platform aims to drive user interaction and encourage frequent engagement wh
 
 ### Feedback and Support
 - **Feedback Submission**: Users can submit feedback on their experiences or report issues.
-- **Review Chatbot** Users on the site can send feedback on our site to the chatbot which will directly send us an email regarding what the feedback is about and the email of the user who made the feedback.
+- **Review Chatbot**: Users on the site can send feedback on our site to the chatbot which will directly send us an email regarding what the feedback is about and the email of the user who made the feedback.
   
 ### Additional Features
 - **Transaction History**: Users can view their past transactions, including purchases, sales, and reviews.
