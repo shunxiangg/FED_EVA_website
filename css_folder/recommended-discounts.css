@@ -168,7 +168,7 @@
 }
 
 .listing-details .discount-badge {
-    background-color: var(--accent-color);
+    background-color: #ff4757;
     color: white;
     padding: 0.25rem 0.5rem;
     border-radius: 4px;
