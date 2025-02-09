@@ -46,8 +46,9 @@ const DATABASE_URL = "https://evadatabase-f3b8.restdb.io/rest/sell";
 
 document.addEventListener('DOMContentLoaded', function() {
     loadDatabaseProducts();
-    initializeFilters();
+    initializeCategoryFilters();
 });
+
 async function loadDatabaseProducts() {
     try {
         const dbProducts = await fetchDatabaseProducts();
@@ -108,21 +109,66 @@ async function fetchDatabaseProducts() {
 }
 
 
-function initializeFilters() {
-    const applyFiltersBtn = document.getElementById('apply-filters');
-    if (applyFiltersBtn) {
-        applyFiltersBtn.addEventListener('click', applyFilters);
+// function initializeFilters() {
+//     const applyFiltersBtn = document.getElementById('apply-filters');
+//     if (applyFiltersBtn) {
+//         applyFiltersBtn.addEventListener('click', applyFilters);
+//     }
+
+//     // Initialize price display
+//     const priceInput = document.getElementById('price');
+//     const priceDisplay = document.getElementById('price-display');
+//     if (priceInput && priceDisplay) {
+//         priceInput.addEventListener('input', function() {
+//             priceDisplay.textContent = `Price: $0 - $${this.value}`;
+//         });
+//     }
+// }
+
+function initializeCategoryFilters() {
+    const categoryButtons = document.querySelectorAll('.category-item');
+    if (categoryButtons.length === 0) return;
+
+    // Set 'All' as active by default
+    const allButton = document.querySelector('.category-item[value="all"]');
+    if (allButton) {
+        allButton.classList.add('active');
     }
 
-    // Initialize price display
-    const priceInput = document.getElementById('price');
-    const priceDisplay = document.getElementById('price-display');
-    if (priceInput && priceDisplay) {
-        priceInput.addEventListener('input', function() {
-            priceDisplay.textContent = `Price: $0 - $${this.value}`;
+    categoryButtons.forEach(button => {
+        button.addEventListener('click', async function() {
+            // Remove active class from all buttons
+            categoryButtons.forEach(btn => btn.classList.remove('active'));
+            // Add active class to clicked button
+            this.classList.add('active');
+            
+            const category = this.getAttribute('value');
+            const loadingSpinner = document.getElementById('loading-spinner');
+            if (loadingSpinner) loadingSpinner.style.display = 'block';
+
+            try {
+                const products = await fetchDatabaseProducts();
+                let filteredProducts;
+
+                if (category === 'all') {
+                    filteredProducts = products;
+                } else {
+                    filteredProducts = products.filter(product => 
+                        product.category && 
+                        product.category.toLowerCase() === category.toLowerCase()
+                    );
+                }
+
+                displayProducts(filteredProducts);
+            } catch (error) {
+                console.error('Error filtering products:', error);
+            } finally {
+                if (loadingSpinner) loadingSpinner.style.display = 'none';
+            }
         });
-    }
+    });
 }
+
 
 function applyFilters() {
     const category = document.getElementById('category').value;
