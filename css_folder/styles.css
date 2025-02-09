@@ -663,6 +663,7 @@ footer {
   display: flex;
   align-items: center;
   padding: 10px 15px;
+  border: none;
   border-radius: 30px;
   cursor: pointer;
   transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
