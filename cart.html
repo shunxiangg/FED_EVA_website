@@ -31,6 +31,12 @@
         </nav>
     </header>
 
+    <button class="back-button" onclick="goBackToProduct()">
+        <svg xmlns="http://www.w3.org/2000/svg" height="40" width="40" viewBox="0 0 24 24">
+            <path d="M14 7l-5 5 5 5V7z" />
+        </svg>
+    </button>
+
     <main class="cart-page">
         <div class="cart-header">
             <h1>Shopping Cart</h1>
@@ -201,6 +207,24 @@
         });
       });
     </script>
+    <script>
+        function goBackToProduct() {
+            const lastProductId = localStorage.getItem('lastViewedProduct');
+            if (lastProductId) {
+                window.location.href = `productInformation.html?id=${lastProductId}`;
+            } else {
+                window.location.href = 'browse.html';
+            }
+        }
+        
+        // Add class to prevent button overlap with cart items
+        document.addEventListener('DOMContentLoaded', function() {
+            const cartItems = document.querySelector('.cart-items-list');
+            if (cartItems) {
+                cartItems.style.marginTop = '60px'; // Make space for the back button
+            }
+        });
+        </script>
     <script src="js_folder/app.js"></script>
     <script src="js_folder/data.js"></script>
     <script src="js_folder/cart.js"></script>
