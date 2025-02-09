@@ -1,10 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 :root {
-  --accent-color: #A19AD3; /* Accent color */
-  --base-color: white; /* base background color */
-  --text-color: #2E2B41; /* text color */
-  --input-color: #F3F0FF; /* input background color */
+    --accent-color: #A19AD3;
+    /* Accent color */
+    --base-color: white;
+    /* base background color */
+    --text-color: #2E2B41;
+    /* text color */
+    --input-color: #F3F0FF;
+    /* input background color */
 }
 
 header {
@@ -21,8 +25,8 @@ body {
     box-sizing: border-box;
     background-color: #f5f5f5;
     color: var(--text-color);
-  }
-  
+}
+
 a {
     text-decoration: none;
     color: inherit;
@@ -43,15 +47,15 @@ a {
     opacity: 0.8;
 }
 
-#userDisplay{
+#userDisplay {
     color: white;
     margin-right: 50px;
     text-align: center;
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-weight: bold;
     font-size: 20px;
 }
-  
+
 /* Hamburger Styles */
 .hamburger {
     display: none;
@@ -59,7 +63,7 @@ a {
     cursor: pointer;
     z-index: 10;
 }
-  
+
 .hamburger .bar {
     width: 25px;
     height: 4px;
@@ -88,6 +92,7 @@ a {
     margin: 0 auto;
     padding: 0 1rem;
 }
+
 .direct-item {
     background-color: white;
     border-radius: 16px;
@@ -110,6 +115,7 @@ a {
     color: var(--text-color);
     transition: all 0.2s ease;
 }
+
 .direct-item::before {
     font-family: "Font Awesome 5 Free";
     font-weight: 900;
@@ -124,6 +130,7 @@ a {
     box-shadow: 0 4px 12px rgba(161, 154, 211, 0.15);
     background-color: var(--accent-color);
 }
+
 .direct-item p {
     margin: 0;
     font-size: 1rem;
@@ -163,7 +170,8 @@ a {
     cursor: pointer;
     transition: background-color 0.3s;
 }
-.category-item:hover{
+
+.category-item:hover {
     background-color: #e8e8e8;
 }
 
@@ -230,21 +238,24 @@ a {
     gap: 2rem;
     padding: 1rem 2rem;
 }
-.section-title-filter{
+
+.section-title-filter {
     font-size: 1.5rem;
     color: var(--text-color);
     font-weight: 600;
     font-family: Poppins, Arial, sans-serif;
     margin: 0;
     position: relative;
-    padding-bottom: 7px;  
+    padding-bottom: 7px;
 }
+
 .filters-options {
     display: flex;
     gap: 1rem;
     align-items: center;
     flex-wrap: wrap;
 }
+
 /* Add a subtle accent line under the title */
 .section-title::after {
     content: '';
@@ -256,6 +267,7 @@ a {
     background-color: var(--accent-color);
     border-radius: 2px;
 }
+
 .section-title-filter::after {
     content: '';
     position: absolute;
@@ -288,47 +300,47 @@ footer {
     padding: 40px 20px;
     margin-top: 50px;
 }
-  
+
 .footer-content {
     max-width: 1200px;
     margin: 0 auto;
     text-align: center;
 }
-  
+
 .footer-links {
     margin: 20px 0;
 }
-  
+
 .footer-links a {
     color: var(--base-color);
     margin: 0 15px;
     transition: color 0.3s;
 }
-  
+
 .footer-links a:hover {
-    color: var(--accent-color); 
+    color: var(--accent-color);
 }
-  
+
 .social-media {
     margin-top: 20px;
 }
-  
+
 .social-media a {
     color: var(--base-color);
     margin: 0 15px;
     font-size: 18px;
     transition: color 0.3s;
 }
-  
+
 .social-media a:hover {
-    color: var(--accent-color); 
+    color: var(--accent-color);
 }
-  
+
 /* Language Selector */
 #language-selector {
     margin-bottom: 20px;
 }
-  
+
 #language-dropdown {
     padding: 8px;
     border-radius: 4px;
@@ -343,7 +355,7 @@ footer {
         max-width: 800px;
         gap: 0.875rem;
     }
-    
+
     .direct-item {
         padding: 1.25rem 1rem;
         min-height: 90px;
@@ -351,8 +363,8 @@ footer {
 }
 
 @media screen and (max-width: 768px) {
-    .navbar .menu{
-        display:none;
+    .navbar .menu {
+        display: none;
         flex-direction: column;
         width: 100%;
         position: absolute;
@@ -362,19 +374,19 @@ footer {
         padding: 10px 0;
     }
 
-    .navbar .menu.active{
-        display:flex;
+    .navbar .menu.active {
+        display: flex;
     }
 
     .navbar .menu li {
         margin: 10px 0;
         text-align: center;
     }
-    
+
     #userDisplay {
         margin: 0.5rem 0;
     }
-    
+
     #logoutBtn {
         margin: 0.5rem auto;
         width: 80%;
@@ -387,20 +399,23 @@ footer {
     .directory {
         padding: 1rem;
     }
-    
+
     .direct-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 0.75rem;
         padding: 0 0.5rem;
     }
+
     .direct-item {
         min-height: 80px;
         padding: 1rem;
     }
+
     .direct-item i {
         font-size: 1.5rem;
         margin-bottom: 0.5rem;
     }
+
     .direct-item p {
         font-size: 0.9rem;
     }
@@ -411,17 +426,21 @@ footer {
         gap: 1rem;
         padding: 1rem;
     }
+
     .product-grid {
         grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
         gap: 1rem;
         padding: 0.75rem;
     }
+
     .product-title {
         font-size: 0.9rem;
     }
+
     .current-price {
         font-size: 1.1rem;
     }
+
     .product-details {
         padding: 0.75rem;
     }
@@ -430,6 +449,7 @@ footer {
         font-size: 1.25rem;
         padding-bottom: 10px;
     }
+
     .section-title-filter::after {
         width: 32px;
         height: 2px;
@@ -438,11 +458,12 @@ footer {
     .footer-links {
         flex-direction: column;
     }
-    
+
     .footer-links a {
         display: block;
         margin: 0.1px 0;
     }
+
     .search-bar input {
         width: 100%;
         padding: 0.5rem;
@@ -450,20 +471,22 @@ footer {
         border-radius: 4px;
     }
 }
+
 @media screen and (max-width: 480px) {
     .directory {
         padding: 0.75rem;
     }
-    
+
     .section-title {
         font-size: 1.1rem;
         margin-bottom: 1rem;
     }
-    
+
     .direct-grid {
         grid-template-columns: 1fr;
         gap: 0.5rem;
     }
+
     .product-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 0.75rem;
@@ -472,7 +495,8 @@ footer {
 
 
 /* update product grid to center-align boxes while keeping text left-aligned */
-.recommended, .discounts {
+.recommended,
+.discounts {
     padding: 2rem;
     background-color: #f5f5f5;
 }
@@ -496,8 +520,10 @@ footer {
     overflow: hidden;
     transition: all 0.3s ease;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    text-align: left; /* Ensure text is left-aligned */
+    text-align: left;
+    /* Ensure text is left-aligned */
 }
+
 .product-card:hover {
     transform: translateY(-4px);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
@@ -507,7 +533,8 @@ footer {
     position: relative;
     width: 100%;
     height: 10px;
-    padding-top: 100%; /* 1:1 Aspect Ratio */
+    padding-top: 100%;
+    /* 1:1 Aspect Ratio */
     overflow: hidden;
 }
 
@@ -576,6 +603,7 @@ footer {
     align-items: center;
     gap: 0.5rem;
 }
+
 .seller-info i {
     font-size: 0.875rem;
 }

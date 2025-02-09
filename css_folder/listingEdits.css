@@ -3,12 +3,16 @@
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;  /* Full viewport width */
-    height: 100vh; /* Full viewport height */
+    width: 100vw;
+    /* Full viewport width */
+    height: 100vh;
+    /* Full viewport height */
     background-color: rgba(46, 43, 65, 0.8);
     display: flex;
-    justify-content: center;  /* Horizontal centering */
-    align-items: center;      /* Vertical centering */
+    justify-content: center;
+    /* Horizontal centering */
+    align-items: center;
+    /* Vertical centering */
     z-index: 1000;
 }
 
@@ -16,13 +20,18 @@
     background-color: var(--base-color);
     border-radius: 12px;
     padding: 30px;
-    width: 90%;               /* Responsive width */
-    max-width: 600px;         /* Maximum width */
-    margin: 20px;             /* Space from edges on mobile */
+    width: 90%;
+    /* Responsive width */
+    max-width: 600px;
+    /* Maximum width */
+    margin: 20px;
+    /* Space from edges on mobile */
     position: relative;
     animation: modalPopIn 0.3s ease-out;
-    max-height: 90vh;         /* Maximum height */
-    overflow-y: auto;         /* Scrollable if content is too long */
+    max-height: 90vh;
+    /* Maximum height */
+    overflow-y: auto;
+    /* Scrollable if content is too long */
 }
 
 @keyframes modalPopIn {
@@ -30,6 +39,7 @@
         transform: scale(0.95) translateY(-10px);
         opacity: 0;
     }
+
     to {
         transform: scale(1) translateY(0);
         opacity: 1;
@@ -112,7 +122,8 @@
     margin-top: 30px;
 }
 
-.save-btn, .cancel-btn {
+.save-btn,
+.cancel-btn {
     padding: 12px 25px;
     border-radius: 8px;
     font-size: 15px;
@@ -195,7 +206,8 @@
         flex-direction: column;
     }
 
-    .save-btn, .cancel-btn {
+    .save-btn,
+    .cancel-btn {
         width: 100%;
     }
 }

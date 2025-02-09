@@ -1,27 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login</title>
   <link rel="stylesheet" href="css_folder/styles.css">
   <link rel="stylesheet" href="css_folder/signuplogin.css">
- 
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
-
-    
     .wrapper {
       width: 40%;
       max-width: 50%;
       padding: 20px;
       background-color: white;
       border-radius: 10px;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       position: relative;
       z-index: 10;
     }
-    
+
     .lottie-animation {
       position: absolute;
       right: 0;
@@ -34,13 +33,13 @@
       z-index: 1;
       padding-right: 5%;
     }
-    
+
     body {
       margin: 0;
       overflow: hidden;
       background: linear-gradient(135deg, #5695ec 0%, #2b52a5 100%);
     }
-    
+
     .back-button {
       position: absolute;
       top: 20px;
@@ -49,11 +48,12 @@
     }
   </style>
 </head>
+
 <body>
   <!-- Back Button -->
   <button class="back-button" onclick="window.location.href='index.html'">
     <svg xmlns="http://www.w3.org/2000/svg" height="40" width="40" viewBox="0 0 24 24">
-      <path d="M14 7l-5 5 5 5V7z"/>
+      <path d="M14 7l-5 5 5 5V7z" />
     </svg>
   </button>
 
@@ -70,7 +70,10 @@
         </div>
         <div>
           <label for="password-input">
-            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M240-80q-33 0-56.5-23.5T160-160v-400q0-33 23.5-56.5T240-640h40v-80q0-83 58.5-141.5T480-920q83 0 141.5 58.5T680-720v80h40q33 0 56.5 23.5T800-560v400q0 33-23.5 56.5T720-80H240Zm240-200q33 0 56.5-23.5T560-360q0-33-23.5-56.5T480-440q-33 0-56.5 23.5T400-360q0 33 23.5 56.5T480-280ZM360-640h240v-80q0-50-35-85t-85-35q-50 0-85 35t-35 85v80Z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
+              <path
+                d="M240-80q-33 0-56.5-23.5T160-160v-400q0-33 23.5-56.5T240-640h40v-80q0-83 58.5-141.5T480-920q83 0 141.5 58.5T680-720v80h40q33 0 56.5 23.5T800-560v400q0 33-23.5 56.5T720-80H240Zm240-200q33 0 56.5-23.5T560-360q0-33-23.5-56.5T480-440q-33 0-56.5 23.5T400-360q0 33 23.5 56.5T480-280ZM360-640h240v-80q0-50-35-85t-85-35q-50 0-85 35t-35 85v80Z" />
+            </svg>
           </label>
           <input type="password" name="password" id="password-input" placeholder="Password">
         </div>
@@ -85,27 +88,25 @@
           <a style="color: #7276ff;" href="/terms-of-service">Terms of Service</a>
         </div>
         <div class="social-media">
-          <a style="color: #7276ff;" class="fab fa-instagram" href="https://www.instagram.com/" target="_blank">  Instagram</a> |
-          <a style="color: #7276ff;" class="fab fa-facebook" href="https://facebook.com" target="_blank">  Facebook</a> |
-          <a style="color: #7276ff;" class="fab fa-twitter" href="https://twitter.com" target="_blank">  Twitter</a> |
-          <a style="color: #7276ff;" class="fab fa-linkedin" href="https://linkedin.com" target="_blank">    LinkedIn</a>
+          <a style="color: #7276ff;" class="fab fa-instagram" href="https://www.instagram.com/" target="_blank">
+            Instagram</a> |
+          <a style="color: #7276ff;" class="fab fa-facebook" href="https://facebook.com" target="_blank"> Facebook</a> |
+          <a style="color: #7276ff;" class="fab fa-twitter" href="https://twitter.com" target="_blank"> Twitter</a> |
+          <a style="color: #7276ff;" class="fab fa-linkedin" href="https://linkedin.com" target="_blank"> LinkedIn</a>
         </div>
       </div>
     </div>
 
     <div class="lottie-animation">
-      <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
-      <dotlottie-player
-        src="https://lottie.host/95bad8ef-37f0-46cb-bdc6-9a2867022ef2/i4gDUmajYg.lottie"
-        background="transparent"
-        speed="1"
-        style="width: 700px; height: 700px"
-        loop
-        autoplay>
+      <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs"
+        type="module"></script>
+      <dotlottie-player src="https://lottie.host/95bad8ef-37f0-46cb-bdc6-9a2867022ef2/i4gDUmajYg.lottie"
+        background="transparent" speed="1" style="width: 700px; height: 700px" loop autoplay>
       </dotlottie-player>
     </div>
   </div>
-  
+
   <script src="js_api_folder/login.js"></script>
 </body>
+
 </html>

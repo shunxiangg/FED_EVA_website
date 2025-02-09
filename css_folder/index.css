@@ -1,10 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 :root {
-  --accent-color: #A19AD3; 
-  --base-color: white; /* base background color */
-  --text-color: #2E2B41; /* text color */
-  --input-color: #F3F0FF; /* input background color */
+    --accent-color: #A19AD3;
+    --base-color: white;
+    /* base background color */
+    --text-color: #2E2B41;
+    /* text color */
+    --input-color: #F3F0FF;
+    /* input background color */
 }
 
 header {
@@ -21,13 +24,13 @@ body {
     box-sizing: border-box;
     background-color: #f5f5f5;
     color: var(--text-color);
-  }
-  
+}
+
 a {
     text-decoration: none;
     color: inherit;
 }
-  
+
 /* Navbar Styles */
 .navbar {
     background-color: var(--text-color);
@@ -37,13 +40,13 @@ a {
     align-items: center;
     position: relative;
 }
-  
+
 .navbar .logo {
     font-size: 24px;
     color: var(--base-color);
     font-weight: bold;
 }
-  
+
 .navbar .menu {
     list-style: none;
     display: flex;
@@ -52,24 +55,24 @@ a {
     flex-grow: 1;
     justify-content: flex-end;
 }
-  
+
 .navbar .menu li {
     margin-left: 20px;
 }
-  
+
 .navbar .menu a {
     color: var(--base-color);
     padding: 10px;
     display: block;
     transition: all 0.3s ease;
 }
-  
+
 .navbar .menu a:hover {
     text-decoration: underline;
-    color: var(--accent-color); 
+    color: var(--accent-color);
     transform: translateY(-5px);
 }
-  
+
 /* Hamburger Styles */
 .hamburger {
     display: none;
@@ -77,7 +80,7 @@ a {
     cursor: pointer;
     z-index: 10;
 }
-  
+
 .hamburger .bar {
     width: 25px;
     height: 4px;
@@ -85,7 +88,7 @@ a {
     margin: 4px;
     border-radius: 50px;
 }
-  
+
 .search-bar {
     flex-grow: 1;
     margin: 0 2rem;
@@ -119,7 +122,7 @@ a {
 }
 
 .direct-item {
-    background-color:gray;
+    background-color: gray;
     padding: 1rem;
     text-align: center;
     border-radius: 10px;
@@ -225,47 +228,47 @@ footer {
     padding: 40px 20px;
     margin-top: 50px;
 }
-  
+
 .footer-content {
     max-width: 1200px;
     margin: 0 auto;
     text-align: center;
 }
-  
+
 .footer-links {
     margin: 20px 0;
 }
-  
+
 .footer-links a {
     color: var(--base-color);
     margin: 0 15px;
     transition: color 0.3s;
 }
-  
+
 .footer-links a:hover {
-    color: var(--accent-color); 
+    color: var(--accent-color);
 }
-  
+
 .social-media {
     margin-top: 20px;
 }
-  
+
 .social-media a {
     color: var(--base-color);
     margin: 0 15px;
     font-size: 18px;
     transition: color 0.3s;
 }
-  
+
 .social-media a:hover {
-    color: var(--accent-color); 
+    color: var(--accent-color);
 }
-  
+
 /* Language Selector */
 #language-selector {
     margin-bottom: 20px;
 }
-  
+
 #language-dropdown {
     padding: 8px;
     border-radius: 4px;
@@ -276,8 +279,8 @@ footer {
 
 /* Responsive Styles */
 @media screen and (max-width: 768px) {
-    .navbar .menu{
-        display:none;
+    .navbar .menu {
+        display: none;
         flex-direction: column;
         width: 100%;
         position: absolute;
@@ -287,15 +290,15 @@ footer {
         padding: 10px 0;
     }
 
-    .navbar .menu.active{
-        display:flex;
+    .navbar .menu.active {
+        display: flex;
     }
 
     .navbar .menu li {
         margin: 10px 0;
         text-align: center;
     }
-    
+
     .hamburger {
         display: flex;
     }
@@ -303,11 +306,12 @@ footer {
     .footer-links {
         flex-direction: column;
     }
-    
+
     .footer-links a {
         display: block;
         margin: 0.1px 0;
     }
+
     .search-bar input {
         width: 100%;
         padding: 0.5rem;
