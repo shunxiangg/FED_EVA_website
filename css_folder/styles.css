@@ -216,7 +216,8 @@ h1 {
 
 #apply-filters:hover {
   background-color: #45a049;
-}/* search bar on nav bar */
+}
+/* search bar on nav bar */
 .navbar input[type="text"] {
   width: 800px;
   height: 38px;
