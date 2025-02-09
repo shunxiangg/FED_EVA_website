@@ -173,11 +173,12 @@ function applyFilters() {
             </div>
             <div class="product-details">
                 <h3>${product.itemName}</h3>
-                <p class="product-category">Category: ${product.category}</p>
-                <p class="product-condition">Condition: ${product.condition}</p>
-                ${priceDisplay}
-                <p class="inventory-count">Inventory: ${product.quantity || 0} items</p>
+                
                 <p class="seller-info">Seller: ${product.sellerName}</p>
+                
+                ${priceDisplay}
+
+                
                 <button 
                     onclick="event.stopPropagation(); addToCart('${product._id}')" 
                     class="add-to-cart-btn"
