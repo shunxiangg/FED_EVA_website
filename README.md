@@ -1,6 +1,4 @@
-Here is the updated version of your README, incorporating the requested features of **account management**, **user-specified purchases**, **listing ads**, and **sell listing items**:
 
----
 
 # MokeSell Interactive Web Application
 
