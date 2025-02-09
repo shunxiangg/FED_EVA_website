@@ -64,51 +64,155 @@ async function fetchDatabaseProducts() {
 }
 
 
+// function initializeFilters() {
+//     const applyFiltersBtn = document.getElementById('apply-filters');
+//     if (applyFiltersBtn) {
+//         applyFiltersBtn.addEventListener('click', applyFilters);
+//     }
+
+//     // Initialize price display
+//     const priceInput = document.getElementById('price');
+//     const priceDisplay = document.getElementById('price-display');
+//     if (priceInput && priceDisplay) {
+//         priceInput.addEventListener('input', function() {
+//             priceDisplay.textContent = `Price: $0 - $${this.value}`;
+//         });
+//     }
+// }
+
 function initializeFilters() {
+    // Initialize price input and display
+    const priceInput = document.getElementById('price');
+    const priceDisplay = document.getElementById('price-display');
+    
+    if (priceInput && priceDisplay) {
+        priceInput.addEventListener('input', function() {
+            const value = this.value.trim();
+            if (value === '') {
+                priceDisplay.textContent = 'Price: Any';
+            } else {
+                priceDisplay.textContent = `Price: $0 - $${value}`;
+            }
+        });
+    }
+
+    // Add event listeners to all filter inputs
+    const categorySelect = document.getElementById('category');
+    const conditionSelect = document.getElementById('condition');
+    const searchInput = document.getElementById('search');
     const applyFiltersBtn = document.getElementById('apply-filters');
+
+    // Apply filters when the Apply button is clicked
     if (applyFiltersBtn) {
         applyFiltersBtn.addEventListener('click', applyFilters);
     }
 
-    // Initialize price display
-    const priceInput = document.getElementById('price');
-    const priceDisplay = document.getElementById('price-display');
-    if (priceInput && priceDisplay) {
-        priceInput.addEventListener('input', function() {
-            priceDisplay.textContent = `Price: $0 - $${this.value}`;
+    // Optional: Apply filters when select options change
+    [categorySelect, conditionSelect].forEach(select => {
+        if (select) {
+            select.addEventListener('change', applyFilters);
+        }
+    });
+
+    // Apply filters when Enter is pressed in price input
+    if (priceInput) {
+        priceInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                applyFilters();
+            }
+        });
+    }
+
+    // Apply filters when Enter is pressed in search
+    if (searchInput) {
+        searchInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                applyFilters();
+            }
         });
     }
 }
 
-function applyFilters() {
-    const category = document.getElementById('category').value;
-    const maxPrice = parseFloat(document.getElementById('price').value);
-    const condition = document.getElementById('condition').value;
-    const searchQuery = document.getElementById('search').value.toLowerCase();
-    const loadingSpinner = document.getElementById('loading-spinner');
+// function applyFilters() {
+//     const category = document.getElementById('category').value;
+//     const maxPrice = parseFloat(document.getElementById('price').value);
+//     const condition = document.getElementById('condition').value;
+//     const searchQuery = document.getElementById('search').value.toLowerCase();
+//     const loadingSpinner = document.getElementById('loading-spinner');
  
-    loadingSpinner.style.display = 'block';
+//     loadingSpinner.style.display = 'block';
     
+//     fetchDatabaseProducts()
+//         .then(products => {
+//             const filteredProducts = products.filter(product => {
+//                 const matchesCategory = category === 'all' || product.category === category;
+//                 const matchesPrice = parseFloat(product.price) <= maxPrice;
+//                 const matchesCondition = condition === 'all' || product.condition === condition;
+//                 const matchesSearch = product.itemName.toLowerCase().includes(searchQuery) ||
+//                                   product.description.toLowerCase().includes(searchQuery);
+                
+//                 return matchesCategory && matchesPrice && matchesCondition && matchesSearch;
+//             });
+ 
+//             displayProducts(filteredProducts);
+//         })
+//         .catch(error => console.error('Error applying filters:', error))
+//         .finally(() => {
+//             loadingSpinner.style.display = 'none';
+//         });
+//  }
+
+
+function applyFilters() {
+    const category = document.getElementById('category')?.value || 'all';
+    const condition = document.getElementById('condition')?.value || 'all';
+    const priceInput = document.getElementById('price')?.value.trim();
+    const searchQuery = document.getElementById('search')?.value.toLowerCase().trim() || '';
+    const loadingSpinner = document.getElementById('loading-spinner');
+
+    if (loadingSpinner) {
+        loadingSpinner.style.display = 'block';
+    }
+
     fetchDatabaseProducts()
         .then(products => {
             const filteredProducts = products.filter(product => {
-                const matchesCategory = category === 'all' || product.category === category;
-                const matchesPrice = parseFloat(product.price) <= maxPrice;
-                const matchesCondition = condition === 'all' || product.condition === condition;
-                const matchesSearch = product.itemName.toLowerCase().includes(searchQuery) ||
-                                  product.description.toLowerCase().includes(searchQuery);
-                
-                return matchesCategory && matchesPrice && matchesCondition && matchesSearch;
+                // category filter, only apply if not 'all'
+                const matchesCategory = category === 'all' || 
+                    product.category?.toLowerCase() === category.toLowerCase();
+
+                // Condition filter, only apply if not 'all'
+                const matchesCondition = condition === 'all' || 
+                    product.condition === condition;
+
+                // Price filter, only apply if price is entered
+                const matchesPrice = !priceInput || 
+                    (product.price && parseFloat(product.price) <= parseFloat(priceInput));
+
+                // Search filter 
+                const matchesSearch = !searchQuery || 
+                    product.itemName?.toLowerCase().includes(searchQuery) ||
+                    product.description?.toLowerCase().includes(searchQuery);
+
+                // Combine all filters 
+                return matchesCategory && matchesCondition && matchesPrice && matchesSearch;
             });
- 
+
             displayProducts(filteredProducts);
         })
-        .catch(error => console.error('Error applying filters:', error))
+        .catch(error => {
+            console.error('Error applying filters:', error);
+            const productList = document.getElementById('product-list');
+            if (productList) {
+                productList.innerHTML = "<p class='no-products'>Error filtering products.</p>";
+            }
+        })
         .finally(() => {
-            loadingSpinner.style.display = 'none';
+            if (loadingSpinner) {
+                loadingSpinner.style.display = 'none';
+            }
         });
- }
-
+}
 
 
 
