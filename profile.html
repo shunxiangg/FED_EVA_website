@@ -23,16 +23,15 @@
           EVA
         </a>
       </div>
-   
+
       <ul class="menu">
-       <li><span id="userDisplay"></span></li>
+        <li><span id="userDisplay"></span></li>
         <li><a href="ads.html" class="nav-link"><i class="fas fa-ad"></i></a></li>
         <li><a href="home.html" class="nav-link">Home</a></li>
         <li><a href="browse.html" class="nav-link">Browse</a></li>
         <li><a href="sell.html" class="nav-link">Sell</a></li>
         <!-- <li><a href="signup.html">Sign Up</a></li> -->
         <li><a class="fas fa-user" href="profile.html" class="nav-link_active"></a></li>
-
 
       </ul>
       <div class="hamburger" onclick="toggleMenu()">
@@ -42,7 +41,6 @@
       </div>
     </nav>
   </header>
-  
 
   <div class="profile-container">
     <div class="profile-info">
@@ -55,8 +53,7 @@
       </div>
       <button id="edit-btn" class="btn">Edit Profile</button>
     </div>
-    
-  
+
     <div id="edit-modal" class="modal">
       <div class="modal-content">
         <h3>Edit Profile</h3>
@@ -65,12 +62,12 @@
             <label for="edit-name">Name</label>
             <input type="text" id="edit-name" required>
           </div>
-          
+
           <div class="form-group">
             <label for="edit-email">Email</label>
             <input type="email" id="edit-email" required>
           </div>
-          
+
           <div class="form-group">
             <label for="edit-gender">Gender</label>
             <select id="edit-gender" required>
@@ -79,12 +76,12 @@
               <option value="Female">Female</option>
             </select>
           </div>
-          
+
           <div class="form-group">
             <label for="edit-phone">Phone</label>
             <input type="tel" id="edit-phone" required>
           </div>
-  
+
           <div class="button-group">
             <button type="submit" class="btn btn-primary">Update</button>
             <button type="button" class="btn btn-secondary" id="cancel-btn">Cancel</button>
@@ -107,183 +104,141 @@
     </div>
   </section>
 
-
-<!-- Add container for listings display -->
-<div class="my-listings-container">
-  <h2>My Listings</h2>
-  <div id="listings-list" class="listings-grid">
+  <!-- Add container for listings display -->
+  <div class="my-listings-container">
+    <h2>My Listings</h2>
+    <div id="listings-list" class="listings-grid">
       <!-- Listings will be dynamically inserted here -->
+    </div>
   </div>
-</div>
 
-<!-- Old code below -->
-
-<!-- <main class="sell-container">
-<h1>List Item for Sale</h1>
-<form id="listing-form">
-    <div class="form-group">
-        <label>Item Name</label>
-        <input type="text" id="itemName" required>
+  <!------------------------ edit listing modal ------------------------------------------------------------------->
+  <div id="editListingModal" class="modal" style="display: none;">
+    <div class="modal-content">
+      <h2>Edit Listing</h2>
+      <form id="editListingForm">
+        <input type="hidden" id="edit-listing-id">
+        <div class="image-upload">
+          <input type="file" id="editPhotoUpload" accept="image/*" hidden>
+          <div class="upload-box" onclick="document.getElementById('editPhotoUpload').click()">
+            <span>Update Photo</span>
+          </div>
+        </div>
+        <div class="category-group">
+          <select id="edit-category" required>
+            <option value="Electronics & Technology">Electronics & Technology</option>
+            <option value="Fashion & Apparel">Fashion & Apparel</option>
+            <option value="Home & Living">Home & Living</option>
+            <option value="Health & Beauty">Health & Beauty</option>
+            <option value="Sports & Outdoor">Sports & Outdoor</option>
+            <option value="Books & Media">Books & Media</option>
+            <option value="Toys & Games">Toys & Games</option>
+            <option value="Food & Beverages">Food & Beverages</option>
+            <option value="Automotive">Automotive</option>
+            <option value="Pet Supplies">Pet Supplies</option>
+            <option value="Baby & Kids">Baby & Kids</option>
+            <option value="Office & Professional">Office & Professional</option>
+            <option value="Houses & Real Estate">Houses & Real Estate</option>
+            <option value="Jewelry & Accessories">Jewelry & Accessories</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <input type="text" id="edit-item-name" placeholder="Item Name" required>
+          <input type="number" id="edit-price" placeholder="$ Price" required>
+          <textarea id="edit-description" placeholder="Description" required></textarea>
+          <input type="number" id="edit-quantity" placeholder="Item Quantity" required>
+        </div>
+        <div class="discount-section">
+          <h3>Discount Options</h3>
+          <div class="form-group">
+            <label for="edit-discount-percentage">Discount Percentage</label>
+            <input type="number" id="edit-discount-percentage" name="edit-discount-percentage" min="0" max="100"
+              placeholder="Enter discount percentage (0-100)">
+          </div>
+          <div class="form-group">
+            <label for="edit-discount-start">Discount Start Date</label>
+            <input type="date" id="edit-discount-start" name="edit-discount-start">
+          </div>
+          <div class="form-group">
+            <label for="edit-discount-end">Discount End Date</label>
+            <input type="date" id="edit-discount-end" name="edit-discount-end">
+          </div>
+        </div>
+        <div class="button-group">
+          <button type="submit" class="save-btn">Save Changes</button>
+          <button type="button" class="cancel-btn" onclick="closeEditModal()">Cancel</button>
+        </div>
+      </form>
     </div>
-    <div class="form-group">
-        <label>Price</label>
-        <input type="number" id="item-price" required>
-    </div>
-    <div class="form-group">
-        <label>Category</label>
-        <select id="item-category" required>
-            <option value="electronics">Electronics</option>
-            <option value="furniture">Furniture</option>
-            <option value="clothing">Clothing</option>
-            <option value="books">Books</option>
-        </select>
-    </div>
-    <div class="form-group">
-        <label>Description</label>
-        <textarea id="item-description" required></textarea>
-    </div>
-    <button type="submit">List Item</button>
-</form>
-</main> -->
-
-
-<!------------------------ edit listing modal ------------------------------------------------------------------->
-<div id="editListingModal" class="modal" style="display: none;">
-<div class="modal-content">
-  <h2>Edit Listing</h2>
-  <form id="editListingForm">
-    <input type="hidden" id="edit-listing-id">
-    <div class="image-upload">
-      <input type="file" id="editPhotoUpload" accept="image/*" hidden>
-      <div class="upload-box" onclick="document.getElementById('editPhotoUpload').click()">
-        <span>Update Photo</span>
-      </div>
-    </div>
-    <div class="category-group">
-      <select id="edit-category" required>
-        <option value="Electronics & Technology">Electronics & Technology</option>
-        <option value="Fashion & Apparel">Fashion & Apparel</option>
-        <option value="Home & Living">Home & Living</option>
-        <option value="Health & Beauty">Health & Beauty</option>
-        <option value="Sports & Outdoor">Sports & Outdoor</option>
-        <option value="Books & Media">Books & Media</option>
-        <option value="Toys & Games">Toys & Games</option>
-        <option value="Food & Beverages">Food & Beverages</option>
-        <option value="Automotive">Automotive</option>
-        <option value="Pet Supplies">Pet Supplies</option>
-        <option value="Baby & Kids">Baby & Kids</option>
-        <option value="Office & Professional">Office & Professional</option>
-        <option value="Houses & Real Estate">Houses & Real Estate</option>
-        <option value="Jewelry & Accessories">Jewelry & Accessories</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <input type="text" id="edit-item-name" placeholder="Item Name" required>
-      <input type="number" id="edit-price" placeholder="$ Price" required>
-      <textarea id="edit-description" placeholder="Description" required></textarea>
-      <input type="number" id="edit-quantity" placeholder="Item Quantity" required>
-    </div>
-    <div class="discount-section">
-      <h3>Discount Options</h3>
-      <div class="form-group">
-          <label for="edit-discount-percentage">Discount Percentage</label>
-          <input 
-              type="number" 
-              id="edit-discount-percentage" 
-              name="edit-discount-percentage" 
-              min="0" 
-              max="100" 
-              placeholder="Enter discount percentage (0-100)"
-          >
-      </div>
-      <div class="form-group">
-          <label for="edit-discount-start">Discount Start Date</label>
-          <input 
-              type="date" 
-              id="edit-discount-start" 
-              name="edit-discount-start"
-          >
-      </div>
-      <div class="form-group">
-          <label for="edit-discount-end">Discount End Date</label>
-          <input type="date" id="edit-discount-end" name="edit-discount-end">
-      </div>
   </div>
-    <div class="button-group">
-      <button type="submit" class="save-btn">Save Changes</button>
-      <button type="button" class="cancel-btn" onclick="closeEditModal()">Cancel</button>
-    </div>
-  </form>
-</div>
-</div>
-<script src='https://cdn.jotfor.ms/s/umd/latest/for-embedded-agent.js'></script>
-<script>
-  window.addEventListener("DOMContentLoaded", function() {
-    window.AgentInitializer.init({
-      agentRenderURL: "https://agent.jotform.com/0194e55c77377697a8d98ac9f4e1fad8b333",
-      rootId: "JotformAgent-0194e55c77377697a8d98ac9f4e1fad8b333",
-      formID: "0194e55c77377697a8d98ac9f4e1fad8b333",
-      queryParams: ["skipWelcome=1", "maximizable=1"],
-      domain: "https://www.jotform.com",
-      isDraggable: false,
-      background: "linear-gradient(180deg, #FF98BC 0%, #FF98BC 100%)",
-      buttonBackgroundColor: "#972D54",
-      buttonIconColor: "#FFF",
-      variant: false,
-      customizations: {
-        "greeting": "Yes",
-        "greetingMessage": "Hi! How can I assist you?",
-        "openByDefault": "No",
-        "pulse": "Yes",
-        "position": "left",
-        "autoOpenChatIn": "0"
-      },
-      isVoice: undefined
+  <script src='https://cdn.jotfor.ms/s/umd/latest/for-embedded-agent.js'></script>
+  <script>
+    window.addEventListener("DOMContentLoaded", function () {
+      window.AgentInitializer.init({
+        agentRenderURL: "https://agent.jotform.com/0194e55c77377697a8d98ac9f4e1fad8b333",
+        rootId: "JotformAgent-0194e55c77377697a8d98ac9f4e1fad8b333",
+        formID: "0194e55c77377697a8d98ac9f4e1fad8b333",
+        queryParams: ["skipWelcome=1", "maximizable=1"],
+        domain: "https://www.jotform.com",
+        isDraggable: false,
+        background: "linear-gradient(180deg, #FF98BC 0%, #FF98BC 100%)",
+        buttonBackgroundColor: "#972D54",
+        buttonIconColor: "#FFF",
+        variant: false,
+        customizations: {
+          "greeting": "Yes",
+          "greetingMessage": "Hi! How can I assist you?",
+          "openByDefault": "No",
+          "pulse": "Yes",
+          "position": "left",
+          "autoOpenChatIn": "0"
+        },
+        isVoice: undefined
+      });
     });
-  });
-</script>
+
+  </script>
   <script src="js_api_folder/api.js"></script>
   <script src="js_folder/profile.js"></script>
   <script src="js_folder/purchasehistory.js"></script>
   <script src="js_folder/mylistings.js"></script>
   <script src="sell.js"></script>
-  
   <style>
     .manage-chats-btn {
-        background-color: var(--accent-color, #A19AD3);
-        color: white;
-        border: none;
-        padding: 8px 12px;
-        border-radius: 4px;
-        cursor: pointer;
-        margin-top: 10px;
-        transition: background-color 0.3s ease;
+      background-color: var(--accent-color, #A19AD3);
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: background-color 0.3s ease;
     }
 
     .manage-chats-btn:hover {
-        background-color: var(--text-color, #2E2B41);
+      background-color: var(--text-color, #2E2B41);
     }
 
     .listings-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-        gap: 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
     }
 
     .listing-item {
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        padding: 15px;
-        text-align: center;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 15px;
+      text-align: center;
     }
 
     .listing-item img {
-        max-width: 100%;
-        height: 200px;
-        object-fit: cover;
-        border-radius: 8px;
+      max-width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 8px;
     }
-</style>
+  </style>
 </body>
 
 </html>
