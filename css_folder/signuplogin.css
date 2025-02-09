@@ -1,30 +1,33 @@
-
-
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-:root{
+
+:root {
   --accent-color: #A19AD3;
   --base-color: white;
   --text-color: #2E2B41;
   --input-color: #FCE7C8;
   --link-color: #7276ff;
 }
-*{
+
+* {
   margin: 0;
   padding: 0;
 }
 
-html{
+html {
   font-family: Poppins, Segoe UI, sans-serif;
   font-size: 12pt;
   color: var(--text-color);
   text-align: center;
 }
+
 body {
   min-height: 100vh;
-  background-color: #f0f0f0; /* Or any color you prefer */
+  background-color: #f0f0f0;
+  /* Or any color you prefer */
   overflow: hidden;
 }
-.wrapper{
+
+.wrapper {
   box-sizing: border-box;
   background-color: var(--base-color);
   height: 100vh;
@@ -52,12 +55,13 @@ body {
   transition: .6s ease-in-out 1.2s, visibility 0s 1s;
 } */
 
-h1{
+h1 {
   font-size: 3rem;
   font-weight: 900;
   text-transform: uppercase;
 }
-form{
+
+form {
   width: min(400px, 100%);
   margin-top: 20px;
   margin-bottom: 50px;
@@ -66,12 +70,14 @@ form{
   align-items: center;
   gap: 10px;
 }
-form > div{
+
+form>div {
   width: 100%;
   display: flex;
   justify-content: center;
 }
-form label{
+
+form label {
   flex-shrink: 0;
   height: 50px;
   width: 50px;
@@ -85,7 +91,8 @@ form label{
   font-size: 1.5rem;
   font-weight: 500;
 }
-form input{
+
+form input {
   box-sizing: border-box;
   flex-grow: 1;
   min-width: 0;
@@ -98,20 +105,25 @@ form input{
   background-color: var(--input-color);
   transition: 150ms ease;
 }
-form input:hover{
+
+form input:hover {
   border-color: var(--accent-color);
 }
-form input:focus{
+
+form input:focus {
   outline: none;
   border-color: var(--text-color);
 }
-div:has(input:focus) > label{
+
+div:has(input:focus)>label {
   background-color: var(--text-color);
 }
-form input::placeholder{
+
+form input::placeholder {
   color: var(--text-color);
 }
-form button{
+
+form button {
   margin-top: 10px;
   border: none;
   border-radius: 1000px;
@@ -124,34 +136,42 @@ form button{
   cursor: pointer;
   transition: 150ms ease;
 }
-form button:hover{
+
+form button:hover {
   background-color: var(--text-color);
 }
-form button:focus{
+
+form button:focus {
   outline: none;
   background-color: var(--text-color);
 }
-a{
+
+a {
   text-decoration: none;
   color: var(--accent-color);
 }
-a:hover{
+
+a:hover {
   text-decoration: underline;
 }
-@media(max-width: 1100px){
-  .wrapper{
+
+@media(max-width: 1100px) {
+  .wrapper {
     width: min(600px, 100%);
     border-radius: 0;
   }
 }
-form div.incorrect label{
+
+form div.incorrect label {
   background-color: #f06272;
 }
-form div.incorrect input{
+
+form div.incorrect input {
   border-color: #f06272;
 }
-#error-message{
-  color:#f06272;
+
+#error-message {
+  color: #f06272;
 }
 
 
@@ -159,44 +179,45 @@ form div.incorrect input{
 
 /* Back Button */
 .back-button {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    background-color: var(--base-color);
-    border: none;
-    font-size: 1.2rem;
-    color: var(--text-color);
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    padding: 10px 15px;
-    border-radius: 30px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
-  }
-  
-  .back-button:hover {
-    background-color: var(--accent-color);
-    color: var(--base-color);
-    transform: scale(1.1); /* zoom on hover */
-  }
-  
-  .back-button:focus {
-    outline: none;
-  }
-  
-  /* Styling for the arrow inside the back button */
-  .back-button svg {
-    margin-right: 8px;
-    fill: var(--text-color);
-    width: 24px;
-    height: 24px;
-  }
-  
-  /* styling for laptop screens*/
-  @media (max-width: 1500px) {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background-color: var(--base-color);
+  border: none;
+  font-size: 1.2rem;
+  color: var(--text-color);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+
+.back-button:hover {
+  background-color: var(--accent-color);
+  color: var(--base-color);
+  transform: scale(1.1);
+  /* zoom on hover */
+}
+
+.back-button:focus {
+  outline: none;
+}
+
+/* Styling for the arrow inside the back button */
+.back-button svg {
+  margin-right: 8px;
+  fill: var(--text-color);
+  width: 24px;
+  height: 24px;
+}
+
+/* styling for laptop screens*/
+@media (max-width: 1500px) {
   html {
-    font-size: 9pt; 
+    font-size: 9pt;
   }
 
   .wrapper {
@@ -204,55 +225,56 @@ form div.incorrect input{
   }
 
   h1 {
-    font-size: 2.3rem; 
+    font-size: 2.3rem;
   }
 
   form {
-    width: min(320px, 100%); 
+    width: min(320px, 100%);
     margin-top: 15px;
-    margin-bottom: 35px; 
-    gap: 7px; 
+    margin-bottom: 35px;
+    gap: 7px;
   }
 
   form label {
-    height: 38px; 
-    width: 38px; 
-    font-size: 1.2rem; 
+    height: 38px;
+    width: 38px;
+    font-size: 1.2rem;
   }
 
   form input {
-    height: 38px; 
-    padding: 0.7em; 
+    height: 38px;
+    padding: 0.7em;
   }
 
   form button {
     margin-top: 8px;
-    padding: .65em 3.2em; 
-    font-size: 1rem; 
+    padding: .65em 3.2em;
+    font-size: 1rem;
   }
 
   .back-button {
-    top: 12px; 
-    left: 12px; 
-    font-size: 1rem; 
+    top: 12px;
+    left: 12px;
+    font-size: 1rem;
   }
 
   .back-button svg {
-    width: 18px; 
+    width: 18px;
   }
 
   .create-account-link {
-    font-size: 1rem; 
-    padding: 8px 14px; 
+    font-size: 1rem;
+    padding: 8px 14px;
   }
 
   .login-footer-content {
-    margin-top: 40px; 
-    font-size: 1rem; 
+    margin-top: 40px;
+    font-size: 1rem;
   }
-  
-  .footer-links, .social-media {
-    font-size: 1.5rem; 
+
+  .footer-links,
+  .social-media {
+    font-size: 1.5rem;
   }
 }
 
@@ -286,125 +308,131 @@ form div.incorrect input{
 
 
 
-  /* MOBILE STYLES */
-  @media (max-width: 768px) {
-    
-    .wrapper {
-      width: 100%; 
-      padding: 15px; 
-      background-color: rgba(0, 0, 0, 0.5); 
-    }
-  
-    form input {
-      padding: 0.8em; 
-      font-size: 1rem; 
-    }
-  
-    form button {
-      padding: 0.75em 3em; 
-      font-size: 1rem; 
-    }
-  
-    form label {
-      font-size: 1.2rem; 
-    }
-  
-    form {
-      margin-top: 15px;
-      margin-bottom: 30px;
-    }
-  
-    form > div {
-      width: 100%;
-      display: flex;
-      justify-content: space-between; 
-      margin-bottom: 10px; 
-    }
-  
-    form input {
-      padding: 0.8em; 
-      width: 100%; 
-    }
-  
-    .back-button {
-      font-size: 1rem; 
-      padding: 8px 12px; 
-      top: 15px; 
-      left: 15px; 
-    }
+/* MOBILE STYLES */
+@media (max-width: 768px) {
 
-    h1 {
-        color: white; 
-    }
-    
-    p {
-        color: white; 
-    }
-    .login-footer-content {
-      font-size: 0.9rem; /* Smaller font size for tablets */
-      padding: 10px 0;
-    }
-  
-    .footer-links a, .social-media a {
-      font-size: 0.9rem;
-    }
-
+  .wrapper {
+    width: 100%;
+    padding: 15px;
+    background-color: rgba(0, 0, 0, 0.5);
   }
-  
 
-  @media (max-width: 480px) {
-    .wrapper {
-      width: 100%; 
-      padding: 10px; 
-      background-color: rgba(0, 0, 0, 0.5); 
-    }
-  
-    form input {
-      padding: 0.7em; 
-      font-size: 0.9rem; 
-    }
-  
-    form button {
-      padding: 0.7em 2.5em; 
-      font-size: 0.9rem; 
-    }
-  
-    form label {
-      font-size: 1rem; 
-    }
-  
-    .back-button {
-      font-size: 1rem; 
-      padding: 7px 10px;
-    }
-
-    h1 {
-        color: white;
-    }
-    
-    p {
-        color: white; 
-    }
-
-    .login-footer-content {
-      font-size: 0.8rem; /* Smaller font size for mobile */
-      padding: 8px 0;
-    }
-  
-    .footer-links a, .social-media a {
-      font-size: 0.8rem; /* Smaller links for mobile */
-      margin: 5px 0;
-    }
-  
-    .social-media {
-      margin-top: 15px;
-    }
+  form input {
+    padding: 0.8em;
+    font-size: 1rem;
   }
-  
+
+  form button {
+    padding: 0.75em 3em;
+    font-size: 1rem;
+  }
+
+  form label {
+    font-size: 1.2rem;
+  }
+
+  form {
+    margin-top: 15px;
+    margin-bottom: 30px;
+  }
+
+  form>div {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+
+  form input {
+    padding: 0.8em;
+    width: 100%;
+  }
+
+  .back-button {
+    font-size: 1rem;
+    padding: 8px 12px;
+    top: 15px;
+    left: 15px;
+  }
+
+  h1 {
+    color: white;
+  }
+
+  p {
+    color: white;
+  }
+
+  .login-footer-content {
+    font-size: 0.9rem;
+    /* Smaller font size for tablets */
+    padding: 10px 0;
+  }
+
+  .footer-links a,
+  .social-media a {
+    font-size: 0.9rem;
+  }
+
+}
+
+
+@media (max-width: 480px) {
+  .wrapper {
+    width: 100%;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+
+  form input {
+    padding: 0.7em;
+    font-size: 0.9rem;
+  }
+
+  form button {
+    padding: 0.7em 2.5em;
+    font-size: 0.9rem;
+  }
+
+  form label {
+    font-size: 1rem;
+  }
+
+  .back-button {
+    font-size: 1rem;
+    padding: 7px 10px;
+  }
+
+  h1 {
+    color: white;
+  }
+
+  p {
+    color: white;
+  }
+
+  .login-footer-content {
+    font-size: 0.8rem;
+    /* Smaller font size for mobile */
+    padding: 8px 0;
+  }
+
+  .footer-links a,
+  .social-media a {
+    font-size: 0.8rem;
+    /* Smaller links for mobile */
+    margin: 5px 0;
+  }
+
+  .social-media {
+    margin-top: 15px;
+  }
+}
+
 /* Create account link */
 .create-account-link {
   display: inline-block;
-  margin-top: 20px; 
+  margin-top: 20px;
   font-size: 1rem;
   color: var(--accent-color);
   text-decoration: none;
@@ -412,22 +440,20 @@ form div.incorrect input{
   transition: all 0.3s ease-in-out;
   position: relative;
 
-  border-radius: 300px; 
-  background-color: transparent; 
+  border-radius: 300px;
+  background-color: transparent;
 }
 
 /* hover effect for background color text color changse */
 .create-account-link:hover {
   background-color: var(--accent-color);
   color: rgb(238, 255, 0);
-  transform: translateY(-3px); 
+  transform: translateY(-3px);
 }
 
 /* Active state when the button is clicked */
 .create-account-link:active {
-  transform: translateY(3px); 
-  background-color: var(--accent-color); 
-  color: var(--link-color); 
+  transform: translateY(3px);
+  background-color: var(--accent-color);
+  color: var(--link-color);
 }
-
-

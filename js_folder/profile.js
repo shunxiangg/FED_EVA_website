@@ -1,11 +1,11 @@
 const APIKEY = "6787a92c77327a0a035a5437";
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const modal = document.getElementById('edit-modal');
     const editBtn = document.getElementById('edit-btn');
     const cancelBtn = document.getElementById('cancel-btn');
     const editForm = document.getElementById('edit-form');
-    
+
     let currentUser = null;
 
     async function fetchAndDisplayUser() {
@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
             const data = await response.json();
-            
+
             if (data.length > 0) {
                 currentUser = data[0];
                 displayUserInfo(currentUser);
@@ -51,18 +51,18 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('edit-phone').value = user.userPhone || '';
     }
 
-    editBtn.onclick = function() {
+    editBtn.onclick = function () {
         populateEditForm(currentUser);
         modal.style.display = 'block';
     }
 
-    cancelBtn.onclick = function() {
+    cancelBtn.onclick = function () {
         modal.style.display = 'none';
     }
 
-    editForm.onsubmit = async function(e) {
+    editForm.onsubmit = async function (e) {
         e.preventDefault();
-        
+
         const updatedUser = {
             ...currentUser,
             name: document.getElementById('edit-name').value,
@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    window.onclick = function(e) {
+    window.onclick = function (e) {
         if (e.target === modal) {
             modal.style.display = 'none';
         }
@@ -103,19 +103,19 @@ document.addEventListener('DOMContentLoaded', function() {
     fetchAndDisplayUser();
 });
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const logoutBtn = document.getElementById('logoutBtn');
     const userDisplay = document.getElementById('userDisplay');
-    
+
     // Show username if logged in
     const userName = localStorage.getItem('userName');
     if (userName) {
         userDisplay.textContent = `Welcome, ${userName}!`;
         logoutBtn.style.display = 'block';
     }
-    
+
     // Logout functionality
-    window.logout = function() {
+    window.logout = function () {
         localStorage.removeItem('userName');
         localStorage.removeItem('userEmail');
         window.location.href = 'login.html';

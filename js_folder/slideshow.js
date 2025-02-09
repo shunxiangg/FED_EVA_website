@@ -13,7 +13,7 @@ class Slideshow {
             console.log('Initializing slideshow...');
             const slideContainer = document.getElementById('ad-slides');
             const dotsContainer = document.getElementById('slide-dots');
-            
+
             if (!slideContainer || !dotsContainer) {
                 console.error('Required containers not found:', {
                     slideContainer: !!slideContainer,
@@ -69,7 +69,7 @@ class Slideshow {
     renderSlides() {
         const slideContainer = document.getElementById('ad-slides');
         const dotsContainer = document.getElementById('slide-dots');
-        
+
         if (!slideContainer || !dotsContainer) {
             console.log('Required containers not found');
             return;
@@ -100,7 +100,7 @@ class Slideshow {
 
     showSlide(n) {
         if (!this.slides.length) return;
-        
+
         this.currentSlide = (n + this.slides.length) % this.slides.length;
 
         const slides = document.getElementsByClassName('slide');
@@ -144,7 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('Found ad-slides, initializing...');
         slideshowInstance = new Slideshow();
         slideshowInstance.init();
-        
+
         // Expose functions globally
         window.slideshow = {
             changeSlide: (direction) => slideshowInstance.changeSlide(direction),

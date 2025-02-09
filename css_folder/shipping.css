@@ -2,14 +2,16 @@
     max-width: 1000px;
     margin: 0 auto;
     padding: 2rem;
-    flex:1;
+    flex: 1;
 }
+
 h1 {
     font-size: 2rem;
     margin-bottom: 2rem;
     position: relative;
     display: inline-block;
 }
+
 h1::after {
     content: '';
     position: absolute;
@@ -25,7 +27,7 @@ h1::after {
     border-radius: 10px;
     padding: 2rem;
     margin-bottom: 2rem;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .section-title {
@@ -33,6 +35,7 @@ h1::after {
     margin-bottom: 1.5rem;
     color: #1a1a1a;
 }
+
 .service-card {
     border: 1px solid #e0e0e0;
     border-radius: 8px;
@@ -46,6 +49,7 @@ h1::after {
     margin-bottom: 1rem;
     font-weight: 600;
 }
+
 .service-detail {
     display: flex;
     align-items: center;
@@ -108,4 +112,3 @@ h1::after {
     border-radius: 8px;
     margin-top: 1rem;
 }
-

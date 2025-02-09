@@ -1,9 +1,9 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     // Check if user came from login or signup
     const prevPage = document.referrer;
-    
+
     console.log('Need to wait');
-    setTimeout(function() {
+    setTimeout(function () {
         console.log('setting window location');
         // Redirect based on previous page
         if (prevPage.includes('login.html')) {

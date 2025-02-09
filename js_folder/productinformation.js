@@ -11,14 +11,14 @@ function checkAuthentication() {
 // Calculate discounted price
 function calculateDiscountedPrice(product) {
     const originalPrice = parseFloat(product.price);
-    
+
     if (product.discountPercentage && product.discountPercentage > 0) {
         const currentDate = new Date();
         const startDate = product.discountStartDate ? new Date(product.discountStartDate) : null;
         const endDate = product.discountEndDate ? new Date(product.discountEndDate) : null;
 
-        const isDiscountActive = (!startDate || currentDate >= startDate) && 
-                                (!endDate || currentDate <= endDate);
+        const isDiscountActive = (!startDate || currentDate >= startDate) &&
+            (!endDate || currentDate <= endDate);
 
         if (isDiscountActive) {
             const discountedPrice = originalPrice * (1 - product.discountPercentage / 100);
@@ -41,7 +41,7 @@ function calculateDiscountedPrice(product) {
 async function getProductDetails() {
     const urlParams = new URLSearchParams(window.location.search);
     const productId = urlParams.get('id');
-    
+
     if (!productId) {
         document.getElementById('product-details').innerHTML = 'Product not found';
         return;
@@ -56,7 +56,7 @@ async function getProductDetails() {
                 "x-apikey": APIKEY
             }
         });
-        
+
         if (!response.ok) {
             throw new Error('Failed to fetch product details');
         }
@@ -73,7 +73,7 @@ async function getProductDetails() {
 // Display product details on the page
 function displayProductDetails(product) {
     const pricing = calculateDiscountedPrice(product);
-    
+
     let priceHtml = '';
     if (pricing.discountPercentage > 0) {
         priceHtml = `
@@ -91,22 +91,22 @@ function displayProductDetails(product) {
         `;
     }
 
-     // Format category and condition with proper capitalization
-     const formattedCategory = product.category.charAt(0).toUpperCase() + product.category.slice(1).toLowerCase();
+    // Format category and condition with proper capitalization
+    const formattedCategory = product.category.charAt(0).toUpperCase() + product.category.slice(1).toLowerCase();
 
-     //handling for condition
-     let formattedCondition;
-     if (product.condition.toLowerCase() === 'brandnew') {
-         formattedCondition = 'Brand New';
-     } 
-     else if (product.condition.toLowerCase() === 'gentlyused'){
+    //handling for condition
+    let formattedCondition;
+    if (product.condition.toLowerCase() === 'brandnew') {
+        formattedCondition = 'Brand New';
+    }
+    else if (product.condition.toLowerCase() === 'gentlyused') {
         formattedCondition = 'Gently Used';
-     }
-     else if (product.condition.toLowerCase() === 'likenew'){
+    }
+    else if (product.condition.toLowerCase() === 'likenew') {
         formattedCondition = 'Like New';
-     }
- 
-     const detailsHtml = `
+    }
+
+    const detailsHtml = `
          <div class="product-details-grid">
              <div class="product-image-large">
                  <img src="${product.imageData || '/api/placeholder/600/400'}" 
@@ -130,14 +130,14 @@ function displayProductDetails(product) {
              </div>
          </div>
      `;
-    
+
     document.getElementById('product-details').innerHTML = detailsHtml;
 }
 
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', () => {
     getProductDetails();
-    
+
     // Display user name if logged in
     const userName = localStorage.getItem('userName');
     const userDisplay = document.getElementById('userDisplay');

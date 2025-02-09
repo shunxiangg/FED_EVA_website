@@ -1,6 +1,6 @@
 const DATABASE_URL = "https://evadatabase-f3b8.restdb.io/rest/sell";
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     loadDatabaseProducts();
     initializeFilters();
 
@@ -9,7 +9,7 @@ async function loadDatabaseProducts() {
     try {
         const dbProducts = await fetchDatabaseProducts();
         displayProducts(dbProducts);
-        displayDiscountedProducts(dbProducts); 
+        displayDiscountedProducts(dbProducts);
     } catch (error) {
         console.error('Error loading products:', error);
     }
@@ -18,18 +18,18 @@ async function loadDatabaseProducts() {
 function displayDiscountedProducts(products) {
     const discountList = document.getElementById('discounts-list');
     if (!discountList) return;
-    
-    const discountedProducts = products.filter(product => 
-        product.discountPercentage > 0 && 
+
+    const discountedProducts = products.filter(product =>
+        product.discountPercentage > 0 &&
         (!product.discountStartDate || new Date(product.discountStartDate) <= new Date()) &&
         (!product.discountEndDate || new Date(product.discountEndDate) >= new Date())
     );
-    
+
     if (discountedProducts.length === 0) {
         discountList.innerHTML = "<p>No discounted products available.</p>";
         return;
     }
-    
+
     discountList.innerHTML = discountedProducts.map(product => {
         const discountedPrice = (product.price * (1 - product.discountPercentage / 100)).toFixed(2);
         return `
@@ -69,9 +69,9 @@ function initializeFilters() {
     // Initialize price input and display
     const priceInput = document.getElementById('price');
     const priceDisplay = document.getElementById('price-display');
-    
+
     if (priceInput && priceDisplay) {
-        priceInput.addEventListener('input', function() {
+        priceInput.addEventListener('input', function () {
             const value = this.value.trim();
             if (value === '') {
                 priceDisplay.textContent = 'Price: Any';
@@ -101,7 +101,7 @@ function initializeFilters() {
 
     // Apply filters when Enter is pressed in price input
     if (priceInput) {
-        priceInput.addEventListener('keypress', function(e) {
+        priceInput.addEventListener('keypress', function (e) {
             if (e.key === 'Enter') {
                 applyFilters();
             }
@@ -110,7 +110,7 @@ function initializeFilters() {
 
     // Apply filters when Enter is pressed in search
     if (searchInput) {
-        searchInput.addEventListener('keypress', function(e) {
+        searchInput.addEventListener('keypress', function (e) {
             if (e.key === 'Enter') {
                 applyFilters();
             }
@@ -134,19 +134,19 @@ function applyFilters() {
         .then(products => {
             const filteredProducts = products.filter(product => {
                 // category filter, only apply if not 'all'
-                const matchesCategory = category === 'all' || 
+                const matchesCategory = category === 'all' ||
                     product.category?.toLowerCase() === category.toLowerCase();
 
                 // Condition filter, only apply if not 'all'
-                const matchesCondition = condition === 'all' || 
+                const matchesCondition = condition === 'all' ||
                     product.condition === condition;
 
                 // Price filter, only apply if price is entered
-                const matchesPrice = !priceInput || 
+                const matchesPrice = !priceInput ||
                     (product.price && parseFloat(product.price) <= parseFloat(priceInput));
 
                 // Search filter 
-                const matchesSearch = !searchQuery || 
+                const matchesSearch = !searchQuery ||
                     product.itemName?.toLowerCase().includes(searchQuery) ||
                     product.description?.toLowerCase().includes(searchQuery);
 
@@ -173,7 +173,7 @@ function applyFilters() {
 
 
 
- function displayProducts(products) {
+function displayProducts(products) {
     const productList = document.getElementById('product-list');
     if (!productList) return;
 
@@ -194,13 +194,13 @@ function applyFilters() {
             const startDate = product.discountStartDate ? new Date(product.discountStartDate) : null;
             const endDate = product.discountEndDate ? new Date(product.discountEndDate) : null;
 
-            const isDiscountActive = (!startDate || currentDate >= startDate) && 
-                                     (!endDate || currentDate <= endDate);
+            const isDiscountActive = (!startDate || currentDate >= startDate) &&
+                (!endDate || currentDate <= endDate);
 
             if (isDiscountActive) {
                 const discountedPrice = displayPrice * (1 - product.discountPercentage / 100);
                 displayPrice = discountedPrice;
-                
+
                 priceDisplay = `
                     <div class="product-price-container">
                         <span class="original-price">$${parseFloat(product.price).toFixed(2)}</span>
@@ -226,7 +226,7 @@ function applyFilters() {
         return `
         <div class="product-card" onclick="window.location.href='productInformation.html?id=${product._id}'">
             <div class="product-image">
-            ${product.imageData ? 
+            ${product.imageData ?
                 `<div class="product-image1">
                     <img src="${product.imageData}" alt="${product.itemName}" loading="lazy">
                  </div>` :
@@ -261,20 +261,20 @@ function applyFilters() {
 
 function truncateText(text, maxLength) {
     return text.length > maxLength ? text.slice(0, maxLength) + '...' : text;
- }
+}
 // event listener for enter key to search
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const navbarSearch = document.querySelector('.navbar input[type="text"]');
     const loadingSpinner = document.getElementById('loading-spinner');
-    
-    navbarSearch.addEventListener('keypress', async function(e) {
+
+    navbarSearch.addEventListener('keypress', async function (e) {
         if (e.key === 'Enter') {
             const searchQuery = this.value.toLowerCase();
             loadingSpinner.style.display = 'block';
-            
+
             try {
                 const products = await fetchDatabaseProducts();
-                const filteredProducts = products.filter(product => 
+                const filteredProducts = products.filter(product =>
                     product.itemName.toLowerCase().includes(searchQuery) ||
                     product.description.toLowerCase().includes(searchQuery)
                 );
@@ -286,4 +286,4 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     });
-  });
+});

@@ -5,7 +5,7 @@ function checkloginAuthencation() {
         window.location.href = 'index.html';
         return;
     }
-    
+
     const userDisplay = document.getElementById('userDisplay');
     const logoutBtn = document.getElementById('logoutBtn');
     if (userDisplay && logoutBtn) {

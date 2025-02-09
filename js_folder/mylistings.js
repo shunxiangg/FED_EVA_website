@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     const APIKEY = "6787a92c77327a0a035a5437";
     const DATABASE_URL = "https://evadatabase-f3b8.restdb.io/rest/sell";
-    
+
     function getUserListings() {
         const userEmail = localStorage.getItem('userEmail');
         if (!userEmail) return;
@@ -53,10 +53,10 @@ document.addEventListener("DOMContentLoaded", function () {
             content += `
                 <div class="listing-card" id="${listing._id}">
                     <div class="listing-image">
-                        ${listing.imageData ? 
-                            `<img src="${listing.imageData}" alt="${listing.itemName}">` :
-                            '<div class="no-image">No Image</div>'
-                        }
+                        ${listing.imageData ?
+                    `<img src="${listing.imageData}" alt="${listing.itemName}">` :
+                    '<div class="no-image">No Image</div>'
+                }
                     </div>
                     <div class="listing-details">
                         <h3>${listing.itemName}</h3>
@@ -76,7 +76,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Delete listing function
-    window.deleteListing = function(id) {
+    window.deleteListing = function (id) {
         if (!confirm('Are you sure you want to delete this listing?')) return;
 
         const settings = {

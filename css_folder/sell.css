@@ -1,14 +1,14 @@
-.container{
+.container {
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
 }
 
-.image-upload{
+.image-upload {
     margin-bottom: 20px;
 }
 
-.upload-box{
+.upload-box {
     width: 200px;
     height: 200px;
     border: 2px dashed #ccc;
@@ -19,22 +19,24 @@
     background-color: #f5f5f5;
 }
 
-.video-link input{
+.video-link input {
     width: 200px;
     margin-bottom: 20px;
 }
 
-.category-group{
+.category-group {
     margin-bottom: 20px;
 }
-.category-group input{
+
+.category-group input {
     width: 100%;
     padding: 8px;
     margin-bottom: 10px;
     border: 1px solid #ddd;
     border-radius: 4px;
 }
-.category-group select{
+
+.category-group select {
     width: 100%;
     padding: 8px;
     margin-bottom: 10px;
@@ -42,7 +44,8 @@
     border-radius: 4px;
     cursor: pointer;
 }
-.category-group textarea{
+
+.category-group textarea {
     width: 100%;
     padding: 8px;
     margin-bottom: 10px;
@@ -50,14 +53,15 @@
     border-radius: 4px;
 }
 
-.form-group{
+.form-group {
     margin-bottom: 20px;
     border: 1px solid #ccc;
     border-radius: 10px;
     padding: 20px;
     margin: 20px 0;
 }
-.form-group input{
+
+.form-group input {
     width: 100%;
     padding: 8px;
     margin-bottom: 10px;
@@ -65,52 +69,58 @@
     border-radius: 4px;
 }
 
-.form-group select{
+.form-group select {
     width: 100%;
     padding: 8px;
     margin-bottom: 10px;
     border: 1px solid #ddd;
     border-radius: 4px;
 }
-.form-group textarea{
+
+.form-group textarea {
     width: 100%;
     padding: 8px;
     margin-bottom: 10px;
     border: 1px solid #ddd;
     border-radius: 4px;
 }
-.form-group textarea{
+
+.form-group textarea {
     height: 100px;
     resize: vertical;
 }
 
-.condition-group{
+.condition-group {
     margin-bottom: 20px;
 }
-.condition-group input{
+
+.condition-group input {
     cursor: pointer;
 }
-.condition-group label{
+
+.condition-group label {
     cursor: pointer;
     margin-right: 20px;
 }
-.radio-group{
+
+.radio-group {
     display: flex;
     gap: 10px;
     margin-top: 10px;
 }
 
-.delivery-method{
+.delivery-method {
     border: 1px solid #ccc;
     border-radius: 10px;
     padding: 20px;
     margin: 20px 0;
 }
-.delivery-method h3{
+
+.delivery-method h3 {
     margin-bottom: 15px;
 }
 
-.pickup-address{
+.pickup-address {
     width: 98%;
     padding: 8px;
     margin-bottom: 10px;
@@ -118,26 +128,27 @@
     border-radius: 5px;
 }
 
-.address-row{
+.address-row {
     display: flex;
     gap: 10px;
     margin-bottom: 15px;
 }
 
-.unit-no{
-    width: 50%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-.postal-code{
+.unit-no {
     width: 50%;
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 5px;
 }
 
-.delivery-option{
+.postal-code {
+    width: 50%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.delivery-option {
     border: 1px solid #ccc;
     border-radius: 8px;
     padding: 20px;
@@ -147,28 +158,31 @@
     align-items: center;
     cursor: pointer;
 }
-.delivery-option input{
+
+.delivery-option input {
     cursor: pointer;
 }
-.delivery-label{
+
+.delivery-label {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
     width: 100%;
     cursor: pointer;
 }
-.delivery-details h4{
+
+.delivery-details h4 {
     margin: 0 0 10px 0;
     font-size: 16px;
 }
 
-.delivery-details p{
+.delivery-details p {
     margin: 5px 0;
     color: #666;
     font-size: 14px;
 }
 
-.list-now{
+.list-now {
     width: 100%;
     padding: 10px;
     background-color: #4CAF50;
@@ -177,11 +191,13 @@
     border-radius: 4px;
     cursor: pointer;
 }
-.list-now:hover{
+
+.list-now:hover {
     background-color: #45a049;
 }
 
-.edit-btn, .delete-btn {
+.edit-btn,
+.delete-btn {
     padding: 0.5rem 1rem;
     border: none;
     border-radius: 4px;
@@ -284,7 +300,7 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     display: flex;
     justify-content: center;
-    align-items: center; 
+    align-items: center;
     width: 100%;
 }
 
@@ -293,7 +309,7 @@
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 1.5rem;
     margin-top: 1.5rem;
-    justify-items: center; 
+    justify-items: center;
 }
 
 .listing-card {
@@ -353,7 +369,8 @@
     margin-top: 1rem;
 }
 
-.edit-btn, .delete-btn {
+.edit-btn,
+.delete-btn {
     padding: 0.5rem 1rem;
     border: none;
     border-radius: 4px;

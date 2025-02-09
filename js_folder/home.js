@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // search filter products for home page
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     loadDatabaseProducts();
     initializeCategoryFilters();
 });
@@ -94,12 +94,12 @@ function initializeCategoryFilters() {
     }
 
     categoryButtons.forEach(button => {
-        button.addEventListener('click', async function() {
+        button.addEventListener('click', async function () {
             // Remove active class from all buttons
             categoryButtons.forEach(btn => btn.classList.remove('active'));
             // Add active class to clicked button
             this.classList.add('active');
-            
+
             const category = this.getAttribute('value');
             const loadingSpinner = document.getElementById('loading-spinner');
             if (loadingSpinner) loadingSpinner.style.display = 'block';
@@ -111,8 +111,8 @@ function initializeCategoryFilters() {
                 if (category === 'all') {
                     filteredProducts = products;
                 } else {
-                    filteredProducts = products.filter(product => 
-                        product.category && 
+                    filteredProducts = products.filter(product =>
+                        product.category &&
                         product.category.toLowerCase() === category.toLowerCase()
                     );
                 }
@@ -139,10 +139,10 @@ function displayProducts(products) {
     productList.innerHTML = products.map(product => `
         <div class="product-card" onclick="window.location.href='productInformation.html?id=${product._id}'">
             <div class="product-image">
-                ${product.imageData ? 
-                    `<img src="${product.imageData}" alt="${product.itemName}" class="product-image">` :
-                    '<div class="no-image">No Image Available</div>'
-                }
+                ${product.imageData ?
+            `<img src="${product.imageData}" alt="${product.itemName}" class="product-image">` :
+            '<div class="no-image">No Image Available</div>'
+        }
             </div>
             <div class="product-details">
                 <h3>${product.itemName}</h3>

@@ -5,10 +5,10 @@ document.addEventListener("DOMContentLoaded", function () {
   // Initialize image upload preview for new listing
   const photoUpload = document.getElementById('photoUpload');
   if (photoUpload) {
-    photoUpload.addEventListener('change', function(e) {
+    photoUpload.addEventListener('change', function (e) {
       if (e.target.files && e.target.files[0]) {
         const reader = new FileReader();
-        reader.onload = function(e) {
+        reader.onload = function (e) {
           const uploadBox = document.querySelector('.upload-box');
           uploadBox.style.backgroundImage = `url(${e.target.result})`;
           uploadBox.querySelector('span').style.display = 'none';
@@ -21,10 +21,10 @@ document.addEventListener("DOMContentLoaded", function () {
   // Initialize image upload preview for editing listing
   const editPhotoUpload = document.getElementById('editPhotoUpload');
   if (editPhotoUpload) {
-    editPhotoUpload.addEventListener('change', function(e) {
+    editPhotoUpload.addEventListener('change', function (e) {
       if (e.target.files && e.target.files[0]) {
         const reader = new FileReader();
-        reader.onload = function(e) {
+        reader.onload = function (e) {
           const uploadBox = document.querySelector('#editListingModal .upload-box');
           uploadBox.style.backgroundImage = `url(${e.target.result})`;
           uploadBox.querySelector('span').style.display = 'none';
@@ -76,7 +76,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const imageFile = document.getElementById('photoUpload').files[0];
       if (imageFile) {
         const reader = new FileReader();
-        reader.onload = function(e) {
+        reader.onload = function (e) {
           listingData.imageData = e.target.result;
           createListing(listingData);
         };
@@ -164,8 +164,8 @@ document.addEventListener("DOMContentLoaded", function () {
         const startDate = listing.discountStartDate ? new Date(listing.discountStartDate) : null;
         const endDate = listing.discountEndDate ? new Date(listing.discountEndDate) : null;
 
-        const isDiscountActive = (!startDate || currentDate >= startDate) && 
-                                  (!endDate || currentDate <= endDate);
+        const isDiscountActive = (!startDate || currentDate >= startDate) &&
+          (!endDate || currentDate <= endDate);
 
         if (isDiscountActive) {
           displayPrice = originalPrice * (1 - listing.discountPercentage / 100);
@@ -182,10 +182,10 @@ document.addEventListener("DOMContentLoaded", function () {
       content += `
         <div class="listing-card" id="${listing._id}">
           <div class="listing-image">
-            ${listing.imageData ? 
-              `<img src="${listing.imageData}" alt="${listing.itemName}">` :
-              '<div class="no-image">No Image</div>'
-            }
+            ${listing.imageData ?
+          `<img src="${listing.imageData}" alt="${listing.itemName}">` :
+          '<div class="no-image">No Image</div>'
+        }
           </div>
           <div class="listing-details">
             <h3>${listing.itemName}</h3>
@@ -207,7 +207,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // Edit listing - populate form
-  window.editListing = function(id) {
+  window.editListing = function (id) {
     const settings = {
       method: "GET",
       headers: {
@@ -226,7 +226,7 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById('edit-price').value = listing.price;
         document.getElementById('edit-description').value = listing.description;
         document.getElementById('edit-quantity').value = listing.quantity;
-        
+
         // Set category
         const categorySelect = document.getElementById('edit-category');
         categorySelect.value = listing.category;
@@ -254,7 +254,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // Delete listing
-  window.deleteListing = function(id) {
+  window.deleteListing = function (id) {
     if (!confirm('Are you sure you want to delete this listing?')) return;
 
     const settings = {
@@ -280,11 +280,11 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // Edit listing form submission
-  document.getElementById('editListingForm').addEventListener('submit', function(e) {
+  document.getElementById('editListingForm').addEventListener('submit', function (e) {
     e.preventDefault();
-    
+
     const id = document.getElementById('edit-listing-id').value;
-    
+
     // Prepare updated data
     const updatedData = {
       itemName: document.getElementById('edit-item-name').value,
@@ -303,7 +303,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const imageFile = document.getElementById('editPhotoUpload').files[0];
     if (imageFile) {
       const reader = new FileReader();
-      reader.onload = function(e) {
+      reader.onload = function (e) {
         updatedData.imageData = e.target.result;
         performUpdate(id, updatedData);
       };
@@ -340,7 +340,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // Close edit modal
-  window.closeEditModal = function() {
+  window.closeEditModal = function () {
     const editModal = document.getElementById('editListingModal');
     if (editModal) {
       editModal.style.display = 'none';

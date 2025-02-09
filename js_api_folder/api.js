@@ -1,10 +1,10 @@
 document.addEventListener("DOMContentLoaded", function () {
   const APIKEY = "6787a92c77327a0a035a5437";
-  
+
   // Initialize page elements
   const updateContainer = document.getElementById("update-contact-container");
   const addUpdateMsg = document.getElementById("add-update-msg");
-  
+
   if (updateContainer) updateContainer.style.display = "none";
   if (addUpdateMsg) addUpdateMsg.style.display = "none";
 
@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
         .then(data => {
           console.log(data);
           if (contactSubmit) contactSubmit.disabled = false;
-          
+
           if (addUpdateMsg) {
             addUpdateMsg.style.display = "block";
             setTimeout(function () {
@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
           const form = document.getElementById("add-contact-form");
           if (form) form.reset();
-          
+
           // Redirect to animation page after successful signup
           setTimeout(() => {
             window.location.href = 'lottie.html';
@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", function () {
   function getContacts(limit = 10, all = true) {
     const contactList = document.getElementById("contact-list");
     const totalContacts = document.getElementById("total-contacts");
-    
+
     if (!contactList) return;
 
     let settings = {
@@ -129,12 +129,12 @@ document.addEventListener("DOMContentLoaded", function () {
       if (e.target.classList.contains("delete-btn")) {
         e.preventDefault();
         const contactId = e.target.getAttribute("data-id");
-        
+
         if (confirm("Are you sure you want to delete this account?")) {
           deleteContact(contactId);
         }
       }
-      
+
       // Edit action
       if (e.target.classList.contains("edit-btn")) {
         e.preventDefault();
@@ -142,7 +142,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const contactName = e.target.getAttribute("data-name");
         const contactEmail = e.target.getAttribute("data-email");
         const contactPassword = e.target.getAttribute("data-password");
-        
+
         document.getElementById("update-contact-name").value = contactName;
         document.getElementById("update-contact-email").value = contactEmail;
         document.getElementById("update-contact-password").value = contactPassword;
@@ -157,7 +157,7 @@ document.addEventListener("DOMContentLoaded", function () {
   if (updateSubmitBtn) {
     updateSubmitBtn.addEventListener("click", function (e) {
       e.preventDefault();
-      
+
       const contactId = document.getElementById("update-contact-id").value;
       const contactName = document.getElementById("update-contact-name").value;
       const contactEmail = document.getElementById("update-contact-email").value;
@@ -191,7 +191,7 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log('Success:', data);
         document.getElementById("update-contact-container").style.display = "none";
         getContacts();
-        
+
         if (addUpdateMsg) {
           addUpdateMsg.style.display = "block";
           setTimeout(function () {
@@ -236,7 +236,7 @@ fetch("https://evadatabase-f3b8.restdb.io/rest/accounts", settings)
   .then(data => {
     console.log(data);
     if (contactSubmit) contactSubmit.disabled = false;
-    
+
     if (addUpdateMsg) {
       addUpdateMsg.style.display = "block";
       setTimeout(function () {
@@ -246,31 +246,20 @@ fetch("https://evadatabase-f3b8.restdb.io/rest/accounts", settings)
 
     const form = document.getElementById("add-contact-form");
     if (form) form.reset();
-    
+
     // Redirect to lottie animation page
     window.location.href = 'lottie.html';
 
     getContacts();
   })
 
+document.addEventListener('DOMContentLoaded', function () {
+  const userName = localStorage.getItem('userName');
+  const userDisplay = document.getElementById('userDisplay');
 
-
-
-
-
-
-
-
-
-
-
-  document.addEventListener('DOMContentLoaded', function() {
-    const userName = localStorage.getItem('userName');
-    const userDisplay = document.getElementById('userDisplay');
-    
-    if (userName && userDisplay) {
-        userDisplay.textContent = `Welcome, ${userName}!`;
-        userDisplay.style.color = '#fff';
-        userDisplay.style.padding = '0 15px';
-    }
+  if (userName && userDisplay) {
+    userDisplay.textContent = `Welcome, ${userName}!`;
+    userDisplay.style.color = '#fff';
+    userDisplay.style.padding = '0 15px';
+  }
 });

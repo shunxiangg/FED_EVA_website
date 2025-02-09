@@ -60,7 +60,7 @@ async function loadPurchaseHistory() {
 
     } catch (error) {
         console.error('Error:', error);
-        document.getElementById('purchase-history').innerHTML = 
+        document.getElementById('purchase-history').innerHTML =
             '<p>Error loading purchase history. Please try again later.</p>';
     }
 }

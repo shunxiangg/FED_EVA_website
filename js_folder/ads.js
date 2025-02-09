@@ -64,10 +64,10 @@ function renderSlides() {
 function showSlides(n) {
     if (!slides.length) return;
     currentSlide = (n + slides.length) % slides.length;
-    
+
     document.querySelectorAll('.slide').forEach(slide => slide.classList.remove('active'));
     document.querySelectorAll('.dot').forEach(dot => dot.classList.remove('active'));
-    
+
     document.querySelectorAll('.slide')[currentSlide].classList.add('active');
     document.querySelectorAll('.dot')[currentSlide].classList.add('active');
 }
@@ -91,11 +91,11 @@ function resetSlideTimer() {
 function initImagePreview() {
     const imageInput = document.getElementById('adImage');
     if (imageInput) {
-        imageInput.addEventListener('change', function(e) {
+        imageInput.addEventListener('change', function (e) {
             const file = e.target.files[0];
             if (file) {
                 const reader = new FileReader();
-                reader.onload = function(e) {
+                reader.onload = function (e) {
                     const preview = document.getElementById('imagePreview');
                     preview.src = e.target.result;
                     preview.style.display = 'block';
@@ -109,7 +109,7 @@ function initImagePreview() {
 function initAdForm() {
     const adForm = document.getElementById('adForm');
     if (adForm) {
-        adForm.addEventListener('submit', async function(e) {
+        adForm.addEventListener('submit', async function (e) {
             e.preventDefault();
 
             const imageFile = document.getElementById('adImage').files[0];
@@ -119,7 +119,7 @@ function initAdForm() {
             }
 
             const reader = new FileReader();
-            reader.onload = async function(e) {
+            reader.onload = async function (e) {
                 try {
                     const response = await fetch(ADS_URL, {
                         method: 'POST',
@@ -138,7 +138,7 @@ function initAdForm() {
                     });
 
                     if (!response.ok) throw new Error('Failed to create advertisement');
-                    
+
                     alert('Advertisement created successfully!');
                     loadUserAds();
                     adForm.reset();
@@ -174,7 +174,7 @@ async function loadUserAds() {
 
         if (!response.ok) throw new Error('Failed to fetch ads');
         const ads = await response.json();
-        
+
         adsGrid.innerHTML = ads.map(ad => `
             <div class="ad-card">
                 <img src="${ad.imageUrl}" alt="${ad.title}" 
@@ -217,12 +217,12 @@ async function deleteAd(adId) {
 }
 
 // Initialize
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     // For homepage slideshow
     if (document.getElementById('ad-slides')) {
         initializeSlideshow();
     }
-    
+
     // For ad management page
     if (document.getElementById('adForm')) {
         initImagePreview();

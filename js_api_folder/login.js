@@ -40,14 +40,14 @@ document.addEventListener("DOMContentLoaded", function () {
                 // Find matching account
                 const account = accounts.find(acc => acc.email === email && acc.password === password);
 
-                
+
                 if (account) {
                     localStorage.setItem('loginId', account._id);
                     localStorage.setItem('userEmail', account.email);
                     localStorage.setItem('userName', account.name);
 
                     loadingOverlay.querySelector('p').textContent = 'Login successful!';
-                 
+
                     //after a short duratuion it will direct to browswe pag
                     setTimeout(() => {
                         window.location.href = 'lottie.html';

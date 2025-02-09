@@ -2,7 +2,7 @@
 const APIKEY = "6787a92c77327a0a035a5437";
 const DATABASE_URL = "https://evadatabase-f3b8.restdb.io/rest/sell";
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     initializeFilters();
     loadDatabaseProducts(); // Initial load of all products
 });
@@ -12,7 +12,7 @@ function initializeFilters() {
     const priceInput = document.getElementById('price');
     const priceDisplay = document.getElementById('price-display');
     if (priceInput && priceDisplay) {
-        priceInput.addEventListener('input', function() {
+        priceInput.addEventListener('input', function () {
             priceDisplay.textContent = `Price: $0 - $${this.value}`;
         });
     }
@@ -20,14 +20,14 @@ function initializeFilters() {
     // Initialize category buttons
     const categoryButtons = document.querySelectorAll('.category-item');
     categoryButtons.forEach(button => {
-        button.addEventListener('click', function() {
+        button.addEventListener('click', function () {
             console.log('Category clicked:', this.getAttribute('value'));
-            
+
             // Remove active class from all category buttons
             categoryButtons.forEach(btn => btn.classList.remove('active'));
             // Add active class to clicked button
             this.classList.add('active');
-            
+
             // Apply filters
             applyAllFilters(this.getAttribute('value'));
         });
@@ -36,7 +36,7 @@ function initializeFilters() {
     // Initialize condition select
     const conditionSelect = document.getElementById('condition');
     if (conditionSelect) {
-        conditionSelect.addEventListener('change', function() {
+        conditionSelect.addEventListener('change', function () {
             const activeCategory = document.querySelector('.category-item.active');
             const category = activeCategory ? activeCategory.getAttribute('value') : 'all';
             applyAllFilters(category);
@@ -45,7 +45,7 @@ function initializeFilters() {
 
     // Initialize price range
     if (priceInput) {
-        priceInput.addEventListener('change', function() {
+        priceInput.addEventListener('change', function () {
             const activeCategory = document.querySelector('.category-item.active');
             const category = activeCategory ? activeCategory.getAttribute('value') : 'all';
             applyAllFilters(category);
@@ -63,12 +63,12 @@ async function applyAllFilters(category) {
         const products = await fetchDatabaseProducts();
 
         const filteredProducts = products.filter(product => {
-            const matchesCategory = category === 'all' || 
-                                  (product.category && 
-                                   product.category.toLowerCase() === category.toLowerCase());
+            const matchesCategory = category === 'all' ||
+                (product.category &&
+                    product.category.toLowerCase() === category.toLowerCase());
             const matchesPrice = parseFloat(product.price) <= maxPrice;
-            const matchesCondition = condition === 'all' || 
-                                   product.condition === condition;
+            const matchesCondition = condition === 'all' ||
+                product.condition === condition;
 
             return matchesCategory && matchesPrice && matchesCondition;
         });
@@ -94,10 +94,10 @@ function displayProducts(products) {
     productList.innerHTML = products.map(product => `
         <div class="product-card" onclick="window.location.href='productInformation.html?id=${product._id}'">
             <div class="product-image">
-                ${product.imageData ? 
-                    `<img src="${product.imageData}" alt="${product.itemName}" class="product-image">` :
-                    '<div class="no-image">No Image Available</div>'
-                }
+                ${product.imageData ?
+            `<img src="${product.imageData}" alt="${product.itemName}" class="product-image">` :
+            '<div class="no-image">No Image Available</div>'
+        }
             </div>
             <div class="product-details">
                 <h3>${product.itemName}</h3>
@@ -163,7 +163,7 @@ function initializeFilters() {
     const priceInput = document.getElementById('price');
     const priceDisplay = document.getElementById('price-display');
     if (priceInput && priceDisplay) {
-        priceInput.addEventListener('input', function() {
+        priceInput.addEventListener('input', function () {
             priceDisplay.textContent = `Price: $0 - $${this.value}`;
         });
     }
@@ -172,7 +172,7 @@ function initializeFilters() {
     const discountFilterCheckbox = document.createElement('input');
     discountFilterCheckbox.type = 'checkbox';
     discountFilterCheckbox.id = 'discount-filter';
-    
+
     const discountFilterLabel = document.createElement('label');
     discountFilterLabel.htmlFor = 'discount-filter';
     discountFilterLabel.textContent = 'Show Discounted Items Only';
@@ -205,25 +205,25 @@ async function applyAllFilters() {
         const products = await fetchDatabaseProducts();
 
         const filteredProducts = products.filter(product => {
-            const matchesCategory = category === 'all' || 
-                                  (product.category && 
-                                   product.category.toLowerCase() === category.toLowerCase());
+            const matchesCategory = category === 'all' ||
+                (product.category &&
+                    product.category.toLowerCase() === category.toLowerCase());
             const matchesPrice = parseFloat(product.price) <= maxPrice;
-            const matchesCondition = condition === 'all' || 
-                                   product.condition === condition;
-            
+            const matchesCondition = condition === 'all' ||
+                product.condition === condition;
+
             // Discount filter logic
-            const hasDiscount = product.discountPercentage && 
-                                product.discountPercentage > 0 && 
-                                (!product.discountStartDate || new Date(product.discountStartDate) <= new Date()) &&
-                                (!product.discountEndDate || new Date(product.discountEndDate) >= new Date());
+            const hasDiscount = product.discountPercentage &&
+                product.discountPercentage > 0 &&
+                (!product.discountStartDate || new Date(product.discountStartDate) <= new Date()) &&
+                (!product.discountEndDate || new Date(product.discountEndDate) >= new Date());
 
             const matchesDiscountFilter = !discountFilter || hasDiscount;
 
-            return matchesCategory && 
-                   matchesPrice && 
-                   matchesCondition && 
-                   matchesDiscountFilter;
+            return matchesCategory &&
+                matchesPrice &&
+                matchesCondition &&
+                matchesDiscountFilter;
         });
 
         displayProducts(filteredProducts);
@@ -246,11 +246,11 @@ function displayProducts(products) {
 
     productList.innerHTML = products.map(product => {
         // Calculate discounted price if discount exists
-        const hasDiscount = product.discountPercentage && 
-                            product.discountPercentage > 0 && 
-                            (!product.discountStartDate || new Date(product.discountStartDate) <= new Date()) &&
-                            (!product.discountEndDate || new Date(product.discountEndDate) >= new Date());
-        
+        const hasDiscount = product.discountPercentage &&
+            product.discountPercentage > 0 &&
+            (!product.discountStartDate || new Date(product.discountStartDate) <= new Date()) &&
+            (!product.discountEndDate || new Date(product.discountEndDate) >= new Date());
+
         const originalPrice = parseFloat(product.price);
         let displayPrice = originalPrice;
         let discountInfo = '';
@@ -269,10 +269,10 @@ function displayProducts(products) {
         return `
         <div class="product-card" onclick="window.location.href='productInformation.html?id=${product._id}'">
             <div class="product-image">
-                ${product.imageData ? 
-                    `<img src="${product.imageData}" alt="${product.itemName}" class="product-image">` :
-                    '<div class="no-image">No Image Available</div>'
-                }
+                ${product.imageData ?
+                `<img src="${product.imageData}" alt="${product.itemName}" class="product-image">` :
+                '<div class="no-image">No Image Available</div>'
+            }
             </div>
             <div class="product-details">
                 <h3>${product.itemName}</h3>
