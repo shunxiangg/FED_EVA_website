@@ -1,0 +1,261 @@
+.rewards-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 2rem;
+    background-color: #f5f5f5;
+}
+
+.rewards-header {
+    margin-bottom: 2rem;
+}
+
+.rewards-header h1 {
+    font-size: 2.5rem;
+    color: #2D3748;
+    font-weight: 700;
+    position: relative;
+    display: inline-block;
+    margin-bottom: 0.5rem;
+}
+
+.rewards-header h1::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 60px;
+    height: 4px;
+    background-color: #007BFF;
+    border-radius: 2px;
+}
+
+/* Points Overview Card */
+.points-overview-card {
+    background-color: #FFFFFF;
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    border: 1px solid #E2E8F0;
+}
+
+.points-balance {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.points-balance i {
+    font-size: 2.5rem;
+    color: #007BFF;
+    margin-right: 1.5rem;
+}
+
+.points-info h2 {
+    font-size: 1.5rem;
+    color: #2D3748;
+    margin-bottom: 0.5rem;
+}
+
+.points-amount {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #007BFF;
+}
+
+.tier-status {
+    border-top: 1px solid #E2E8F0;
+    padding-top: 1.5rem;
+}
+
+.tier-status h3 {
+    color: #2D3748;
+    margin-bottom: 1rem;
+}
+
+.tier-name {
+    color: #007BFF;
+    font-weight: 600;
+}
+
+.progress-bar {
+    height: 8px;
+    background-color: #E2E8F0;
+    border-radius: 4px;
+    margin-bottom: 0.5rem;
+}
+
+.progress {
+    height: 100%;
+    background-color: #007BFF;
+    border-radius: 4px;
+    transition: width 0.3s ease;
+}
+
+/* Rewards Sections */
+.rewards-section {
+    margin-bottom: 3rem;
+}
+
+.rewards-section h2 {
+    font-size: 1.75rem;
+    color: #2D3748;
+    margin-bottom: 1.5rem;
+    position: relative;
+    display: inline-block;
+}
+
+.rewards-section h2::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 40px;
+    height: 3px;
+    background-color: #007BFF;
+    border-radius: 2px;
+}
+
+.rewards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.reward-card {
+    background-color: #FFFFFF;
+    border-radius: 12px;
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    border: 1px solid #E2E8F0;
+}
+
+.reward-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.reward-card i {
+    font-size: 2rem;
+    color: #007BFF;
+    margin-bottom: 1rem;
+}
+
+.reward-card h3 {
+    color: #2D3748;
+    margin-bottom: 0.75rem;
+}
+
+.reward-card p {
+    color: #4A5568;
+    margin-bottom: 1rem;
+}
+
+.points-label {
+    display: inline-block;
+    background-color: #EBF4FF;
+    color: #007BFF;
+    padding: 0.25rem 0.75rem;
+    border-radius: 999px;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.redeem-button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.redeem-button:hover {
+    background-color: #0056b3;
+}
+
+/* Membership Tiers */
+.tiers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.tier-card {
+    background-color: #FFFFFF;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.tier-header {
+    padding: 1.5rem;
+    text-align: center;
+    color: white;
+}
+
+.tier-header.silver {
+    background: linear-gradient(135deg, #B8C2CC, #8795A1);
+}
+
+.tier-header.gold {
+    background: linear-gradient(135deg, #FFB347, #FFD700);
+}
+
+.tier-header.platinum {
+    background: linear-gradient(135deg, #2D3748, #4A5568);
+}
+
+.tier-benefits {
+    padding: 1.5rem;
+    list-style: none;
+}
+
+.tier-benefits li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.75rem;
+    color: #4A5568;
+}
+
+.tier-benefits i {
+    color: #007BFF;
+    margin-right: 0.75rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .rewards-container {
+        padding: 0 1rem;
+    }
+
+    .rewards-header h1 {
+        font-size: 2rem;
+    }
+
+    .points-balance {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .points-balance i {
+        margin: 0 0 1rem 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .rewards-header h1 {
+        font-size: 1.75rem;
+    }
+
+    .reward-card {
+        padding: 1.5rem;
+    }
+
+    .tier-card {
+        margin-bottom: 1rem;
+    }
+}

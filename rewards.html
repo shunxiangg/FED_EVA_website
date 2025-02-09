@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MokeSell - Buy and Sell Online</title>
+  <link rel="stylesheet" href="css_folder/styles.css">
+  <link rel="stylesheet" href="css_folder/home.css">
+  <link rel="stylesheet" href="css_folder/cart.css">
+  <link rel="stylesheet" href="css_folder/ads.css">
+  <link rel="stylesheet" href="css_folder/home-products.css">
+  <link rel="stylesheet" href="css_folder/rewards.css">
+  <link rel="stylesheet" href="css_folder/keyframesLoading.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+  <header>
+    <nav class="navbar">
+      <div class="logo">
+        <a href="home.html">
+          EVA
+        </a>
+      </div>
+
+      <!--  SEARchh-->
+      <input type="text" class="search-bar" id="search" placeholder="Search products...">
+
+      <!-- <div class="search-bar">
+        <input type="text" placeholder="Search">
+      </div> -->
+      <ul class="menu">
+        <li><span id="userDisplay"></span></li>
+        <!-- <li><button id="logoutBtn" onclick="logout()" style="display: none;">Logout</button></li> -->
+        <li><a href="home.html" class="nav-link_active">Home</a></li>
+        <li><a href="browse.html" class="nav-link">Browse</a></li>
+        <li><a href="sell.html" class="nav-link">Sell</a></li>
+        <!-- <li><a href="signup.html" class="nav-link">Sign Up</a></li> -->
+        <li><a class="fas fa-user" href="profile.html" class="nav-link"></a></li>
+
+        <!-- <li><a href="ads.html" class="nav-link">ads</a></li> -->
+      </ul>
+      <div class="hamburger" onclick="toggleMenu()">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </div>
+    </nav>
+  </header>
+
+  <!------ Back button -------->
+  <button class="back-button" onclick="window.location.href='home.html'">
+    <svg xmlns="http://www.w3.org/2000/svg" height="40" width="40" viewBox="0 0 24 24">
+      <path d="M14 7l-5 5 5 5V7z" />
+    </svg>
+  </button>
+
+
+  <div class="slideshow-container">
+    <div id="ad-slides" class="ad-card">
+      <!-- Slides will be inserted here by JavaScript -->
+    </div>
+
+    <!-- Navigation buttons -->
+    <button class="slide-nav prev" onclick="changeSlide(-1)">❮</button>
+    <button class="slide-nav next" onclick="changeSlide(1)">❯</button>
+
+    <!-- Navigation dots -->
+    <div class="slide-dots" id="slide-dots">
+      <!-- Dots will be inserted here by JavaScript -->
+    </div>
+  </div>
+
+  <div class="rewards-container">
+    <div class="rewards-header">
+        <h1>EVA Rewards Program</h1>
+    </div>
+
+    <div class="points-overview-card">
+        <div class="points-balance">
+            <i class="fas fa-star"></i>
+            <div class="points-info">
+                <h2>Your Points Balance</h2>
+                <span class="points-amount">2,500</span>
+                <p>Points available to redeem</p>
+            </div>
+        </div>
+        <div class="tier-status">
+            <h3>Current Tier: <span class="tier-name">Gold Member</span></h3>
+            <div class="progress-bar">
+                <div class="progress" style="width: 75%"></div>
+            </div>
+            <p>1,500 more points until Platinum</p>
+        </div>
+    </div>
+
+    <section class="rewards-section">
+        <h2>Ways to Earn Points</h2>
+        <div class="rewards-grid">
+            <div class="reward-card">
+                <i class="fas fa-shopping-cart"></i>
+                <h3>Shop & Earn</h3>
+                <p>Earn 1 point for every $1 spent</p>
+                <span class="points-label">Regular Rate</span>
+            </div>
+            <div class="reward-card">
+                <i class="fas fa-user-plus"></i>
+                <h3>Refer Friends</h3>
+                <p>Get 500 points for each friend who makes their first purchase</p>
+                <span class="points-label">+500 Points</span>
+            </div>
+            <div class="reward-card">
+                <i class="fas fa-star"></i>
+                <h3>Write Reviews</h3>
+                <p>Earn points for verified purchase reviews</p>
+                <span class="points-label">+50 Points</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="rewards-section">
+        <h2>Available Rewards</h2>
+        <div class="rewards-grid">
+            <div class="reward-card redeemable">
+                <i class="fas fa-ticket-alt"></i>
+                <h3>$5 Off Coupon</h3>
+                <p>Get $5 off your next purchase</p>
+                <button class="redeem-button">Redeem 500 Points</button>
+            </div>
+            <div class="reward-card redeemable">
+                <i class="fas fa-shipping-fast"></i>
+                <h3>Free Express Shipping</h3>
+                <p>One free express shipping voucher</p>
+                <button class="redeem-button">Redeem 1000 Points</button>
+            </div>
+            <div class="reward-card redeemable">
+                <i class="fas fa-gift"></i>
+                <h3>$20 Gift Card</h3>
+                <p>Get a $20 EVA gift card</p>
+                <button class="redeem-button">Redeem 2000 Points</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="rewards-section">
+        <h2>Membership Tiers</h2>
+        <div class="tiers-grid">
+            <div class="tier-card">
+                <div class="tier-header silver">
+                    <h3>Silver</h3>
+                    <p>0 - 1,000 Points</p>
+                </div>
+                <ul class="tier-benefits">
+                    <li><i class="fas fa-check"></i> Basic earning rate (1 point/$1)</li>
+                    <li><i class="fas fa-check"></i> Birthday bonus points</li>
+                    <li><i class="fas fa-check"></i> Monthly newsletter</li>
+                </ul>
+            </div>
+            <div class="tier-card">
+                <div class="tier-header gold">
+                    <h3>Gold</h3>
+                    <p>1,001 - 5,000 Points</p>
+                </div>
+                <ul class="tier-benefits">
+                    <li><i class="fas fa-check"></i> 1.5× earning rate</li>
+                    <li><i class="fas fa-check"></i> Free standard shipping</li>
+                    <li><i class="fas fa-check"></i> Early access to sales</li>
+                    <li><i class="fas fa-check"></i> All Silver benefits</li>
+                </ul>
+            </div>
+            <div class="tier-card">
+                <div class="tier-header platinum">
+                    <h3>Platinum</h3>
+                    <p>5,001+ Points</p>
+                </div>
+                <ul class="tier-benefits">
+                    <li><i class="fas fa-check"></i> 2× earning rate</li>
+                    <li><i class="fas fa-check"></i> Free express shipping</li>
+                    <li><i class="fas fa-check"></i> Priority customer service</li>
+                    <li><i class="fas fa-check"></i> Exclusive events access</li>
+                    <li><i class="fas fa-check"></i> All Gold benefits</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+  </div>
+
+<footer>
+    <div id="language-selector">
+        <select id="language-dropdown" onchange="changeLanguage()">
+            <option value="en">English</option>
+            <option value="zh">Chinese</option>
+            <option value="ms">Malay</option>
+            <option value="hi">Hindi</option>
+        </select>
+    </div>
+
+    <div class="footer-content">
+        <p>&copy; 2025 MokeSell. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="/about">About Us</a> |
+            <a href="/privacy-policy">Privacy Policy</a> |
+            <a href="/terms-of-service">Terms of Service</a>
+        </div>
+        <div class="social-media">
+            <a class="fab fa-instagram" href="https://www.instagram.com/" target="_blank"> Instagram</a> |
+            <a class="fab fa-facebook" href="https://facebook.com" target="_blank"> Facebook</a> |
+            <a class="fab fa-twitter" href="https://twitter.com" target="_blank"> Twitter</a> |
+            <a class="fab fa-linkedin" href="https://linkedin.com" target="_blank"> LinkedIn</a>
+        </div>
+    </div>
+</footer>
+
+<script src='https://cdn.jotfor.ms/s/umd/latest/for-embedded-agent.js'></script>
+  <script>
+    window.addEventListener("DOMContentLoaded", function () {
+      window.AgentInitializer.init({
+        agentRenderURL: "https://agent.jotform.com/0194e55c77377697a8d98ac9f4e1fad8b333",
+        rootId: "JotformAgent-0194e55c77377697a8d98ac9f4e1fad8b333",
+        formID: "0194e55c77377697a8d98ac9f4e1fad8b333",
+        queryParams: ["skipWelcome=1", "maximizable=1"],
+        domain: "https://www.jotform.com",
+        isDraggable: false,
+        background: "linear-gradient(180deg, #FF98BC 0%, #FF98BC 100%)",
+        buttonBackgroundColor: "#972D54",
+        buttonIconColor: "#FFF",
+        variant: false,
+        customizations: {
+          "greeting": "Yes",
+          "greetingMessage": "Hi! How can I assist you?",
+          "openByDefault": "No",
+          "pulse": "Yes",
+          "position": "left",
+          "autoOpenChatIn": "0"
+        },
+        isVoice: undefined
+      });
+    });
+  </script>
+  <!-- Scripts -->
+  <script src="js_folder/ads.js"></script>
+  <script src="js_folder/slideshow.js"></script>
+
+  <script src="js_folder/index.js"></script>
+  <script src="js_folder/app.js"></script>
+  <script src="js_folder/cart.js"></script>
+  <script src="js_folder/config.js"></script>
+  <script src="js_folder/profile.js"></script>
+  <script src="js_folder/listings.js"></script>
+  <script src="js_folder/purchasehistory.js"></script>
+  <script src="sell.js"></script>
+  <script src="js_folder/recommendations.js"></script>
+  <script src="js_folder/welcome_msg.js"></script>
+  <script src="js_api_folder/loginAuthencation.js"></script>
+  
+</body>
+
+</html>
