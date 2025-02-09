@@ -25,6 +25,7 @@
 .product-card:hover, .listing-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
 }
 
 .product-image, .listing-image {
