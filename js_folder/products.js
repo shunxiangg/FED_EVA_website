@@ -39,9 +39,9 @@ function displayDiscountedProducts(products) {
                 </div>
                 <div class="listing-details">
                     <h3>${product.itemName}</h3>
-                    <p class="price">Original: <s>$${product.price}</s></p>
-                    <p class="price">Now: $${discountedPrice}</p>
-                    <p class="discount-badge">${product.discountPercentage}% OFF</p>
+                    <span class="discount-badge">${product.discountPercentage}% OFF</span>
+                    <p class="price">Original: $${product.price}</p>
+                    <p class="price" style="color: #1a73e8; font-size: 1rem; font-weight: 600;">Now: $${discountedPrice}</p>
                     <button onclick="addToCart('${product._id}')">Add to Cart</button>
                 </div>
             </div>`;
