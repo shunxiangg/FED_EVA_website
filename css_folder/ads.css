@@ -1,131 +1,134 @@
 
+
 .slideshow-container {
-    position: relative;
-    max-width: 600px;
-    margin: 10px auto;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  padding: 20px;
+  position: relative;
+  width: 70%;
+  height: 30vh;
+  margin: 50px auto; /* Increased top and bottom margin */
+  margin-bottom: 20px; /* Adjusted bottom margin */
+  overflow: hidden;
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.ad-card {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.slide {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.slide.active {
+  opacity: 1;
+}
+
+.slide-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Shows the entire image without cropping */
+  object-position: center; /* Center the image */
+  background: white; /* Optional: adds a white background if image doesn't fill the container */
+}
+.slide-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20px;
+  padding-left: 10%; /* Add more left padding to move text right */
+  background: linear-gradient(to top, rgba(0,0,0,0.7), rgba(0,0,0,0));
+  color: white;
+}
+
+.special-tag {
+  background: #ff4d4d;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 4px;
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+.ad-title {
+  font-size: 24px;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.ad-description {
+  font-size: 16px;
+  opacity: 0.9;
+}
+
+.slide-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255,255,255,0.5);
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.prev {
+  left: 5%; /* Moved from 10px to 15% from the left */
+}
+
+.next {
+  right: 5%; /* Moved from 10px to 15% from the right */
+}
+
+.slide-dots {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  background: rgba(255,255,255,0.5);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.dot.active {
+  background: white;
+}
+
+@media (max-width: 768px) {
+  .slideshow-container {
+      height: 30vh;
   }
-  
-  .ad-card {
-    height: 120px;
-    position: relative;
-  }
-  
-  .slide {
-    display: none;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-  }
-  
-  .slide.active {
-    display: block;
-  }
-  
-  .slide-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  
+
   .slide-content {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    padding: 10px;
-    /* background: linear-gradient(to right, rgba(0,0,0,0.7), rgba(0,0,0,0.3)); */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+      padding: 10px;
   }
-  
-  .special-tag {
-    display: inline-block;
-    background: #ff4d4d;
-    color: white;
-    padding: 2px 8px;
-    border-radius: 3px;
-    font-size: 11px;
-    font-weight: bold;
-    margin-bottom: 4px;
-    width: fit-content;
-  }
-  
+
   .ad-title {
-    font-size: 14px;
-    font-weight: bold;
-    color: white;
-    margin: 0 0 4px 0;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
-    padding-left: 10%;
+      font-size: 18px;
   }
-  
+
   .ad-description {
-    font-size: 12px;
-    color: #fff;
-    margin: 0;
-    opacity: 0.9;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
-    padding-left: 10%;
+      font-size: 14px;
   }
-  
-  /* Navigation buttons */
-  .slide-nav {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(255,255,255,0.8);
-    border: none;
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    cursor: pointer;
-    font-size: 12px;
-    z-index: 2;
-    opacity: 0.7;
-    transition: opacity 0.2s;
-  }
-  
-  .slide-nav:hover {
-    opacity: 1;
-  }
-  
-  .prev { left: 5px; }
-  .next { right: 5px; }
-  
-  /* Dots */
-  .slide-dots {
-    position: absolute;
-    bottom: 8px;
-    right: 8px;
-    display: flex;
-    gap: 4px;
-    z-index: 2;
-  }
-  
-  .dot {
-    width: 5px;
-    height: 5px;
-    background: rgba(255,255,255,0.5);
-    border-radius: 50%;
-    cursor: pointer;
-    transition: background 0.2s;
-  }
-  
-  .dot.active {
-    background: #fff;
-  }
-  
-  @media (max-width: 768px) {
-    .slideshow-container {
-        margin: 5px;
-    }
-  }
+}
