@@ -1,17 +1,33 @@
-*,html{font-family: Arial, Helvetica, sans-serif;}
-.bg-blue{background: #153863;}
-.animation-center{  display: flex;
+*, html {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.bg-blue {
+  background: #153863;
+}
+.animation-center {
+  display: flex;
   justify-content: center;
   align-items: center;
-  /*height: 100vh;*/ /*if we only want this item to be smack center*/
- }
-.loading-text{
-    display: block;
-    margin: 0 auto;
-    text-align: center;
-    color: white;
-    top: -50px;
-    position: relative;
-    font-style: italic;
+  height: 100vh; /* This makes it full viewport height */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
 }
-
+.loading-text {
+  display: block;
+  margin-top: 20px; /* Adds space between animation and text */
+  text-align: center;
+  color: white;
+  font-style: italic;
+}
+.lottie-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}

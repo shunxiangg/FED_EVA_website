@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function() {
         } else {
             window.location.href = 'index.html'; //go default page either signup or main index.html
         }
-    }, 800);
+    }, 1200);
 
 });
 
