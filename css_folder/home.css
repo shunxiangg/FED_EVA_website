@@ -43,6 +43,14 @@ a {
     opacity: 0.8;
 }
 
+#userDisplay{
+    color: white;
+    margin-right: 50px;
+    text-align: center;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+}
   
 /* Hamburger Styles */
 .hamburger {
