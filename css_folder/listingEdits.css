@@ -1,0 +1,201 @@
+/* Modal Base Styles */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;  /* Full viewport width */
+    height: 100vh; /* Full viewport height */
+    background-color: rgba(46, 43, 65, 0.8);
+    display: flex;
+    justify-content: center;  /* Horizontal centering */
+    align-items: center;      /* Vertical centering */
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: var(--base-color);
+    border-radius: 12px;
+    padding: 30px;
+    width: 90%;               /* Responsive width */
+    max-width: 600px;         /* Maximum width */
+    margin: 20px;             /* Space from edges on mobile */
+    position: relative;
+    animation: modalPopIn 0.3s ease-out;
+    max-height: 90vh;         /* Maximum height */
+    overflow-y: auto;         /* Scrollable if content is too long */
+}
+
+@keyframes modalPopIn {
+    from {
+        transform: scale(0.95) translateY(-10px);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1) translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Modal Header */
+.modal-content h2 {
+    color: var(--text-color);
+    margin-bottom: 25px;
+    font-size: 24px;
+    border-bottom: 2px solid var(--input-color);
+    padding-bottom: 15px;
+    font-family: Poppins, Arial, sans-serif;
+}
+
+/* Form Groups */
+.modal-content .form-group {
+    margin-bottom: 20px;
+}
+
+.modal-content input[type="text"],
+.modal-content input[type="number"],
+.modal-content select,
+.modal-content textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--input-color);
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: Poppins, Arial, sans-serif;
+    background-color: var(--input-color);
+    color: var(--text-color);
+    transition: all 0.3s ease;
+}
+
+.modal-content input:focus,
+.modal-content select:focus,
+.modal-content textarea:focus {
+    border-color: var(--accent-color);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(161, 154, 211, 0.2);
+}
+
+.modal-content textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+/* Image Upload Section */
+.image-upload {
+    margin-bottom: 25px;
+}
+
+.upload-box {
+    border: 2px dashed var(--accent-color);
+    padding: 30px;
+    text-align: center;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background-color: var(--input-color);
+}
+
+.upload-box:hover {
+    border-color: var(--text-color);
+    background-color: rgba(161, 154, 211, 0.1);
+}
+
+.upload-box span {
+    color: var(--text-color);
+    font-size: 16px;
+    font-family: Poppins, Arial, sans-serif;
+}
+
+/* Button Group */
+.button-group {
+    display: flex;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.save-btn, .cancel-btn {
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    flex: 1;
+    font-family: Poppins, Arial, sans-serif;
+}
+
+.save-btn {
+    background-color: var(--accent-color);
+    color: var(--base-color);
+    border: none;
+}
+
+.save-btn:hover {
+    background-color: var(--text-color);
+    transform: translateY(-2px);
+}
+
+.cancel-btn {
+    background-color: var(--input-color);
+    color: var(--text-color);
+    border: 1px solid var(--input-color);
+}
+
+
+.cancel-btn:hover {
+    background-color: #e8e5ff;
+    border-color: var(--accent-color);
+}
+
+/* Discount Section Styling */
+.discount-section {
+    background-color: var(--input-color);
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 25px;
+    border: 1px solid rgba(161, 154, 211, 0.2);
+}
+
+.discount-section h3 {
+    color: var(--text-color);
+    font-size: 18px;
+    margin-bottom: 15px;
+    font-family: Poppins, Arial, sans-serif;
+}
+
+.discount-section .form-group {
+    margin-bottom: 15px;
+}
+
+.discount-section label {
+    display: block;
+    color: var(--text-color);
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-family: Poppins, Arial, sans-serif;
+}
+
+.discount-section input[type="number"],
+.discount-section input[type="date"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid rgba(161, 154, 211, 0.3);
+    border-radius: 6px;
+    font-size: 14px;
+    background-color: var(--base-color);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .modal-content {
+        padding: 20px;
+        margin: 10px;
+    }
+
+    .button-group {
+        flex-direction: column;
+    }
+
+    .save-btn, .cancel-btn {
+        width: 100%;
+    }
+}
