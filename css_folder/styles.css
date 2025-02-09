@@ -160,57 +160,56 @@
     margin: 20px 0;
   }
 
-  /* Filters Section */
-  .filters {
-    background-color: var(--base-color);
-    padding: 20px;
-    border-radius: 8px;
-    margin-bottom: 30px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-    max-width: 1200px;
-    margin-left: auto;
-    margin-right: auto;
-  }
+ /* Filters Section */
+ .filters {
+  background-color: var(--base-color);
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 30px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
 
-  .filters label {
-    font-weight: bold;
-    color: var(--text-color);
-    white-space: nowrap;
-  }
+.filters label {
+  font-weight: bold;
+  color: var(--text-color);
+  white-space: nowrap;
+}
 
-  .filters select,
-  .filters input[type="text"] {
-    padding: 8px;
-    margin-right: 20px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 14px;
-  }
+.filters select,
+.filters input[type="text"] {
+  padding: 8px;
+  margin-right: 20px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+}
 
-  .filters input[type="range"] {
-    width: 200px;
-    margin: 0 10px;
-  }
+.filters input[type="range"] {
+  width: 200px;
+  margin: 0 10px;
+}
 
-  #apply-filters {
-    background-color: var(--accent-color);
-    color: var(--base-color);
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 14px;
-    transition: background-color 0.3s;
-  }
+#apply-filters {
+  background-color: var(--accent-color);
+  color: var(--base-color);
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
+}
 
-  #apply-filters:hover {
-    background-color: #45a049;
-  }
-
+#apply-filters:hover {
+  background-color: #45a049;
+}
   /* search bar on nav bar */
   .navbar input[type="text"] {
     width: 800px;
