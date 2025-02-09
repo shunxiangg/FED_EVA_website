@@ -10,6 +10,46 @@
 
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+
+    
+    .wrapper {
+      width: 40%;
+      max-width: 50%;
+      padding: 20px;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      position: relative;
+      z-index: 10;
+    }
+    
+    .lottie-animation {
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1;
+      padding-right: 5%;
+    }
+    
+    body {
+      margin: 0;
+      overflow: hidden;
+      background: linear-gradient(135deg, #fda085 0%, #9f65f6 100%);
+    }
+    
+    .back-button {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      z-index: 20;
+    }
+  </style>
 </head>
 
 <body>
@@ -67,55 +107,8 @@
         </div>
 
         <button type="submit" value="Send" class="btn btn-primary" id="contact-submit">Signup</button>
-
       </form>
     </div>
-
-
-
-
-    <!-- 
-
-
-
-
-    <div id="update-contact">
-      <form id="update-contact-form">
-
-        <div class="form-group">
-          <label for="update-contact-name">
-            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M480-480q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 66-47 113t-113 47ZM160-160v-112q0-34 17.5-62.5T224-378q62-31 126-46.5T480-440q66 0 130 15.5T736-378q29 15 46.5 43.5T800-272v112H160Z"/></svg>
-          </label>
-          <input type="text" name="name" id="update-contact-name" placeholder="name" required>
-        </div>
-
-        <div class="form-group">
-          <label for="update-contact-email">
-            <span>@</span>
-          </label>
-          <input type="email" name="email" id="update-contact-email" placeholder="Email" required>
-        </div>
-
-        <div class="form-group">
-          <label for="update-contact-password">
-            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M240-80q-33 0-56.5-23.5T160-160v-400q0-33 23.5-56.5T240-640h40v-80q0-83 58.5-141.5T480-920q83 0 141.5 58.5T680-720v80h40q33 0 56.5 23.5T800-560v400q0 33-23.5 56.5T720-80H240Zm240-200q33 0 56.5-23.5T560-360q0-33-23.5-56.5T480-440q-33 0-56.5 23.5T400-360q0 33 23.5 56.5T480-280ZM360-640h240v-80q0-50-35-85t-85-35q-50 0-85 35t-35 85v80Z"/></svg>
-          </label>
-          <input type="password" name="password" id="update-contact-password" placeholder="Password" required>
-        </div>
-
-        <div class="form-group">
-          <label for="repeat-password-input">
-            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="http://www.w3.org/2000/svg" width="24"><path d="M240-80q-33 0-56.5-23.5T160-160v-400q0-33 23.5-56.5T240-640h40v-80q0-83 58.5-141.5T480-920q83 0 141.5 58.5T680-720v80h40q33 0 56.5 23.5T800-560v400q0 33-23.5 56.5T720-80H240Z"/></svg>
-          </label>
-          <input type="password" name="repeat-password" id="repeat-password-input" placeholder="Repeat Password">
-        </div>
-
-        <button type="submit">Signup</button>
-
-      </form>
-    </div> -->
-
-
 
     <!-- Account List Table -->
     <div class="container mt-5">
@@ -195,33 +188,19 @@
         <a style="color: #7276ff;" class="fab fa-linkedin" href="https://linkedin.com" target="_blank"> LinkedIn</a>
       </div>
     </div>
+    
   </div>
-  <script src='https://cdn.jotfor.ms/s/umd/latest/for-embedded-agent.js'></script>
-  <script>
-    window.addEventListener("DOMContentLoaded", function() {
-      window.AgentInitializer.init({
-        agentRenderURL: "https://agent.jotform.com/0194e55c77377697a8d98ac9f4e1fad8b333",
-        rootId: "JotformAgent-0194e55c77377697a8d98ac9f4e1fad8b333",
-        formID: "0194e55c77377697a8d98ac9f4e1fad8b333",
-        queryParams: ["skipWelcome=1", "maximizable=1"],
-        domain: "https://www.jotform.com",
-        isDraggable: false,
-        background: "linear-gradient(180deg, #FF98BC 0%, #FF98BC 100%)",
-        buttonBackgroundColor: "#972D54",
-        buttonIconColor: "#FFF",
-        variant: false,
-        customizations: {
-          "greeting": "Yes",
-          "greetingMessage": "Hi! How can I assist you?",
-          "openByDefault": "No",
-          "pulse": "Yes",
-          "position": "left",
-          "autoOpenChatIn": "0"
-        },
-        isVoice: undefined
-      });
-    });
-  </script>
+  <div class="lottie-animation">
+    <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
+    <dotlottie-player
+      src="https://lottie.host/95bad8ef-37f0-46cb-bdc6-9a2867022ef2/i4gDUmajYg.lottie"
+      background="transparent"
+      speed="1"
+      style="width: 700px; height: 700px"
+      loop
+      autoplay>
+    </dotlottie-player>
+  </div>
   <script src="js_api_folder/api.js"></script>
   <script src="js_api_folder/login.js"></script>
   <script src="js_api_folder/signup.js"></script>

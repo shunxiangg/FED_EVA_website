@@ -4,9 +4,13 @@
   padding: 0;
   box-sizing: border-box;
 }
-.bg-blue {
-  background: #153863;
+
+body {
+  margin: 0;
+  overflow: hidden;
+  background: linear-gradient(135deg, #f87855 0%, #934ff8 100%);
 }
+
 .animation-center {
   display: flex;
   justify-content: center;
@@ -17,6 +21,7 @@
   left: 0;
   width: 100%;
 }
+
 .loading-text {
   display: block;
   margin-top: 20px; /* Adds space between animation and text */
@@ -24,6 +29,7 @@
   color: white;
   font-style: italic;
 }
+
 .lottie-container {
   display: flex;
   flex-direction: column;

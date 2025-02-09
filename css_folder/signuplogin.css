@@ -19,11 +19,9 @@ html{
   color: var(--text-color);
   text-align: center;
 }
-body{
+body {
   min-height: 100vh;
-  background-image: url('../img_folder/loginsigninbackground.jpeg');
-  background-size: cover;
-  background-position: right;
+  background-color: #f0f0f0; /* Or any color you prefer */
   overflow: hidden;
 }
 .wrapper{
