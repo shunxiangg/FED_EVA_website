@@ -9,7 +9,7 @@
   margin-bottom: 20px; /* Adjusted bottom margin */
   overflow: hidden;
   border-radius: 15px;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 14px 20px rgba(0, 0, 0, 0.1);
 }
 
 .ad-card {
@@ -35,9 +35,9 @@
 .slide-image {
   width: 100%;
   height: 100%;
-  object-fit: contain; /* Shows the entire image without cropping */
-  object-position: center; /* Center the image */
-  background: white; /* Optional: adds a white background if image doesn't fill the container */
+  object-fit: contain; 
+  object-position: center; 
+  background: white; 
 }
 .slide-content {
   position: absolute;
@@ -45,8 +45,7 @@
   left: 0;
   right: 0;
   padding: 20px;
-  padding-left: 10%; /* Add more left padding to move text right */
-  background: linear-gradient(to top, rgba(0,0,0,0.7), rgba(0,0,0,0));
+  padding-left: 10%;
   color: white;
 }
 
