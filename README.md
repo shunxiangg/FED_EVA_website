@@ -38,40 +38,31 @@ The platform aims to drive user interaction and encourage frequent engagement wh
 ## Features
 
 ### E-commerce Experience
-- **Rewards and Gamification**: Users can earn rewards as they shop, unlock special offers, and participate in challenges.
 - **Discount Offers**: Users can earn exclusive discounts by engaging in the platform's interactive features and by competing for deals.
 
 ### User Account Management
 - **Account Creation**: Users can create an account to purchase and sell items, earn and redeem rewards and vouchers.
 - **Profile Management**: Users can update their profiles and account settings, including changing contact information or passwords.
-- **Follow Feature**: Users can follow other sellers to receive updates on new listings and promotions.
 - **Order History**: Users can view their past purchases, track orders, and check their rewards history.
 - **Purchase Preferences**: Users can specify their purchase preferences such as product categories, price range, and item condition, allowing for a more personalized shopping experience.
 
 ### Listing Management
 - **Create Listings**: Sellers can list items by uploading photos, providing descriptions, and selecting categories.
-- **Listing Expiry**: Listings automatically become inactive after 30 days to ensure fresh content.
-- **Featured Listings**: Sellers can pay to feature their listings as ads, making them more visible to potential buyers.
-- **Sell Multiple Items**: Sellers can list multiple items at once with a bulk upload feature.
+- **Sell Multiple Items**: Sellers can list multiple items on the site.
 
 ### Search and Browsing
 - **Search Functionality**: Users can search for items using keywords and filter by category, price range, or item condition.
 - **Category Browsing**: Browse through categories like electronics, clothing, furniture, etc.
-- **Save Listings**: Users can "like" and save listings for later review or purchase.
 
 ### Communication and Transactions
-- **Chat Feature**: Buyers and sellers can communicate directly through an integrated chat feature to discuss product details and negotiate offers.
-- **Offer Submission**: Buyers can submit an offer price to sellers through the platform, helping create a competitive marketplace.
-- **Review System**: Buyers and sellers can rate each other after transactions, building trust within the community.
+- **Chat Feature**: Buyers and sellers can communicate directly through an integrated chat feature to discuss product details and negotiate offers. (Tried to implement but failed)
+
 
 ### Feedback and Support
 - **Feedback Submission**: Users can submit feedback on their experiences or report issues.
-- **Support Staff Assignment**: Feedback is categorized and assigned to support staff for resolution.
-- **Support Rating**: After an issue is resolved, users can rate their support experience to help improve services.
-
+- **Review Chatbot** Users on the site can send feedback on our site to the chatbot which will directly send us an email regarding what the feedback is about and the email of the user who made the feedback.
+  
 ### Additional Features
-- **User Notifications**: Users receive notifications for new listings, offers, and chat messages.
 - **Transaction History**: Users can view their past transactions, including purchases, sales, and reviews.
-- **Quizzes**: Users can attempt quizzes to find products that suit their specific needs.
-- **Ad Listings**: Sellers can pay to feature their listings as advertisements, allowing them to stand out to users browsing specific categories.
+- **Ads Listings**: Sellers can pay to feature their listings or post advertisements on the site, allowing their product or post to be marketed to users who are using the site.
 - **Personalized Recommendations**: Based on users’ preferences and past activity, the platform recommends products they might like, making the shopping experience more tailored.
