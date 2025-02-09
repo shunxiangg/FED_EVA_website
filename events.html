@@ -50,6 +50,15 @@
       </div>
     </nav>
   </header>
+
+  <!------ Back button -------->
+  <button class="back-button" onclick="window.location.href='home.html'">
+    <svg xmlns="http://www.w3.org/2000/svg" height="40" width="40" viewBox="0 0 24 24">
+      <path d="M14 7l-5 5 5 5V7z" />
+    </svg>
+  </button>
+
+
   <div class="slideshow-container">
     <div id="ad-slides" class="ad-card">
       <!-- Slides will be inserted here by JavaScript -->
@@ -67,86 +76,91 @@
 
   <div class="events-container">
     <div class="events-header">
-        <h1>EVA Events This Month</h1>
+      <h1>EVA Events This Month</h1>
     </div>
 
     <div class="event-card">
-        <div class="event-title">Summer Sale Launch</div>
-        <div class="event-description">
-            Join us for our biggest summer sale of the year! Enjoy exclusive discounts on top brands and get amazing deals across all product categories. Don't miss out on incredible savings and limited-time offers.
-        </div>
-        <div class="event-date">
-            <i class="fas fa-calendar-alt"></i>
-            July 15, 2025 | 10:00 AM - 8:00 PM
-        </div>
+      <div class="event-title">Summer Sale Launch</div>
+      <div class="event-description">
+        Join us for our biggest summer sale of the year! Enjoy exclusive discounts on top brands and get amazing deals
+        across all product categories. Don't miss out on incredible savings and limited-time offers.
+      </div>
+      <div class="event-date">
+        <i class="fas fa-calendar-alt"></i>
+        July 15, 2025 | 10:00 AM - 8:00 PM
+      </div>
     </div>
 
     <div class="event-card">
-        <div class="event-title">Sustainability Workshop</div>
-        <div class="event-description">
-            Learn about sustainable shopping practices and how you can make eco-friendly choices. Our expert panel will discuss reducing environmental impact through conscious consumption, featuring insights from leading sustainability experts.
-        </div>
-        <div class="event-date">
-            <i class="fas fa-leaf"></i>
-            July 22, 2025 | 2:00 PM - 4:00 PM
-        </div>
+      <div class="event-title">Sustainability Workshop</div>
+      <div class="event-description">
+        Learn about sustainable shopping practices and how you can make eco-friendly choices. Our expert panel will
+        discuss reducing environmental impact through conscious consumption, featuring insights from leading
+        sustainability experts.
+      </div>
+      <div class="event-date">
+        <i class="fas fa-leaf"></i>
+        July 22, 2025 | 2:00 PM - 4:00 PM
+      </div>
     </div>
 
     <div class="event-card">
-        <div class="event-title">New Product Preview Night</div>
-        <div class="event-description">
-            Get an exclusive first look at our upcoming product lines. Meet our designers, try out new products, and enjoy special preview night discounts. Be the first to discover the latest innovations and trends.
-        </div>
-        <div class="event-date">
-            <i class="fas fa-rocket"></i>
-            July 28, 2025 | 6:00 PM - 9:00 PM
-        </div>
+      <div class="event-title">New Product Preview Night</div>
+      <div class="event-description">
+        Get an exclusive first look at our upcoming product lines. Meet our designers, try out new products, and enjoy
+        special preview night discounts. Be the first to discover the latest innovations and trends.
+      </div>
+      <div class="event-date">
+        <i class="fas fa-rocket"></i>
+        July 28, 2025 | 6:00 PM - 9:00 PM
+      </div>
     </div>
-</div>
-<script src='https://cdn.jotfor.ms/s/umd/latest/for-embedded-agent.js'></script>
-<script>
-  window.addEventListener("DOMContentLoaded", function() {
-    window.AgentInitializer.init({
-      agentRenderURL: "https://agent.jotform.com/0194e55c77377697a8d98ac9f4e1fad8b333",
-      rootId: "JotformAgent-0194e55c77377697a8d98ac9f4e1fad8b333",
-      formID: "0194e55c77377697a8d98ac9f4e1fad8b333",
-      queryParams: ["skipWelcome=1", "maximizable=1"],
-      domain: "https://www.jotform.com",
-      isDraggable: false,
-      background: "linear-gradient(180deg, #FF98BC 0%, #FF98BC 100%)",
-      buttonBackgroundColor: "#972D54",
-      buttonIconColor: "#FFF",
-      variant: false,
-      customizations: {
-        "greeting": "Yes",
-        "greetingMessage": "Hi! How can I assist you?",
-        "openByDefault": "No",
-        "pulse": "Yes",
-        "position": "left",
-        "autoOpenChatIn": "0"
-      },
-      isVoice: undefined
+  </div>
+  <script src='https://cdn.jotfor.ms/s/umd/latest/for-embedded-agent.js'></script>
+  <script>
+    window.addEventListener("DOMContentLoaded", function () {
+      window.AgentInitializer.init({
+        agentRenderURL: "https://agent.jotform.com/0194e55c77377697a8d98ac9f4e1fad8b333",
+        rootId: "JotformAgent-0194e55c77377697a8d98ac9f4e1fad8b333",
+        formID: "0194e55c77377697a8d98ac9f4e1fad8b333",
+        queryParams: ["skipWelcome=1", "maximizable=1"],
+        domain: "https://www.jotform.com",
+        isDraggable: false,
+        background: "linear-gradient(180deg, #FF98BC 0%, #FF98BC 100%)",
+        buttonBackgroundColor: "#972D54",
+        buttonIconColor: "#FFF",
+        variant: false,
+        customizations: {
+          "greeting": "Yes",
+          "greetingMessage": "Hi! How can I assist you?",
+          "openByDefault": "No",
+          "pulse": "Yes",
+          "position": "left",
+          "autoOpenChatIn": "0"
+        },
+        isVoice: undefined
+      });
     });
-  });
-</script>
-<!-- Scripts -->
-<script src="js_folder/home.js"></script>
-<script src="js_folder/products.js"></script>
+  </script>
+  <!-- Scripts -->
+  <script src="js_folder/home.js"></script>
+  <script src="js_folder/products.js"></script>
 
-<script src="js_folder/ads.js"></script>
-<script src="js_folder/slideshow.js"></script>
+  <script src="js_folder/ads.js"></script>
+  <script src="js_folder/slideshow.js"></script>
 
-<script src="js_folder/index.js"></script>
-<script src="js_folder/app.js"></script>
-<script src="js_folder/cart.js"></script>
-<script src="js_folder/config.js"></script>
-<script src="js_folder/profile.js"></script>
-<script src="js_folder/listings.js"></script>
-<script src="js_folder/purchasehistory.js"></script>
-<script src="sell.js"></script>
-<script src="js_folder/recommendations.js"></script>
-<script src="js_folder/welcome_msg.js"></script>
-<script src="js_api_folder/loginAuthencation.js"></script>
+  <script src="js_folder/index.js"></script>
+  <script src="js_folder/app.js"></script>
+  <script src="js_folder/cart.js"></script>
+  <script src="js_folder/config.js"></script>
+  <script src="js_folder/profile.js"></script>
+  <script src="js_folder/listings.js"></script>
+  <script src="js_folder/purchasehistory.js"></script>
+  <script src="sell.js"></script>
+  <script src="js_folder/recommendations.js"></script>
+  <script src="js_folder/welcome_msg.js"></script>
+  <script src="js_api_folder/loginAuthencation.js"></script>
 
 </body>
+
 </html>
