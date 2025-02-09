@@ -285,7 +285,39 @@
   }
 
 
+  .price-filter-container {
+    position: relative;
+    display: inline-block;
+}
 
+.price-input {
+    width: 200px; /* Fixed width */
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.price-display {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 200px;
+    background: white;
+    border: 1px solid #ddd;
+    border-top: none;
+    padding: 5px;
+    box-sizing: border-box;
+    z-index: 10;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: none; /* Hidden by default */
+}
+
+.price-input:focus + .price-display,
+.price-display:hover {
+    display: block;
+}
 
 
 

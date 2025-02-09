@@ -70,9 +70,12 @@
         <option value="Jewelry & Accessories">Jewelry & Accessories</option>
       </select>
 
-      <label for="price">Price:</label>
-      <input type="range" id="price" min="0" max="5000" step="100">
-      <p id="price-display">Price: $0 - $5000</p>
+     
+      <div class="price-filter-container">
+        <input type="text" id="price" class="price-input" placeholder="Enter max price" maxlength="15">
+        <div id="price-display" class="price-display">
+            Price: $0 - $0
+        </div>
 
       <label for="condition">Condition:</label>
       <select id="condition">
