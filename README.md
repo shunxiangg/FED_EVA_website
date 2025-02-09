@@ -75,3 +75,75 @@ The platform aims to drive user interaction and encourage frequent engagement wh
 - **Quizzes**: Users can attempt quizzes to find products that suit their specific needs.
 - **Ad Listings**: Sellers can pay to feature their listings as advertisements, allowing them to stand out to users browsing specific categories.
 - **Personalized Recommendations**: Based on users’ preferences and past activity, the platform recommends products they might like, making the shopping experience more tailored.
+
+### Feedback System
+   - Test email capture
+   - Verify feedback storage
+   - Check conversation history
+   - Test admin notification system
+   
+### Customer Support Flow
+```mermaid
+graph TD
+    A[User Initiates Chat] --> B[AI Processes Query]
+    B --> C{Query Type}
+    C -->|Navigation| D[Provide Directions]
+    C -->|Product| E[Show Recommendations]
+    C -->|Support| F[Offer Assistance]
+    C -->|Feedback| G[Capture & Store]
+    G --> H[Send to Admin Email]
+```
+
+
+
+## Technologies Used
+- **HTML5**: Used for the overall structure and layout of the website.
+- **CSS3**: For styling the website with modern, responsive design elements.
+- **JavaScript**: To create interactive elements, including the gamified shopping experience, chat functionality, and real-time updates for the cart.
+- **APIs**: Various third-party APIs (e.g., for payment gateway integration, user authentication) are used to enhance functionality.
+- **Lottie Animation**: Integrated to provide dynamic, visually appealing animations that enhance the interactive experience.
+- **Database Integration**: The platform integrates with a database for managing user accounts, product listings, and transaction history.
+
+## Installation
+
+To run this project locally, follow these steps:
+1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/MokeSell.git
+```
+2. Navigate to the project directory:
+```bash
+cd MokeSell
+```
+3. Open `index.html` in your preferred web browser to view the site.
+
+## Testing
+
+### User Testing
+- Perform functional testing of the shopping cart, search feature, and user login system.
+- Conduct usability testing to ensure that the shopping experience is smooth and the gamification elements are intuitive.
+- Test the listing creation process and the process of placing offers and following sellers.
+
+### Bug Fixes
+- Fix issues related to navigation inconsistencies (e.g., difference between `index.html` and `browse.html` nav menus).
+- Resolve problems with the real-time chat feature, ensuring messages are properly sent and received.
+
+## Credits and References
+- Images and other media used in this project are sourced from various online archives and free resources.
+- Inspiration for the design and gamification features came from popular eCommerce platforms and gaming apps. (e.g., Shopee [https://shopee.sg/])
+- Design [https://www.youtube.com/watch?v=OXGznpKZ_sA]
+- YT login/signup [https://www.youtube.com/@techmakersnocode] [https://www.youtube.com/@coding2go]
+- IG [https://www.instagram.com/web_development_legend/] [https://www.instagram.com/the_coding_wizard/]
+- Icons [https://fontawesome.com/start]
+- Connect Login & Sign up Form with DATABASE[https://www.youtube.com/watch?v=TRHtOixzrH8] [https://www.youtube.com/watch?v=EQii31gG51Q] [https://restdb.io/docs/javascript-api#restdb] [https://www.sitepoint.com/how-to-get-started-with-restdb-io-and-create-a-simple-cms/]
+- ChatGPT [https://chatgpt.com/]
+- Claude AI [https://claude.ai/]
+- Jotform [https://www.jotform.com/agent/build/0194e55c77377697a8d98ac9f4e1fad8b333/train]
+
+## Acknowledgements
+- Connect Login & Sign up Form with DATABASE[@LX]
+- The concepts of PHP and how it interacts with SQL to retrieve data[@LX]
+
+---
+
+This updated README now includes features for **user-specified purchases**, **listing ads**, and **selling listing items**, along with a comprehensive view of the platform's functionalities.
